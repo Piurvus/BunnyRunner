@@ -24,12 +24,18 @@
     <ClCompile Include="SpriteSheet.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="SpriteSheet.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

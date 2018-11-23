@@ -6,6 +6,7 @@
 
 class SpriteSheet
 {
+
 private:
 	Graphics* gfx;
 	ID2D1Bitmap* bmp;

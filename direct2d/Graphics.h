@@ -4,6 +4,7 @@
 
 class Graphics
 {
+
 private:
 	ID2D1Factory* factory;
 	ID2D1HwndRenderTarget* renderTarget;	//place in ram to render to

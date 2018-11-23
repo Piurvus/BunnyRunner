@@ -2,6 +2,7 @@
 #include "Graphics.h"
 #include "SpriteSheet.h"
 #include <iostream>
+#include "Game.h"
 
 Graphics* graphics;
 
@@ -73,9 +74,6 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 
 	ShowWindow(windowHandle, nCmdShow);
 
-	float y = 0.0;
-	float ySpeed = 0.0;
-
 
 	MSG message;
 	/*while (GetMessage(&message, NULL, 0, 0))
@@ -85,10 +83,8 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 
 	message.message = WM_NULL;
 
-	//-------------------------
-	SpriteSheet* sprites;
-	sprites = new SpriteSheet(L"test.png", graphics, 0.4f);
-	//-------------------------
+	Game* myGame;
+	myGame = new Game(graphics);
 
 	while (message.message != WM_QUIT)
 	{
@@ -97,22 +93,14 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 			DispatchMessage(&message);
 		}
 
-		ySpeed += 1.0f;
-		y += ySpeed;
-		if (y > 600) {
-			y = 600;
-			ySpeed = -30.0f;
-		}
+		//graphics->BeginDraw();
+		
+		myGame->Run();
 
-		graphics->BeginDraw();
-		graphics->ClearScreen(0.0f, 0.0f, 0.5f);
-		sprites->Draw();
-		graphics->DrawCircle(375.0f, y, 50.0f, 255, 255, 0, 0.5);
-
-		graphics->EndDraw();
+		//graphics->EndDraw();
 	}
 
-	delete sprites;
+	delete myGame;
 	delete graphics;
 	return 0;
 
