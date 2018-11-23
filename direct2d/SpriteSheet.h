@@ -10,11 +10,11 @@ class SpriteSheet
 private:
 	Graphics* gfx;
 	ID2D1Bitmap* bmp;
-	const float a;
+	float a;
 
 public:
 	SpriteSheet(LPCWSTR filename, Graphics* gfx, float a);
 	~SpriteSheet();
-	void Draw();
+	void Draw(float a);
 
 };

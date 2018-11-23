@@ -19,6 +19,7 @@ public:
 
 private:
 
+	bool loading = true;
 	float y = 0.0;
 	float ySpeed = 0.0;
 

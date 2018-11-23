@@ -60,7 +60,7 @@ SpriteSheet::~SpriteSheet()
 
 
 
-void SpriteSheet::Draw()
+void SpriteSheet::Draw(float a)
 {
 
 	gfx->GetRenderTarget()->DrawBitmap(
