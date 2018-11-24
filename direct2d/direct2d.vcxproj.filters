@@ -43,5 +43,11 @@
     <Image Include="test.png">
       <Filter>Ressourcendateien</Filter>
     </Image>
+    <Image Include="..\..\..\..\..\Downloads\21807063.jpg">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="rabbit.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
   </ItemGroup>
 </Project>

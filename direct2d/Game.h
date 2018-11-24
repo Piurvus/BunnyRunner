@@ -6,6 +6,8 @@
 class Game {
 
 	SpriteSheet* sprites;
+	SpriteSheet* rabbit;
+
 	Graphics* gfx;
 
 public:

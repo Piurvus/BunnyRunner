@@ -7,6 +7,7 @@ Game::Game(Graphics * gfx):
 
 	//-------------------------
 	sprites = new SpriteSheet(L"test.png", gfx, 0.4f);
+	rabbit = new SpriteSheet(L"rabbit.png", gfx, 1.0f, 8.233333 * 40, 80 * 4);
 	//-------------------------
 
 }
@@ -27,6 +28,7 @@ void Game::Run()
 
 }
 float a = 0.0f;
+int frame = 0;
 void Game::UpdateModel()
 {
 
@@ -42,6 +44,8 @@ void Game::UpdateModel()
 	a += 0.2f;
 	if (a >= 0.8f) a = 0;
 
+	frame++;
+
 }
 
 void Game::ComposeFrame()
@@ -54,7 +58,15 @@ void Game::ComposeFrame()
 		gfx->DrawCircle(200.0f, 600 - y, 50.0f, 255, 255, 0, 0.5);
 	}
 	else {
-		gfx->ClearScreen(0.5f, 0.0f, 0.5f);
+
+		//8.333333333333333333333
+		//80*4
+		gfx->ClearScreen(255, 255, 255);
+
+		rabbit->Draw((frame/8) % 6, 50, 50);
+
+
+
 	}
 	
 }
