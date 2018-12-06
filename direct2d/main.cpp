@@ -5,6 +5,7 @@
 #include "Game.h"
 
 Graphics* graphics;
+Game* myGame;
 
 LRESULT CALLBACK WindowProc(HWND hwnd,
 	UINT uMsg,
@@ -15,6 +16,8 @@ LRESULT CALLBACK WindowProc(HWND hwnd,
 		PostQuitMessage(0);
 		return 0;
 	}
+
+	
 
 	/*if (uMsg == WM_PAINT){
 		graphics->BeginDraw();
@@ -83,7 +86,6 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 
 	message.message = WM_NULL;
 
-	Game* myGame;
 	myGame = new Game(graphics);
 
 	while (message.message != WM_QUIT)

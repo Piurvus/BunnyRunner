@@ -36,8 +36,13 @@ void Game::UpdateModel()
 
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
 	{
+		frame += rabbitSpeed;
 		
-
+		if (GetAsyncKeyState(VK_SPACE)) {
+			rabbitSpeed += 0.001;
+		}
+		else
+			rabbitSpeed = 0.1;
 		/*
 		ySpeed += 1.0f;
 		y += ySpeed;
@@ -73,7 +78,7 @@ void Game::ComposeFrame()
 		//80*4
 		gfx->ClearScreen(255, 255, 255);
 
-		rabbit->Draw((int)((std::clock() / (double)CLOCKS_PER_SEC) * rabbitSpeed) % 6, 50, 50);
+		rabbit->Draw((int)(frame) % 6, 50, 50);
 	}
 
 
