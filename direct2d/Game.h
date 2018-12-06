@@ -2,6 +2,7 @@
 
 #include "Graphics.h"
 #include "SpriteSheet.h"
+#include <ctime>
 
 class Game {
 
@@ -21,6 +22,9 @@ public:
 
 private:
 
+	double refreshRate = 1/30;
+	int rabbitSpeed = 6;
+	std::clock_t clock;
 	bool loading = true;
 	float y = 0.0;
 	float ySpeed = 0.0;
