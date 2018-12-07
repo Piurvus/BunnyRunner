@@ -55,5 +55,11 @@
     <Image Include="rabbit.png">
       <Filter>Ressourcendateien</Filter>
     </Image>
+    <Image Include="..\..\..\..\..\Downloads\kisspng-baby-carrot-food-vegetable-emoji-vegetable-image-5adbc52b086a46.1341162115243522990345.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="deadle.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
   </ItemGroup>
 </Project>

@@ -86,11 +86,25 @@ void SpriteSheet::Draw(float a)
 
 }
 
+void SpriteSheet::Draw(float x, float y, double size)
+{
+	//	position on screen
+	D2D_RECT_F dest = D2D1::RectF(
+		x, y,
+		x + spriteWidth * size, y + spriteHeight * size);
+
+	gfx->GetRenderTarget()->DrawBitmap(
+		bmp,
+		dest,
+		1.0f,
+		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR,
+		D2D1::RectF(0.0f, 0.0f,
+			bmp->GetSize().width, bmp->GetSize().height));
+}
+
 void SpriteSheet::Draw(int index, int x, int y, double size)
 {
-
-
-
+		
 	//	position in image
 	D2D_RECT_F src = D2D1::RectF(
 		(float)((index % spritesAccross) * spriteWidth),
@@ -111,3 +125,5 @@ void SpriteSheet::Draw(int index, int x, int y, double size)
 		src);
 
 }
+
+

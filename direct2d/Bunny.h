@@ -6,6 +6,7 @@ class Bunny {
 
 	Graphics* gfx;
 	SpriteSheet* bunny;
+	SpriteSheet* deadBunny;
 
 	double frame;
 	double bunnySpeed;
@@ -13,8 +14,7 @@ class Bunny {
 	double sizeX, sizeY;
 	double speedY;
 	double height;
-	bool changer = false;
-
+	bool isDead = false;
 
 public:
 
@@ -24,7 +24,7 @@ public:
 	void showBunny();
 	void updateBunny();
 	void jump(double charge);
-
+	bool onGround();
 	void die();
 	
 	//void crouch();
