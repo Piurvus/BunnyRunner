@@ -9,14 +9,14 @@ Game::Game(Graphics * gfx):
 
 	//-------------------------
 	sprites = new SpriteSheet(L"test.png", gfx, 0.4f);
-	rabbit = new SpriteSheet(L"rabbit.png", gfx, 1.0f, 8.233333 * 40, 80 * 4);
+	bunny = new Bunny(gfx);
 	//-------------------------
 
 }
 
 Game::~Game()
 {
-
+	
 	delete sprites;
 
 }
@@ -36,13 +36,16 @@ void Game::UpdateModel()
 
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
 	{
-		frame += rabbitSpeed;
-		
-		if (GetAsyncKeyState(VK_SPACE)) {
-			rabbitSpeed += 0.001;
+		if (GetAsyncKeyState(VK_SPACE))
+			charge += 0.5;
+
+		if (!GetAsyncKeyState(VK_SPACE) && charge != 0) {
+			bunny->jump(charge);
+			charge = 0;
 		}
-		else
-			rabbitSpeed = 0.1;
+
+		bunny->updateBunny();
+
 		/*
 		ySpeed += 1.0f;
 		y += ySpeed;
@@ -78,7 +81,8 @@ void Game::ComposeFrame()
 		//80*4
 		gfx->ClearScreen(255, 255, 255);
 
-		rabbit->Draw((int)(frame) % 6, 50, 50);
+		bunny->showBunny();
+		gfx->DrawLine(0, 435, 800, 435);
 	}
 
 

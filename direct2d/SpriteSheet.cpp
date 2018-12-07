@@ -86,8 +86,11 @@ void SpriteSheet::Draw(float a)
 
 }
 
-void SpriteSheet::Draw(int index, int x, int y)
+void SpriteSheet::Draw(int index, int x, int y, double size)
 {
+
+
+
 	//	position in image
 	D2D_RECT_F src = D2D1::RectF(
 		(float)((index % spritesAccross) * spriteWidth),
@@ -98,7 +101,7 @@ void SpriteSheet::Draw(int index, int x, int y)
 	//	position on screen
 	D2D_RECT_F dest = D2D1::RectF(
 		x, y,
-		x + spriteWidth, y + spriteHeight);
+		x + spriteWidth*size, y + spriteHeight*size);
 
 	gfx->GetRenderTarget()->DrawBitmap(
 		bmp,

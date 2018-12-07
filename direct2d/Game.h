@@ -3,12 +3,12 @@
 #include "Graphics.h"
 #include "SpriteSheet.h"
 #include <ctime>
+#include "Bunny.h"
 
 class Game {
 
 	SpriteSheet* sprites;
-	SpriteSheet* rabbit;
-
+	Bunny* bunny;
 	Graphics* gfx;
 
 public:
@@ -23,12 +23,8 @@ public:
 
 private:
 
-	double frame = 0;
-	double rabbitSpeed = 0.1;
 	double refreshRate = 1/30;
 	std::clock_t clock;
-	bool loading = true;
-	float y = 0.0;
-	float ySpeed = 0.0;
+	double charge = 0;
 
 };

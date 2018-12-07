@@ -143,12 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Bunny.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bunny.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="SpriteSheet.h" />

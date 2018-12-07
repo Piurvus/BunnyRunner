@@ -27,6 +27,9 @@
     <ClCompile Include="Game.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Bunny.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -36,6 +39,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Bunny.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
