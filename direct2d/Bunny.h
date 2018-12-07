@@ -12,6 +12,8 @@ class Bunny {
 	float x, y;
 	double sizeX, sizeY;
 	double speedY;
+	double height;
+	bool changer = false;
 
 
 public:

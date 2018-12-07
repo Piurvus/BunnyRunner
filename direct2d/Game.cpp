@@ -37,7 +37,7 @@ void Game::UpdateModel()
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
 	{
 		if (GetAsyncKeyState(VK_SPACE))
-			charge += 0.5;
+			charge += 0.75;
 
 		if (!GetAsyncKeyState(VK_SPACE) && charge != 0) {
 			bunny->jump(charge);

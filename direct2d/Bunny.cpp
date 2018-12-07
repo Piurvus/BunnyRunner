@@ -28,7 +28,46 @@ void Bunny::showBunny()
 
 void Bunny::updateBunny()
 {
-	
+	if (y < 300 && y > 300 - height && speedY < 0) {
+		if (changer) {
+			changer = !changer;
+			frame = 3;
+		}
+		else {
+			changer = !changer;
+			frame = 2;
+		}
+	}
+	else if (y < 300 - height && speedY < 0) {
+		if (changer) {
+			changer = !changer;
+			frame = 4;
+		}
+		else {
+			changer = !changer;
+			frame = 5;
+		}
+	}
+	else if (y < 300 - height && speedY > 0) {
+		if (changer) {
+			changer = !changer;
+			frame = 5;
+		}
+		else {
+			changer = !changer;
+			frame = 0;
+		}
+	}
+	else if (y < 300 && y > 300 - height && speedY > 0) {
+		if (changer) {
+			changer = !changer;
+			frame = 1;
+		}
+		else {
+			changer = !changer;
+			frame = 0;
+		}
+	}
 
 
 	frame += bunnySpeed;
@@ -58,6 +97,11 @@ void Bunny::updateBunny()
 
 void Bunny::jump(double charge)
 {
+
+	if (charge >= 60)
+		charge = 60;
+
+	height = charge / 0.4;
 
 	speedY = - sqrt(charge);
 
