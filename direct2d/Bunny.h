@@ -15,7 +15,7 @@ class Bunny {
 	float sizeX, sizeY;
 	double speedY;
 	double height;
-	bool isDead = false;
+	bool dead = false;
 
 public:
 
@@ -26,6 +26,7 @@ public:
 	void updateBunny(double speed);
 	void jump(double charge);
 	bool onGround();
+	bool isDead();
 	void die();
 	D2D1_RECT_F returnPos();
 	

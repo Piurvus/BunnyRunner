@@ -28,6 +28,6 @@ private:
 	double refreshRate = 1/30;
 	std::clock_t clock;
 	double charge = 0;
-	bool checkCollision(D2D1_RECT_F rect1, D2D1_RECT_F rect2);
+	bool checkCollision(D2D1_RECT_F rect1, D2D1_RECT_F rect2); 
 
 };

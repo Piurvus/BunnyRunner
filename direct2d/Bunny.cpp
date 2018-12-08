@@ -22,7 +22,7 @@ Bunny::~Bunny()
 
 void Bunny::showBunny()
 {
-	if (!isDead) {
+	if (!dead) {
 		bunny->Draw((int)(frame) % 6, x, y, sizeX);
 	}
 	else {
@@ -34,7 +34,7 @@ void Bunny::showBunny()
 void Bunny::updateBunny(double speed)
 {
 	
-	if (!isDead) {
+	if (!dead) {
 		//	Animation Jump
 		if (y < 300 && y > 300 - height && speedY < 0) {
 			frame = 3;
@@ -87,14 +87,21 @@ bool Bunny::onGround()
 	return false;
 }
 
+bool Bunny::isDead()
+{
+	if (dead)
+		return true;
+	return false;
+}
+
 void Bunny::die()
 {
-	isDead = true;
+	dead = true;
 }
 
 D2D1_RECT_F Bunny::returnPos()
 {
-	rect = { x, y, x + 8.233333f * 40 * sizeX, y + 80 * 4 * sizeX };
+	rect = { x + 25, y + 25, x -25 + 8.233333f * 40 * sizeX, y - 25 + 80 * 4 * sizeX };
 	return rect;
 }
 

@@ -35,8 +35,7 @@ void Game::Run()
 
 void Game::UpdateModel()
 {
-
-	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
+	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate && !bunny->isDead())
 	{
 		if (GetAsyncKeyState(VK_SPACE) && bunny->onGround())
 			charge += 0.75;
@@ -52,7 +51,6 @@ void Game::UpdateModel()
 
 		bunny->updateBunny(speed);
 
-
 		obj->update(speed);
 
 		
@@ -64,6 +62,10 @@ void Game::UpdateModel()
 
 		clock = std::clock();
 	}
+	else if (bunny->isDead() && GetAsyncKeyState(VK_F10) & 1) {
+		bunny = new Bunny(gfx);
+		obj = new Obstacle(gfx);
+	}
 }
 
 void Game::ComposeFrame()
@@ -71,8 +73,16 @@ void Game::ComposeFrame()
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
 	{
 		gfx->ClearScreen(255, 255, 255);
+		
 		obj->show();
 		gfx->DrawLine(0, 435, 800, 435);
+		
+		
+		D2D1_RECT_F a = bunny->returnPos();
+		D2D1_RECT_F b = obj->returnPos();
+		gfx->DrawRectangle(a);
+		gfx->DrawRectangle(b);
+		
 
 		bunny->showBunny();
 	}
@@ -82,7 +92,9 @@ void Game::ComposeFrame()
 	
 }
 
-bool Game::checkCollision(D2D1_RECT_F rect1, D2D1_RECT_F rect2)
+bool Game::checkCollision(D2D1_RECT_F a, D2D1_RECT_F b)
 {
-	return false;
+	
+
+	return (b.top <= a.bottom && b.bottom >= a.top && b.left <= a.right && b.right >= a.left);
 }
