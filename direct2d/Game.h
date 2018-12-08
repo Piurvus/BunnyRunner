@@ -6,8 +6,11 @@
 #include "Bunny.h"
 #include "obstacle.h"
 #include "Carrot.h"
+#include "Fox.h"
 
 class Game {
+
+	Fox* fox;
 	Carrot* carrot;
 	SpriteSheet* sprites;
 	Bunny* bunny;

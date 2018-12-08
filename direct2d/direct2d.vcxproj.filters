@@ -36,6 +36,9 @@
     <ClCompile Include="Carrot.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Fox.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -56,6 +59,9 @@
     <ClInclude Include="Carrot.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Fox.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="test.png">
@@ -71,6 +77,9 @@
       <Filter>Ressourcendateien</Filter>
     </Image>
     <Image Include="carrot.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="fox.png">
       <Filter>Ressourcendateien</Filter>
     </Image>
   </ItemGroup>

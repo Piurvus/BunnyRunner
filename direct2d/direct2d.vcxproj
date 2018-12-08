@@ -145,6 +145,7 @@
   <ItemGroup>
     <ClCompile Include="Bunny.cpp" />
     <ClCompile Include="Carrot.cpp" />
+    <ClCompile Include="Fox.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
@@ -154,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="Bunny.h" />
     <ClInclude Include="Carrot.h" />
+    <ClInclude Include="Fox.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="obstacle.h" />
@@ -163,6 +165,7 @@
     <Image Include="..\..\..\..\..\Downloads\21807063.jpg" />
     <Image Include="carrot.png" />
     <Image Include="deadle.png" />
+    <Image Include="fox.png" />
     <Image Include="rabbit.png" />
     <Image Include="test.png" />
   </ItemGroup>

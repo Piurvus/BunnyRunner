@@ -71,7 +71,5 @@ void Graphics::DrawRectangle(D2D_RECT_F & rect)
 {
 	brush->SetColor(D2D1::ColorF(0, 0, 0));
 	renderTarget->DrawRectangle(rect, brush, 3.0f);
-
-	
 }
 

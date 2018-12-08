@@ -3,6 +3,7 @@
 #include <ctime>
 #include "Bunny.h"
 #include "Carrot.h"
+#include "Fox.h"
 
 Game::Game(Graphics * gfx):
 	gfx(gfx)
@@ -10,6 +11,7 @@ Game::Game(Graphics * gfx):
 
 	//-------------------------
 	//sprites = new SpriteSheet(L"test.png", gfx, 0.4f);
+	fox = new Fox(gfx);
 	carrot = new Carrot(gfx, L"carrot.png");
 	bunny = new Bunny(gfx);
 	obj = new Obstacle(gfx);
@@ -19,7 +21,8 @@ Game::Game(Graphics * gfx):
 
 Game::~Game()
 {
-	
+	delete carrot;
+	delete fox;
 	delete sprites;
 	delete bunny;
 	delete obj;
@@ -44,7 +47,7 @@ void Game::UpdateModel()
 		}
 
 		if (GetAsyncKeyState(VK_SPACE) && bunny->onGround())
-			charge += 1    ;
+			charge += 1.5;
 
 		if (!GetAsyncKeyState(VK_SPACE) && charge != 0 && bunny->onGround()) {
 			bunny->jump(charge);
@@ -54,15 +57,19 @@ void Game::UpdateModel()
 		if (checkCollision(bunny->returnPos(), obj->returnPos())) {
 			bunny->die();
 		}
+		if (checkCollision(bunny->returnPos(), fox->returnPos())) {
+			bunny->die();
+		}
 		
 		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
-			speed += 0.01;
+			speed += 0.1;
 			carrot->renew();
 		}
 
 
 
 		carrot->update(speed);
+		fox->update(speed);
 		obj->update(speed);
 		
 		bunny->updateBunny(speed);
@@ -74,6 +81,7 @@ void Game::UpdateModel()
 		bunny = new Bunny(gfx);
 		obj = new Obstacle(gfx);
 		carrot = new Carrot(gfx, L"carrot.png");
+		fox = new Fox(gfx);
 		speed = 1.0f;
 	}
 	else if (bunny->isDead()) {
@@ -87,19 +95,20 @@ void Game::ComposeFrame()
 	{
 		gfx->ClearScreen(255, 255, 255);
 		
+		fox->show();
 		obj->show();
+
 		gfx->DrawLine(0, 435, 800, 435);
 		
 		carrot->show();
 
+
+		/*
 		D2D1_RECT_F a = bunny->returnPos();
-		D2D1_RECT_F b = carrot->returnPos();
-		//D2D1_RECT_F b = obj->returnPos();
+		D2D1_RECT_F b = fox->returnPos();
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
-		//gfx->DrawRectangle(b);
-		
-
+		*/
 		bunny->showBunny();
 	}
 

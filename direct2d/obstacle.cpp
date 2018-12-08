@@ -22,12 +22,13 @@ Obstacle::Obstacle(Graphics * gfx, LPCWSTR name):
 {
 	ownSprite = true;
 	sprite = new SpriteSheet(name, gfx, 1.0f);
-	height = 250;
-	width = 100;
+	height = 80;
+	width = 80;
 }
 
 Obstacle::~Obstacle()
 {
+	delete sprite;
 	delete &rect;
 	delete gfx;
 }
@@ -49,7 +50,7 @@ void Obstacle::update(double speed)
 		rect = { x, y - height, x + width, y };
 	}
 	else {
-		rect = { x, y - 165, x + width, y -height };
+		rect = { x, (y - height / 2) - 200 , x + width, (y + height / 2) - 200 };
 	}
 
 }

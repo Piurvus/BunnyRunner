@@ -55,7 +55,7 @@ void Bunny::updateBunny(double speed)
 
 	//	Gravitiy
 	if (speedY != 0) {
-		speedY += 0.1;
+		speedY += 0.2;
 	}
 
 	//	Jump
@@ -70,8 +70,12 @@ void Bunny::updateBunny(double speed)
 
 void Bunny::jump(double charge)
 {
+
+
 	if (charge >= 60)
 		charge = 60;
+
+	charge *= 2;
 
 	height = charge / 0.6;
 
