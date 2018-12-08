@@ -66,3 +66,12 @@ void Graphics::DrawLine(float x, float y, float x2, float y2)
 	brush->SetColor(D2D1::ColorF(0, 0, 0));
 	renderTarget->DrawLine(D2D1::Point2F(x, y), D2D1::Point2F(x2, y2), brush, 3.0f);
 }
+
+void Graphics::DrawRectangle(D2D_RECT_F & rect)
+{
+	brush->SetColor(D2D1::ColorF(0, 0, 0));
+	renderTarget->DrawRectangle(rect, brush, 3.0f);
+
+	
+}
+

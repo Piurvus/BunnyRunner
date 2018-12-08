@@ -11,14 +11,13 @@ Bunny::Bunny(Graphics * gfx):
 	frame = 0;
 	bunnySpeed = 0.1;
 	speedY = 0;
-
 }
 
 Bunny::~Bunny()
 {
 	delete deadBunny;
 	delete bunny;
-
+	
 }
 
 void Bunny::showBunny()
@@ -32,8 +31,9 @@ void Bunny::showBunny()
 
 }
 
-void Bunny::updateBunny()
+void Bunny::updateBunny(double speed)
 {
+	
 	if (!isDead) {
 		//	Animation Jump
 		if (y < 300 && y > 300 - height && speedY < 0) {
@@ -52,7 +52,7 @@ void Bunny::updateBunny()
 			frame = 1;
 		}
 
-		frame += bunnySpeed;
+		frame += bunnySpeed * speed;
 
 		//	Gravitiy
 		if (speedY != 0) {
@@ -90,6 +90,12 @@ bool Bunny::onGround()
 void Bunny::die()
 {
 	isDead = true;
+}
+
+D2D1_RECT_F Bunny::returnPos()
+{
+	rect = { x, y, x + 8.233333f * 40 * sizeX, y + 80 * 4 * sizeX };
+	return rect;
 }
 
 

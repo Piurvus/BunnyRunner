@@ -30,6 +30,9 @@
     <ClCompile Include="Bunny.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="obstacle.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -42,6 +45,9 @@
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Bunny.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="obstacle.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,8 +8,9 @@ Game::Game(Graphics * gfx):
 {
 
 	//-------------------------
-	sprites = new SpriteSheet(L"test.png", gfx, 0.4f);
+	//sprites = new SpriteSheet(L"test.png", gfx, 0.4f);
 	bunny = new Bunny(gfx);
+	obj = new Obstacle(gfx);
 	//-------------------------
 
 }
@@ -18,7 +19,8 @@ Game::~Game()
 {
 	
 	delete sprites;
-
+	delete bunny;
+	delete obj;
 }
 
 void Game::Run()
@@ -44,25 +46,21 @@ void Game::UpdateModel()
 			charge = 0;
 		}
 
-		if (GetAsyncKeyState(VK_CONTROL)) {
+		if (checkCollision(bunny->returnPos(), obj->returnPos())) {
 			bunny->die();
 		}
 
-		bunny->updateBunny();
+		bunny->updateBunny(speed);
 
+
+		obj->update(speed);
+
+		
 		/*
-		ySpeed += 1.0f;
-		y += ySpeed;
-		if (y > 600) {
-			y = 600;
-			ySpeed = -30.0f;
-		}
-		if (GetAsyncKeyState(VK_CONTROL) & 1) {
-			loading = !loading;
-		}
-		a += 0.2f;
-		if (a >= 0.8f) a = 0;
+		if (GetAsyncKeyState(VK_SHIFT)&1)
+			speed += 0.1;
 		*/
+
 
 		clock = std::clock();
 	}
@@ -73,6 +71,7 @@ void Game::ComposeFrame()
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
 	{
 		gfx->ClearScreen(255, 255, 255);
+		obj->show();
 		gfx->DrawLine(0, 435, 800, 435);
 
 		bunny->showBunny();
@@ -81,4 +80,9 @@ void Game::ComposeFrame()
 
 	//}
 	
+}
+
+bool Game::checkCollision(D2D1_RECT_F rect1, D2D1_RECT_F rect2)
+{
+	return false;
 }

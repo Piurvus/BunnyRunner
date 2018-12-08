@@ -7,11 +7,12 @@ class Bunny {
 	Graphics* gfx;
 	SpriteSheet* bunny;
 	SpriteSheet* deadBunny;
+	D2D1_RECT_F rect;
 
 	double frame;
 	double bunnySpeed;
 	float x, y;
-	double sizeX, sizeY;
+	float sizeX, sizeY;
 	double speedY;
 	double height;
 	bool isDead = false;
@@ -22,10 +23,11 @@ public:
 	~Bunny();
 
 	void showBunny();
-	void updateBunny();
+	void updateBunny(double speed);
 	void jump(double charge);
 	bool onGround();
 	void die();
+	D2D1_RECT_F returnPos();
 	
 	//void crouch();
 
