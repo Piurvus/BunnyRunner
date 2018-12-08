@@ -33,40 +33,39 @@ void Bunny::showBunny()
 
 void Bunny::updateBunny(double speed)
 {
-	
-	if (!dead) {
-		//	Animation Jump
-		if (y < 300 && y > 300 - height && speedY < 0) {
-			frame = 3;
-		}
-		else if (y < 300 - height && speedY < 0) {
-			frame = 4;
-		}
-		else if (y < 300 - 2 * height && speedY >0) {
-			frame = 5;
-		}
-		else if (y < 300 - height && speedY > 0) {
-			frame = 0;
-		}
-		else if (y < 300 && y > 300 - height && speedY > 0) {
-			frame = 1;
-		}
 
-		frame += bunnySpeed * speed;
-
-		//	Gravitiy
-		if (speedY != 0) {
-			speedY += 0.1;
-		}
-
-		//	Jump
-		y += speedY;
-
-		if (y >= 300.0f) {
-			speedY = 0;
-			y = 300.0f;
-		}
+	//	Animation Jump
+	if (y < 300 && y > 300 - height && speedY < 0) {
+		frame = 3;
 	}
+	else if (y < 300 - height && speedY < 0) {
+		frame = 4;
+	}
+	else if (y < 300 - 2 * height && speedY >0) {
+		frame = 5;
+	}
+	else if (y < 300 - height && speedY > 0) {
+		frame = 0;
+	}
+	else if (y < 300 && y > 300 - height && speedY > 0) {
+		frame = 1;
+	}
+
+	frame += bunnySpeed * speed;
+
+	//	Gravitiy
+	if (speedY != 0) {
+		speedY += 0.1;
+	}
+
+	//	Jump
+	y += speedY;
+
+	if (y >= 300.0f) {
+		speedY = 0;
+		y = 300.0f;
+	}
+
 }
 
 void Bunny::jump(double charge)

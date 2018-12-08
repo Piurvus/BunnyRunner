@@ -36,7 +36,7 @@ void Obstacle::update(double speed)
 	if (x + width <= 0) {
 		renew();
 	}
-	rect = { x, y, x + width, y - height };
+	rect = { x, y - height, x + width, y };
 }
 
 void Obstacle::renew()
@@ -58,5 +58,9 @@ void Obstacle::renew()
 
 D2D_RECT_F Obstacle::returnPos()
 {
+	int a = rect.bottom;
+	rect.bottom = rect.top;
+	rect.top = a;
+
 	return rect;
 }

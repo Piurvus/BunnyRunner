@@ -38,7 +38,7 @@ void Game::UpdateModel()
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate && !bunny->isDead())
 	{
 		if (GetAsyncKeyState(VK_SPACE) && bunny->onGround())
-			charge += 0.75;
+			charge += 1    ;
 
 		if (!GetAsyncKeyState(VK_SPACE) && charge != 0 && bunny->onGround()) {
 			bunny->jump(charge);
@@ -65,6 +65,9 @@ void Game::UpdateModel()
 	else if (bunny->isDead() && GetAsyncKeyState(VK_F10) & 1) {
 		bunny = new Bunny(gfx);
 		obj = new Obstacle(gfx);
+	}
+	else if (bunny->isDead()) {
+		bunny->updateBunny(speed);
 	}
 }
 
