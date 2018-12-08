@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bunny.cpp" />
+    <ClCompile Include="Carrot.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bunny.h" />
+    <ClInclude Include="Carrot.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="obstacle.h" />
@@ -159,7 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Downloads\21807063.jpg" />
-    <Image Include="..\..\..\..\..\Downloads\kisspng-baby-carrot-food-vegetable-emoji-vegetable-image-5adbc52b086a46.1341162115243522990345.png" />
+    <Image Include="carrot.png" />
     <Image Include="deadle.png" />
     <Image Include="rabbit.png" />
     <Image Include="test.png" />

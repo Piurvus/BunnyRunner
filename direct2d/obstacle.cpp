@@ -8,13 +8,22 @@ Obstacle::Obstacle(Graphics * gfx):
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(1, 600);
-
+	
 	while (width < 20 || height < 20) {
 		width = dist(rng) % 100;
 		height = dist(rng) % 200;
 	}
-
+	
 	x = 800 - width;
+}
+
+Obstacle::Obstacle(Graphics * gfx, LPCWSTR name):
+	gfx(gfx)
+{
+	ownSprite = true;
+	sprite = new SpriteSheet(name, gfx, 1.0f);
+	height = 250;
+	width = 100;
 }
 
 Obstacle::~Obstacle()
@@ -36,31 +45,39 @@ void Obstacle::update(double speed)
 	if (x + width <= 0) {
 		renew();
 	}
-	rect = { x, y - height, x + width, y };
+	if (!ownSprite) {
+		rect = { x, y - height, x + width, y };
+	}
+	else {
+		rect = { x, y - 165, x + width, y -height };
+	}
+
 }
 
 void Obstacle::renew()
 {
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
-	std::uniform_int_distribution<std::mt19937::result_type> dist(1, 600);
+	std::uniform_int_distribution<std::mt19937::result_type> dist(800, 1600);
 
 	float widtha = width;
 	float heighta = height;
-
-	while (width < 20 || height < 20 || widtha==width || heighta == height) {
-		width = dist(rng) % 100;
-		height = dist(rng) % 200;
+	
+	if (!ownSprite) {
+		while (width < 20 || height < 20 || widtha == width || heighta == height) {
+			width = dist(rng) % 100;
+			height = dist(rng) % 200;
+		}
 	}
 
-	x = 800 - width;
+	x = dist(rng) - width;
 }
 
 D2D_RECT_F Obstacle::returnPos()
 {
-	int a = rect.bottom;
+	/*int a = rect.bottom;
 	rect.bottom = rect.top;
 	rect.top = a;
-
+	*/
 	return rect;
 }

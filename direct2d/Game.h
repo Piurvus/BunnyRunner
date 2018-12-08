@@ -5,9 +5,10 @@
 #include <ctime>
 #include "Bunny.h"
 #include "obstacle.h"
+#include "Carrot.h"
 
 class Game {
-
+	Carrot* carrot;
 	SpriteSheet* sprites;
 	Bunny* bunny;
 	Graphics* gfx;

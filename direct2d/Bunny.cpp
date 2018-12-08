@@ -11,7 +11,7 @@ Bunny::Bunny(Graphics * gfx):
 	frame = 0;
 	bunnySpeed = 0.1;
 	speedY = 0;
-}
+} 
 
 Bunny::~Bunny()
 {

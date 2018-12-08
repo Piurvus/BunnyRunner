@@ -33,6 +33,9 @@
     <ClCompile Include="obstacle.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="Carrot.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -50,6 +53,9 @@
     <ClInclude Include="obstacle.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Carrot.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="test.png">
@@ -61,10 +67,10 @@
     <Image Include="rabbit.png">
       <Filter>Ressourcendateien</Filter>
     </Image>
-    <Image Include="..\..\..\..\..\Downloads\kisspng-baby-carrot-food-vegetable-emoji-vegetable-image-5adbc52b086a46.1341162115243522990345.png">
+    <Image Include="deadle.png">
       <Filter>Ressourcendateien</Filter>
     </Image>
-    <Image Include="deadle.png">
+    <Image Include="carrot.png">
       <Filter>Ressourcendateien</Filter>
     </Image>
   </ItemGroup>

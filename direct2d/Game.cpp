@@ -1,7 +1,8 @@
 #include "Game.h"
 #include "SpriteSheet.h"
 #include <ctime>
-
+#include "Bunny.h"
+#include "Carrot.h"
 
 Game::Game(Graphics * gfx):
 	gfx(gfx)
@@ -9,6 +10,7 @@ Game::Game(Graphics * gfx):
 
 	//-------------------------
 	//sprites = new SpriteSheet(L"test.png", gfx, 0.4f);
+	carrot = new Carrot(gfx, L"carrot.png");
 	bunny = new Bunny(gfx);
 	obj = new Obstacle(gfx);
 	//-------------------------
@@ -37,6 +39,10 @@ void Game::UpdateModel()
 {
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate && !bunny->isDead())
 	{
+		if (abs(obj->returnPos().left - carrot->returnPos().left) < 100) {
+			carrot->renew();
+		}
+
 		if (GetAsyncKeyState(VK_SPACE) && bunny->onGround())
 			charge += 1    ;
 
@@ -48,23 +54,27 @@ void Game::UpdateModel()
 		if (checkCollision(bunny->returnPos(), obj->returnPos())) {
 			bunny->die();
 		}
-
-		bunny->updateBunny(speed);
-
-		obj->update(speed);
-
 		
-		/*
-		if (GetAsyncKeyState(VK_SHIFT)&1)
-			speed += 0.1;
-		*/
+		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
+			speed += 0.01;
+			carrot->renew();
+		}
+
+
+
+		carrot->update(speed);
+		obj->update(speed);
+		
+		bunny->updateBunny(speed);
 
 
 		clock = std::clock();
 	}
-	else if (bunny->isDead() && GetAsyncKeyState(VK_F10) & 1) {
+	else if ((bunny->isDead() && GetAsyncKeyState(VK_F10) & 1) || GetAsyncKeyState(VK_F10) & 1) {
 		bunny = new Bunny(gfx);
 		obj = new Obstacle(gfx);
+		carrot = new Carrot(gfx, L"carrot.png");
+		speed = 1.0f;
 	}
 	else if (bunny->isDead()) {
 		bunny->updateBunny(speed);
@@ -80,11 +90,14 @@ void Game::ComposeFrame()
 		obj->show();
 		gfx->DrawLine(0, 435, 800, 435);
 		
-		
+		carrot->show();
+
 		D2D1_RECT_F a = bunny->returnPos();
-		D2D1_RECT_F b = obj->returnPos();
+		D2D1_RECT_F b = carrot->returnPos();
+		//D2D1_RECT_F b = obj->returnPos();
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
+		//gfx->DrawRectangle(b);
 		
 
 		bunny->showBunny();
