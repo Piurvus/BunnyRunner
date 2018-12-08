@@ -49,7 +49,7 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 
 	RegisterClassEx(&windowclass);
 
-	RECT rect = { 0, 0, 800, 600 };
+	RECT rect = { 0, 0, 1600, 600 };
 	AdjustWindowRectEx(&rect, WS_OVERLAPPEDWINDOW, false, WS_EX_OVERLAPPEDWINDOW);
 
 	HWND windowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW,

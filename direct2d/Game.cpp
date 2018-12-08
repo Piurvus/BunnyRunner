@@ -98,17 +98,17 @@ void Game::ComposeFrame()
 		fox->show();
 		obj->show();
 
-		gfx->DrawLine(0, 435, 800, 435);
+		gfx->DrawLine(0, 435, 1600, 435);
 		
 		carrot->show();
 
 
-		/*
+		
 		D2D1_RECT_F a = bunny->returnPos();
 		D2D1_RECT_F b = fox->returnPos();
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
-		*/
+		
 		bunny->showBunny();
 	}
 

@@ -14,7 +14,7 @@ Obstacle::Obstacle(Graphics * gfx):
 		height = dist(rng) % 200;
 	}
 	
-	x = 800 - width;
+	x = 1600 - width;
 }
 
 Obstacle::Obstacle(Graphics * gfx, LPCWSTR name):
@@ -59,7 +59,7 @@ void Obstacle::renew()
 {
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
-	std::uniform_int_distribution<std::mt19937::result_type> dist(800, 1600);
+	std::uniform_int_distribution<std::mt19937::result_type> dist(1600, 2400);
 
 	float widtha = width;
 	float heighta = height;
