@@ -118,7 +118,6 @@ void SpriteSheet::Draw(float x, float y, double size, double a, bool cuzitwontwo
 			bmp->GetSize().width, bmp->GetSize().height));
 }
 
-
 void SpriteSheet::Draw(int index, int x, int y, double size)
 {
 	

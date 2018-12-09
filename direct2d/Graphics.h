@@ -23,8 +23,10 @@ public:
 	void BeginDraw();
 	void EndDraw();
 
+	void fillRect(const D2D_RECT_F & rect, float r, float g, float b);
 	void ClearScreen(float r, float g, float b);
 	void DrawCircle(float x, float y, float  radius, float r, float g, float b, float a);
 	void DrawLine(float x, float y, float x2, float y2);
+	void DrawWaterLine(float x, float y, float x2, float y2, float r, float g, float b, float thickness);
 	void DrawRectangle(D2D_RECT_F & rect);
 };

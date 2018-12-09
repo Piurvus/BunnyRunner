@@ -38,6 +38,7 @@ bool Graphics::Init(const HWND windowHandle)
 		return false;
 
 	return true;
+
 }
 
 void Graphics::BeginDraw()
@@ -48,6 +49,12 @@ void Graphics::BeginDraw()
 void Graphics::EndDraw()
 {
 	renderTarget->EndDraw();
+}
+
+void Graphics::fillRect(const D2D_RECT_F & rect, float r , float g, float b)
+{
+	brush->SetColor(D2D1::ColorF(r, g, b));
+	renderTarget->FillRectangle(rect, brush);
 }
 
 void Graphics::ClearScreen(float r, float g, float b)
@@ -67,9 +74,14 @@ void Graphics::DrawLine(float x, float y, float x2, float y2)
 	renderTarget->DrawLine(D2D1::Point2F(x, y), D2D1::Point2F(x2, y2), brush, 3.0f);
 }
 
+void Graphics::DrawWaterLine(float x, float y, float x2, float y2, float r, float g, float b, float thickness)
+{
+	brush->SetColor(D2D1::ColorF(r, g, b));
+	renderTarget->DrawLine(D2D1::Point2F(x, y), D2D1::Point2F(x2, y2), brush, thickness);
+}
+
 void Graphics::DrawRectangle(D2D_RECT_F & rect)
 {
 	brush->SetColor(D2D1::ColorF(0, 0, 0));
 	renderTarget->DrawRectangle(rect, brush, 3.0f);
 }
-

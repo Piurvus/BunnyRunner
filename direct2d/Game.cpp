@@ -13,6 +13,7 @@ Game::Game(Graphics * gfx):
 	xScreen3 = 2*xScreen2;
 
 	//-------Sprites-----------
+	water = new Water(gfx, 50);
 	sprites = new SpriteSheet(L"background.png", gfx, 1.0f);
 	fox = new Fox(gfx);
 	carrot = new Carrot(gfx, L"carrot.png");
@@ -43,6 +44,11 @@ void Game::Run()
 
 void Game::UpdateModel()
 {
+	if (bunny->isDead()) {
+		speed = 1.0;
+	}
+
+
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate && !bunny->isDead())
 	{
 		if (abs(obj->returnPos().left - carrot->returnPos().left) < 100) {
@@ -121,13 +127,15 @@ void Game::ComposeFrame()
 
 	gfx->ClearScreen(255, 255, 255);
 
+	water->showWaterArea(bottom, speed);
+
 	sprites->Draw(xScreen1, -10.0f, 0.6f, 1.0f, true);
 	sprites->Draw(xScreen2, -10.0f, 0.6f, 1.0f, true);
 	sprites->Draw(xScreen3, -10.0f, 0.6f, 1.0f, true);
+	
 
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
 	{
-		
 		fox->show();
 		obj->show();
 
