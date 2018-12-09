@@ -163,6 +163,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\..\Downloads\21807063.jpg" />
+    <Image Include="background.png" />
     <Image Include="carrot.png" />
     <Image Include="deadle.png" />
     <Image Include="fox.png" />

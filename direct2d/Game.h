@@ -9,7 +9,7 @@
 #include "Fox.h"
 
 class Game {
-
+	
 	Fox* fox;
 	Carrot* carrot;
 	SpriteSheet* sprites;

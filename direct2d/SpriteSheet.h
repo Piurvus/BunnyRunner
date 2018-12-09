@@ -22,5 +22,6 @@ public:
 
 	void Draw(float a);
 	void Draw(float x, float y, double size);
+	void Draw(float x, float y, double size, double a, bool cuzitwontworkwithoutkappa);
 	void Draw(int index, int x, int y, double size);
 };

@@ -67,7 +67,7 @@ SpriteSheet::SpriteSheet(LPCWSTR filename, Graphics * gfx, float a, int spriteWi
 
 SpriteSheet::~SpriteSheet()
 {
-	if (bmp) bmp->Release();		
+	if (bmp) bmp->Release();	
 }
 
 
@@ -101,6 +101,23 @@ void SpriteSheet::Draw(float x, float y, double size)
 		D2D1::RectF(0.0f, 0.0f,
 			bmp->GetSize().width, bmp->GetSize().height));
 }
+
+void SpriteSheet::Draw(float x, float y, double size, double a, bool cuzitwontworkwithoutkappa)
+{
+	//	position on screen
+	D2D_RECT_F dest = D2D1::RectF(
+		x, y,
+		x + spriteWidth * size, y + spriteHeight * size);
+
+	gfx->GetRenderTarget()->DrawBitmap(
+		bmp,
+		dest,
+		a,
+		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR,
+		D2D1::RectF(0.0f, 0.0f,
+			bmp->GetSize().width, bmp->GetSize().height));
+}
+
 
 void SpriteSheet::Draw(int index, int x, int y, double size)
 {

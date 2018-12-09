@@ -23,7 +23,7 @@ Bunny::~Bunny()
 void Bunny::showBunny()
 {
 	if (!dead) {
-		bunny->Draw((int)(frame) % 6, x, y, sizeX);
+		bunny->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);
 	}
 	else {
 		deadBunny->Draw(x-100, y-50, sizeX);

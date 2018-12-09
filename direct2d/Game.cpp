@@ -11,6 +11,7 @@ Game::Game(Graphics * gfx):
 
 	//-------------------------
 	//sprites = new SpriteSheet(L"test.png", gfx, 0.4f);
+	sprites = new SpriteSheet(L"background.png", gfx, 1.0f);
 	fox = new Fox(gfx);
 	carrot = new Carrot(gfx, L"carrot.png");
 	bunny = new Bunny(gfx);
@@ -54,7 +55,7 @@ void Game::UpdateModel()
 			bunny->jump(30);
 		}
 
-		if (!GetAsyncKeyState(VK_SPACE) && (charge != 0 || carrots) && bunny->onGround()) {
+		if (!GetAsyncKeyState(VK_SPACE) && charge != 0 && bunny->onGround()) {
 			bunny->jump(charge);
 			charge = 0;
 		}
@@ -101,24 +102,29 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+
+	gfx->ClearScreen(255, 255, 255);
+	sprites->Draw(0.0f, -10.0f, 0.6f, 0.7f, true);
+	sprites->Draw(1223.0f, -10.0f, 0.6f, 0.7f, true);
+
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
 	{
-		gfx->ClearScreen(255, 255, 255);
 		
 		fox->show();
 		obj->show();
 
-		gfx->DrawLine(0, 435, 1600, 435);
+		//gfx->DrawLine(0, 435, 1600, 435);
 		
 		carrot->show();
 
 
-		
+		/*
 		D2D1_RECT_F a = bunny->returnPos();
 		D2D1_RECT_F b = fox->returnPos();
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
-		
+		*/
+
 		bunny->showBunny();
 	}
 
