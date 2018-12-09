@@ -8,9 +8,11 @@
 Game::Game(Graphics * gfx):
 	gfx(gfx)
 {
+	xScreen1 = 0;
+	xScreen2 = 1224;
+	xScreen3 = 2*xScreen2;
 
-	//-------------------------
-	//sprites = new SpriteSheet(L"test.png", gfx, 0.4f);
+	//-------Sprites-----------
 	sprites = new SpriteSheet(L"background.png", gfx, 1.0f);
 	fox = new Fox(gfx);
 	carrot = new Carrot(gfx, L"carrot.png");
@@ -73,6 +75,20 @@ void Game::UpdateModel()
 			carrot->renew();
 		}
 
+		if (xScreen1 + 1224 <= 0) {
+			xScreen1 = 2 * 1224-0.1;
+		}
+		else if (xScreen2 + 1224 <= 0) {
+			xScreen2 = 2 * 1224-0.1;
+		}
+		else if (xScreen3 + 1224 <= 0) {
+			xScreen3 = 2 * 1224-0.1;
+		}
+
+
+		xScreen1 -= 2*(int)speed; 
+		xScreen2 -= 2*(int)speed;
+		xScreen3 -= 2*(int)speed;
 
 
 		carrot->update(speed);
@@ -104,8 +120,10 @@ void Game::ComposeFrame()
 {
 
 	gfx->ClearScreen(255, 255, 255);
-	sprites->Draw(0.0f, -10.0f, 0.6f, 0.7f, true);
-	sprites->Draw(1223.0f, -10.0f, 0.6f, 0.7f, true);
+
+	sprites->Draw(xScreen1, -10.0f, 0.6f, 1.0f, true);
+	sprites->Draw(xScreen2, -10.0f, 0.6f, 1.0f, true);
+	sprites->Draw(xScreen3, -10.0f, 0.6f, 1.0f, true);
 
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
 	{

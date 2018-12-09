@@ -28,6 +28,8 @@ public:
 
 private:
 
+	double xScreen1, xScreen2, xScreen3;
+
 	int carrots = 0;
 	double speed = 1.0f;
 	double refreshRate = 1/30;
