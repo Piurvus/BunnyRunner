@@ -28,6 +28,7 @@ public:
 
 private:
 
+	int carrots = 0;
 	double speed = 1.0f;
 	double refreshRate = 1/30;
 	std::clock_t clock;

@@ -49,7 +49,12 @@ void Game::UpdateModel()
 		if (GetAsyncKeyState(VK_SPACE) && bunny->onGround())
 			charge += 1.5;
 
-		if (!GetAsyncKeyState(VK_SPACE) && charge != 0 && bunny->onGround()) {
+		if (GetAsyncKeyState(VK_SPACE) && !bunny->onGround() && carrots) {
+			carrots--;
+			bunny->jump(30);
+		}
+
+		if (!GetAsyncKeyState(VK_SPACE) && (charge != 0 || carrots) && bunny->onGround()) {
 			bunny->jump(charge);
 			charge = 0;
 		}
@@ -63,6 +68,7 @@ void Game::UpdateModel()
 		
 		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
 			speed += 0.1;
+			carrots++;
 			carrot->renew();
 		}
 
@@ -77,16 +83,20 @@ void Game::UpdateModel()
 
 		clock = std::clock();
 	}
-	else if ((bunny->isDead() && GetAsyncKeyState(VK_F10) & 1) || GetAsyncKeyState(VK_F10) & 1) {
+	else if (bunny->isDead()) {
+		bunny->updateBunny(speed);
+	}
+
+	if (GetAsyncKeyState(VK_F10)) {
+		Sleep(10);
 		bunny = new Bunny(gfx);
 		obj = new Obstacle(gfx);
 		carrot = new Carrot(gfx, L"carrot.png");
 		fox = new Fox(gfx);
 		speed = 1.0f;
+		carrots = 0;
 	}
-	else if (bunny->isDead()) {
-		bunny->updateBunny(speed);
-	}
+
 }
 
 void Game::ComposeFrame()
