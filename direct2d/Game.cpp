@@ -53,6 +53,7 @@ void Game::UpdateModel()
 
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate && !bunny->isDead())
 	{
+		
 		if (abs(obj->returnPos().left - carrot->returnPos().left) < 100) {
 			carrot->renew();
 		}
@@ -60,8 +61,10 @@ void Game::UpdateModel()
 		if (GetAsyncKeyState(VK_SPACE) && bunny->onGround())
 			charge += 1.5;
 
-		if (GetAsyncKeyState(VK_SPACE) && !bunny->onGround() && carrots) {
+		if (GetAsyncKeyState(VK_SPACE) && !bunny->onGround() && carrots && 	(std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 1) {
+			carrotsTimer = clock;
 			carrots--;
+			charge = 0;
 			bunny->jump(30);
 		}
 

@@ -44,7 +44,10 @@ private:
 	int carrots = 0;
 	double speed = 1.0;
 	double refreshRate = 1/30;
+
 	std::clock_t clock;
+	std::clock_t carrotsTimer = 0;
+	
 	double charge = 0;
 	bool checkCollision(D2D1_RECT_F rect1, D2D1_RECT_F rect2); 
 
