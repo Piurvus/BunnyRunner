@@ -9,6 +9,7 @@
 #include "Fox.h"
 #include "Water.h"
 
+
 class Game {
 
 	Fox* fox;
@@ -33,8 +34,12 @@ private:
 	double xScreen1, xScreen2, xScreen3;
 
 
-	D2D1_RECT_F bottom = D2D1::Rect(0, 400, 1600, 600);
+	D2D1_RECT_F bottom = D2D1::Rect(0, 451, 1600, 600);
 	D2D1_COLOR_F color = D2D1::ColorF(50, 50, 255);
+
+	wchar_t distanceCountText[256];
+	wchar_t carrotCountText[256];
+	float distanceCount = 0.0f;
 
 	int carrots = 0;
 	double speed = 1.0;

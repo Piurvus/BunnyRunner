@@ -88,6 +88,7 @@ void SpriteSheet::Draw(float a)
 
 void SpriteSheet::Draw(float x, float y, double size)
 {
+
 	//	position on screen
 	D2D_RECT_F dest = D2D1::RectF(
 		x, y,
@@ -139,7 +140,5 @@ void SpriteSheet::Draw(int index, int x, int y, double size)
 		1.0f,
 		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR,
 		src);
-
 }
-
 

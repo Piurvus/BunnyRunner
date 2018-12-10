@@ -4,6 +4,8 @@
 #include "Bunny.h"
 #include "Carrot.h"
 #include "Fox.h"
+#include <string>
+#include <stdio.h>
 
 Game::Game(Graphics * gfx):
 	gfx(gfx)
@@ -13,7 +15,7 @@ Game::Game(Graphics * gfx):
 	xScreen3 = 2*xScreen2;
 
 	//-------Sprites-----------
-	water = new Water(gfx, 50);
+	water = new Water(gfx, 5);
 	sprites = new SpriteSheet(L"background.png", gfx, 1.0f);
 	fox = new Fox(gfx);
 	carrot = new Carrot(gfx, L"carrot.png");
@@ -91,11 +93,13 @@ void Game::UpdateModel()
 			xScreen3 = 2 * 1224-0.1;
 		}
 
-
 		xScreen1 -= 2*(int)speed; 
 		xScreen2 -= 2*(int)speed;
 		xScreen3 -= 2*(int)speed;
 
+		distanceCount += speed;
+		swprintf_s(distanceCountText, L"%d", (int)distanceCount);
+		swprintf_s(carrotCountText, L"%d", (int)carrots);
 
 		carrot->update(speed);
 		fox->update(speed);
@@ -110,14 +114,16 @@ void Game::UpdateModel()
 		bunny->updateBunny(speed);
 	}
 
-	if (GetAsyncKeyState(VK_F10)) {
+	if (GetAsyncKeyState(VK_F9)) {
 		Sleep(10);
+		water = new Water(gfx, 5);
 		bunny = new Bunny(gfx);
 		obj = new Obstacle(gfx);
 		carrot = new Carrot(gfx, L"carrot.png");
 		fox = new Fox(gfx);
 		speed = 1.0f;
 		carrots = 0;
+		distanceCount = 0.0f;
 	}
 
 }
@@ -127,12 +133,11 @@ void Game::ComposeFrame()
 
 	gfx->ClearScreen(255, 255, 255);
 
-	water->showWaterArea(bottom, speed);
-
 	sprites->Draw(xScreen1, -10.0f, 0.6f, 1.0f, true);
 	sprites->Draw(xScreen2, -10.0f, 0.6f, 1.0f, true);
 	sprites->Draw(xScreen3, -10.0f, 0.6f, 1.0f, true);
-	
+
+	water->showWaterArea(bottom, speed);
 
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
 	{
@@ -150,9 +155,14 @@ void Game::ComposeFrame()
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
 		*/
-
+		
 		bunny->showBunny();
+		gfx->DrawTEXT(&D2D1::Rect(50, 10, 500, 500), 50, L"Score:");
+		gfx->DrawTEXT(&D2D1::Rect(250, 10, 500, 500), 50, distanceCountText);
+		gfx->DrawTEXT(&D2D1::Rect(50, 60, 500, 500), 50, L"Carrots:");
+		gfx->DrawTEXT(&D2D1::Rect(250, 60, 500, 500), 50, carrotCountText);
 	}
+	
 
 
 	//}

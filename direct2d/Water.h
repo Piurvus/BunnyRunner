@@ -3,25 +3,42 @@
 #include <vector>
 #include <random>
 #include <iostream>
+#include "SpriteSheet.h"
+#include <algorithm>
 
 class Water {
 
+	Graphics* gfx;
+
 	class Wave {
 
+		Graphics* gfx;
+
 	public:
+
+		SpriteSheet* log1 = NULL;
+		SpriteSheet* log2 = NULL;
 		float thickness;
 		float r, g, b;
-		int x, y;
+		float x, y;
 		float speed;
 		D2D_VECTOR_2F vec = {};
-		Wave();
+		Wave(Graphics * gfx);
+
+		bool operator< (const Wave &other) const {
+			return y < other.y;
+		}
+
+
 	};
 
-	Graphics* gfx;
 	float r, g, b;
 	int count = 30;
 
+
 	std::vector<Wave> waves;
+	std::vector<Wave> SortWaveBySize();
+
 	double gameSpeed;
 
 public:

@@ -1,4 +1,10 @@
 #include "Graphics.h"
+#include <d2d1_1.h>
+#include <dwrite.h>
+#include <d2d1_2.h>
+#include <d2d1_3.h>
+#include <string>
+#include <cwchar>
 
 Graphics::Graphics()
 {
@@ -80,8 +86,38 @@ void Graphics::DrawWaterLine(float x, float y, float x2, float y2, float r, floa
 	renderTarget->DrawLine(D2D1::Point2F(x, y), D2D1::Point2F(x2, y2), brush, thickness);
 }
 
+void Graphics::DrawTEXT(D2D1_RECT_F* rect, float size, const wchar_t text[])
+{
+
+	HRESULT hr;
+	IDWriteTextFormat* textformat;
+	IDWriteFactory* writeFactory;
+	
+	hr = DWriteCreateFactory(
+		DWRITE_FACTORY_TYPE_SHARED,
+		__uuidof(IDWriteFactory),
+		reinterpret_cast<IUnknown**>(&writeFactory)
+	);
+
+	hr = writeFactory->CreateTextFormat(
+		L"Gabriola",
+		NULL,
+		DWRITE_FONT_WEIGHT_REGULAR,
+		DWRITE_FONT_STYLE_NORMAL,
+		DWRITE_FONT_STRETCH_NORMAL,
+		size,
+		L"en-us",
+		&textformat
+	);
+
+	brush->SetColor(D2D1::ColorF(0, 0, 0));
+	renderTarget->DrawTextW(text, std::wcslen(text), textformat, rect, brush, D2D1_DRAW_TEXT_OPTIONS_NO_SNAP, DWRITE_MEASURING_MODE_NATURAL);
+
+}
+
 void Graphics::DrawRectangle(D2D_RECT_F & rect)
 {
 	brush->SetColor(D2D1::ColorF(0, 0, 0));
 	renderTarget->DrawRectangle(rect, brush, 3.0f);
 }
+

@@ -91,5 +91,11 @@
     <Image Include="background.png">
       <Filter>Ressourcendateien</Filter>
     </Image>
+    <Image Include="log1.PNG">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="log2.PNG">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
   </ItemGroup>
 </Project>
