@@ -21,12 +21,13 @@ class Water {
 		float thickness;
 		float r, g, b;
 		float x, y;
+		float yWithSize;
 		float speed;
 		D2D_VECTOR_2F vec = {};
 		Wave(Graphics * gfx);
 
 		bool operator< (const Wave &other) const {
-			return y < other.y;
+			return yWithSize < other.yWithSize;
 		}
 
 

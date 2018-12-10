@@ -78,11 +78,6 @@ Water::Wave::Wave(Graphics* gfx):
 
 	int random = dist(rng) % 2;
 
-	if (random == 0) 
-		log1 = new SpriteSheet(L"log1.PNG", gfx, 1.0f);
-	else if (random == 1)
-		log2 = new SpriteSheet(L"log2.PNG", gfx, 1.0f);
-
 	/*
 	thickness = (dist(rng) % 20) / 10;
 
@@ -105,7 +100,15 @@ Water::Wave::Wave(Graphics* gfx):
 	}
 
 	vec.x = ((float)(dist(rng) % 10)) / 100 + 0.2;
-	
+
+	if (random == 0) {
+		log1 = new SpriteSheet(L"log1.PNG", gfx, 1.0f);
+		yWithSize = y + vec.x * 237.0f;
+	}
+	else if (random == 1) {
+		log2 = new SpriteSheet(L"log2.PNG", gfx, 1.0f);
+		yWithSize = y + vec.x * 367.0f;
+	}
 
 	speed = 0;
 	while (speed == 0) {
