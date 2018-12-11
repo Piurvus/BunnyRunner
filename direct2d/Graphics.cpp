@@ -98,7 +98,7 @@ void Graphics::DrawTEXT(D2D1_RECT_F* rect, float size, const wchar_t text[])
 		__uuidof(IDWriteFactory),
 		reinterpret_cast<IUnknown**>(&writeFactory)
 	);
-
+	
 	hr = writeFactory->CreateTextFormat(
 		L"Gabriola",
 		NULL,

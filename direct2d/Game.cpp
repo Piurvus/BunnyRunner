@@ -6,6 +6,8 @@
 #include "Fox.h"
 #include <string>
 #include <stdio.h>
+#include <fstream>
+#include <iostream>
 
 Game::Game(Graphics * gfx):
 	gfx(gfx)
@@ -20,18 +22,27 @@ Game::Game(Graphics * gfx):
 	fox = new Fox(gfx);
 	carrot = new Carrot(gfx, L"carrot.png");
 	bunny = new Bunny(gfx);
-	obj = new Obstacle(gfx);
+	obj = new Obstacle(gfx); 
 	//-------------------------
+
+	outfile.open("Highscore.txt");
+	infile.open("Highscore.txt");
+
+	infile >> highscore;
+	swprintf_s(highscoree, L"%d", highscore);
+	
 
 }
 
 Game::~Game()
 {
+	delete water;
 	delete carrot;
 	delete fox;
 	delete sprites;
 	delete bunny;
 	delete obj;
+	outfile.close();
 }
 
 void Game::Run()
@@ -40,7 +51,6 @@ void Game::Run()
 	UpdateModel();
 	ComposeFrame();
 	gfx->EndDraw();
-
 }
 //float a = 0.0f;
 
@@ -49,7 +59,6 @@ void Game::UpdateModel()
 	if (bunny->isDead()) {
 		speed = 1.0;
 	}
-
 
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate && !bunny->isDead())
 	{
@@ -61,7 +70,7 @@ void Game::UpdateModel()
 		if (GetAsyncKeyState(VK_SPACE) && bunny->onGround())
 			charge += 1.5;
 
-		if (GetAsyncKeyState(VK_SPACE) && !bunny->onGround() && carrots && 	(std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 1) {
+		if (GetAsyncKeyState(VK_SPACE) && !bunny->onGround() && carrots && 	(std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 0.5f) {
 			carrotsTimer = clock;
 			carrots--;
 			charge = 0;
@@ -75,9 +84,17 @@ void Game::UpdateModel()
 
 		if (checkCollision(bunny->returnPos(), obj->returnPos())) {
 			bunny->die();
+			outfile << (int)distanceCount << std::endl;	
+
+			infile >> highscore;
+			swprintf_s(highscoree, L"%d", highscore);
 		}
 		if (checkCollision(bunny->returnPos(), fox->returnPos())) {
 			bunny->die();
+			outfile << (int)distanceCount << std::endl;
+
+			infile >> highscore;
+			swprintf_s(highscoree, L"%d", highscore);
 		}
 		
 		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
@@ -101,15 +118,14 @@ void Game::UpdateModel()
 		xScreen3 -= 2*(int)speed;
 
 		distanceCount += speed;
+
 		swprintf_s(distanceCountText, L"%d", (int)distanceCount);
 		swprintf_s(carrotCountText, L"%d", (int)carrots);
 
 		carrot->update(speed);
 		fox->update(speed);
 		obj->update(speed);
-		
 		bunny->updateBunny(speed);
-
 
 		clock = std::clock();
 	}
@@ -133,17 +149,17 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-
-	gfx->ClearScreen(255, 255, 255);
-
-	sprites->Draw(xScreen1, -10.0f, 0.6f, 1.0f, true);
-	sprites->Draw(xScreen2, -10.0f, 0.6f, 1.0f, true);
-	sprites->Draw(xScreen3, -10.0f, 0.6f, 1.0f, true);
-
-	water->showWaterArea(bottom, speed);
-
 	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
 	{
+
+		gfx->ClearScreen(255, 255, 255);
+
+		sprites->Draw(xScreen1, -10.0f, 0.6f, 1.0f, true);
+		sprites->Draw(xScreen2, -10.0f, 0.6f, 1.0f, true);
+		sprites->Draw(xScreen3, -10.0f, 0.6f, 1.0f, true);
+
+		water->showWaterArea(bottom, speed);
+
 		fox->show();
 		obj->show();
 
@@ -158,10 +174,16 @@ void Game::ComposeFrame()
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
 		*/
-		
+
+
 		bunny->showBunny();
 		gfx->DrawTEXT(&D2D1::Rect(50, 10, 500, 500), 50, L"Score:");
 		gfx->DrawTEXT(&D2D1::Rect(250, 10, 500, 500), 50, distanceCountText);
+
+
+		//mbstowcs(outpuet, output, strlen(output + 1));
+		//if((std::stoi(highscore)) >=0 )
+			gfx->DrawTEXT(&D2D1::Rect(800, 10, 500, 500), 50, highscoree);
 		gfx->DrawTEXT(&D2D1::Rect(50, 60, 500, 500), 50, L"Carrots:");
 		gfx->DrawTEXT(&D2D1::Rect(250, 60, 500, 500), 50, carrotCountText);
 	}

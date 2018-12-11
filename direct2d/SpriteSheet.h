@@ -15,6 +15,7 @@ private:
 	int spritesAccross;
 
 public:
+	
 	SpriteSheet(LPCWSTR filename, Graphics* gfx, float a);
 	SpriteSheet(LPCWSTR filename, Graphics* gfx, float a, int spriteWidth, int spriteHeight);
 

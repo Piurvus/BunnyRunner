@@ -8,6 +8,7 @@
 #include "Carrot.h"
 #include "Fox.h"
 #include "Water.h"
+#include <fstream>
 
 
 class Game {
@@ -18,7 +19,9 @@ class Game {
 	SpriteSheet* sprites;
 	Bunny* bunny;
 	Graphics* gfx;
-	Obstacle* obj;
+	Obstacle* obj; 
+	std::ofstream outfile;
+	std::ifstream infile;
 
 public:
 	
@@ -32,7 +35,6 @@ public:
 private:
 
 	double xScreen1, xScreen2, xScreen3;
-
 
 	D2D1_RECT_F bottom = D2D1::Rect(0, 451, 1600, 600);
 	D2D1_COLOR_F color = D2D1::ColorF(50, 50, 255);
@@ -48,6 +50,9 @@ private:
 	std::clock_t clock;
 	std::clock_t carrotsTimer = 0;
 	
+	std::string highscore;
+	wchar_t highscoree[100];
+
 	double charge = 0;
 	bool checkCollision(D2D1_RECT_F rect1, D2D1_RECT_F rect2); 
 
