@@ -25,12 +25,22 @@ Game::Game(Graphics * gfx):
 	obj = new Obstacle(gfx); 
 	//-------------------------
 
-	outfile.open("Highscore.txt");
-	infile.open("Highscore.txt");
 
-	infile >> highscore;
-	swprintf_s(highscoree, L"%d", highscore);
+	//---------Read File----------------
 	
+	infile.open("Highscore.txt");
+	int compare = 0;
+	while (std::getline(infile, highscoreString)) {
+		compare = std::stoi(highscoreString, nullptr, 10);
+		if (compare >= highscoreInt) {
+			highscoreInt = compare;
+		}
+	}
+	outfile.open("Highscore.txt");
+	outfile << highscoreInt << std::endl;
+
+	swprintf_s(highscoreWchar, L"%d", highscoreInt);
+	//----------------------------------
 
 }
 
@@ -84,17 +94,11 @@ void Game::UpdateModel()
 
 		if (checkCollision(bunny->returnPos(), obj->returnPos())) {
 			bunny->die();
-			outfile << (int)distanceCount << std::endl;	
-
-			infile >> highscore;
-			swprintf_s(highscoree, L"%d", highscore);
+			updateHighscore();
 		}
 		if (checkCollision(bunny->returnPos(), fox->returnPos())) {
 			bunny->die();
-			outfile << (int)distanceCount << std::endl;
-
-			infile >> highscore;
-			swprintf_s(highscoree, L"%d", highscore);
+			updateHighscore();
 		}
 		
 		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
@@ -120,7 +124,7 @@ void Game::UpdateModel()
 		distanceCount += speed;
 
 		swprintf_s(distanceCountText, L"%d", (int)distanceCount);
-		swprintf_s(carrotCountText, L"%d", (int)carrots);
+		swprintf_s(carrotCountText, L"%d", carrots);
 
 		carrot->update(speed);
 		fox->update(speed);
@@ -175,15 +179,14 @@ void Game::ComposeFrame()
 		gfx->DrawRectangle(b);
 		*/
 
-
 		bunny->showBunny();
 		gfx->DrawTEXT(&D2D1::Rect(50, 10, 500, 500), 50, L"Score:");
 		gfx->DrawTEXT(&D2D1::Rect(250, 10, 500, 500), 50, distanceCountText);
 
-
 		//mbstowcs(outpuet, output, strlen(output + 1));
 		//if((std::stoi(highscore)) >=0 )
-			gfx->DrawTEXT(&D2D1::Rect(800, 10, 500, 500), 50, highscoree);
+		gfx->DrawTEXT(&D2D1::Rect(1100, 10, 1600, 500), 50, L"Highscore:");
+		gfx->DrawTEXT(&D2D1::Rect(1300, 10, 1600, 500), 50, highscoreWchar);
 		gfx->DrawTEXT(&D2D1::Rect(50, 60, 500, 500), 50, L"Carrots:");
 		gfx->DrawTEXT(&D2D1::Rect(250, 60, 500, 500), 50, carrotCountText);
 	}
@@ -192,6 +195,18 @@ void Game::ComposeFrame()
 
 	//}
 	
+}
+
+void Game::updateHighscore()
+{
+	if ((int)distanceCount >= highscoreInt) {
+		outfile << (int)distanceCount << std::endl;
+		highscoreInt = (int)distanceCount;
+	}
+
+	swprintf_s(highscoreWchar, L"%d", highscoreInt);
+
+	outfile.flush();
 }
 
 bool Game::checkCollision(D2D1_RECT_F a, D2D1_RECT_F b)

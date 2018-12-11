@@ -50,8 +50,11 @@ private:
 	std::clock_t clock;
 	std::clock_t carrotsTimer = 0;
 	
-	std::string highscore;
-	wchar_t highscoree[100];
+	std::string highscoreString;
+	wchar_t highscoreWchar[100];
+	int highscoreInt = 0;
+	void updateHighscore();
+
 
 	double charge = 0;
 	bool checkCollision(D2D1_RECT_F rect1, D2D1_RECT_F rect2); 
