@@ -20,7 +20,9 @@ class Bunny {
 	double speedY;
 	double height;
 	bool dead = false;
+
 	bool crouched = false;
+	int crouchLatency = 3;
 
 public:
 

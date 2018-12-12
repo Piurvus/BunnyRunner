@@ -19,7 +19,6 @@ Bunny::~Bunny()
 {
 	delete deadBunny;
 	delete bunny;
-	
 }
 
 void Bunny::showBunny()
@@ -39,8 +38,15 @@ void Bunny::showBunny()
 void Bunny::updateBunny(double speed)
 {
 
+	if (crouchLatency) {
+		crouchLatency--;
+	}
+	else {
+		crouched = false;
+	}
 	if(puffi)
 		puffi--;
+
 	//	Animation Jump
 	if (y < 300 && y > 300 - height && speedY < 0) {
 		frame = 3;
@@ -67,6 +73,8 @@ void Bunny::updateBunny(double speed)
 
 	//	Jump
 	y += speedY;
+
+	puffiX -= speed;
 
 	if (y >= 300.0f) {
 		speedY = 0;
@@ -117,6 +125,7 @@ void Bunny::die()
 void Bunny::crouch()
 {
 	crouched = true;
+	crouchLatency = 3;
 }
 
 bool Bunny::isCrouched()

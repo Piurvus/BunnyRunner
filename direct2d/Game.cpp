@@ -76,8 +76,8 @@ void Game::UpdateModel()
 		if (abs(obj->returnPos().left - carrot->returnPos().left) < 100) {
 			carrot->renew();
 		}
-		if (GetAsyncKeyState(VK_DOWN))//Crouch
-		{
+
+		if (GetAsyncKeyState(VK_DOWN)) {
 			bunny->crouch();
 		}
 
@@ -184,6 +184,9 @@ void Game::ComposeFrame()
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
 		*/
+
+		if(bunny->isCrouched())
+			gfx->DrawTEXT(&D2D1::Rect(50, 500, 500, 500), 50, L"Crouched");
 
 		bunny->showBunny();
 		gfx->DrawTEXT(&D2D1::Rect(50, 10, 500, 500), 50, L"Score:");
