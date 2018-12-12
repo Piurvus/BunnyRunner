@@ -6,7 +6,7 @@ Bunny::Bunny(Graphics * gfx):
 	deadBunny = new SpriteSheet(L"deadle.png", gfx, 1.0f);
 	bunny = new SpriteSheet(L"rabbit.png", gfx, 1.0f, 8.233333 * 40, 80 * 4);
 	puff = new SpriteSheet(L"puff.png", gfx, 1.0f);
-
+	
 	x = 50;
 	y = 300;
 	sizeX = 0.5;
