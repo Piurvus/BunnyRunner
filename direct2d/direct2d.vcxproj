@@ -167,12 +167,19 @@
     <Image Include="..\..\..\..\..\Downloads\21807063.jpg" />
     <Image Include="background.png" />
     <Image Include="carrot.png" />
+    <Image Include="cloud.png" />
     <Image Include="deadle.png" />
     <Image Include="fox.png" />
     <Image Include="log1.PNG" />
     <Image Include="log2.PNG" />
+    <Image Include="mushroom1.png" />
+    <Image Include="mushroom2.png" />
+    <Image Include="puff.png" />
     <Image Include="rabbit.png" />
+    <Image Include="stone.png" />
+    <Image Include="stone2.png" />
     <Image Include="test.png" />
+    <Image Include="trunk.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -7,7 +7,11 @@ class Bunny {
 	Graphics* gfx;
 	SpriteSheet* bunny;
 	SpriteSheet* deadBunny;
+	SpriteSheet* puff;
 	D2D1_RECT_F rect;
+
+	float puffi = 0;
+	float puffiX, puffiY;
 
 	double frame;
 	double bunnySpeed;

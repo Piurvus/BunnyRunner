@@ -98,10 +98,12 @@ void Game::UpdateModel()
 
 		if (checkCollision(bunny->returnPos(), obj->returnPos())) {
 			bunny->die();
+			distanceCount -= speed;
 			updateHighscore();
 		}
 		if (checkCollision(bunny->returnPos(), fox->returnPos())) {
 			bunny->die();
+			distanceCount -= speed;
 			updateHighscore();
 		}
 		
@@ -111,24 +113,24 @@ void Game::UpdateModel()
 			carrot->renew();
 		}
 
-		if (xScreen1 + 1224 <= 0) {
+		if (xScreen1 + 1224.0 <= 0) {
 			xScreen1 = 2 * 1224-0.1;
 		}
-		else if (xScreen2 + 1224 <= 0) {
-			xScreen2 = 2 * 1224-0.1;
+		else if (xScreen2 + 1224.0 <= 0) {
+			xScreen2 = 2 * 1224.0-0.1;
 		}
-		else if (xScreen3 + 1224 <= 0) {
-			xScreen3 = 2 * 1224-0.1;
+		else if (xScreen3 + 1224.0 <= 0) {
+			xScreen3 = 2 * 1224.0-0.1;
 		}
 
 		xScreen1 -= 2*(int)speed; 
 		xScreen2 -= 2*(int)speed;
 		xScreen3 -= 2*(int)speed;
 
-		distanceCount += speed;
-
 		swprintf_s(distanceCountText, L"%d", (int)distanceCount);
 		swprintf_s(carrotCountText, L"%d", carrots);
+
+		distanceCount += speed;
 
 		carrot->update(speed);
 		fox->update(speed);
@@ -203,6 +205,8 @@ void Game::ComposeFrame()
 
 void Game::updateHighscore()
 {
+	distanceCount += 0.5;
+
 	if ((int)distanceCount >= highscoreInt) {
 		outfile << (int)distanceCount << std::endl;
 		highscoreInt = (int)distanceCount;
