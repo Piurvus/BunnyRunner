@@ -110,6 +110,8 @@ bool Bunny::isDead()
 void Bunny::die()
 {
 	dead = true;
+	if (speedY < 1)
+		speedY = 10;
 }
 
 D2D1_RECT_F Bunny::returnPos()
