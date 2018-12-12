@@ -102,6 +102,17 @@ void Bunny::die()
 	dead = true;
 }
 
+void Bunny::crouch()
+{
+	crouched = true;
+}
+bool Bunny::isCrouched()
+{
+	if (crouched)
+		return true;
+	return false;
+}
+
 D2D1_RECT_F Bunny::returnPos()
 {
 	rect = { x + 65, y + 25, x -25 + 8.233333f * 40 * sizeX, y - 25 + 80 * 4 * sizeX };

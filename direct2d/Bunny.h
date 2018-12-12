@@ -16,6 +16,7 @@ class Bunny {
 	double speedY;
 	double height;
 	bool dead = false;
+	bool crouched = false;
 
 public:
 
@@ -28,6 +29,8 @@ public:
 	bool onGround();
 	bool isDead();
 	void die();
+	void crouch();
+	bool isCrouched();
 	D2D1_RECT_F returnPos();
 	
 	//void crouch();

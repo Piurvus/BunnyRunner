@@ -76,18 +76,22 @@ void Game::UpdateModel()
 		if (abs(obj->returnPos().left - carrot->returnPos().left) < 100) {
 			carrot->renew();
 		}
+		if (GetAsyncKeyState(VK_DOWN)//Crouch
+		{
+			bunny->crouch()
+		}
 
-		if (GetAsyncKeyState(VK_SPACE) && bunny->onGround())
+		if (GetAsyncKeyState(VK_UP) && bunny->onGround())
 			charge += 1.5;
 
-		if (GetAsyncKeyState(VK_SPACE) && !bunny->onGround() && carrots && 	(std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 0.5f) {
+		if (GetAsyncKeyState(VK_UP) && !bunny->onGround() && carrots && 	(std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 0.5f) {
 			carrotsTimer = clock;
 			carrots--;
 			charge = 0;
 			bunny->jump(30);
 		}
 
-		if (!GetAsyncKeyState(VK_SPACE) && charge != 0 && bunny->onGround()) {
+		if (!GetAsyncKeyState(VK_UP) && charge != 0 && bunny->onGround()) {
 			bunny->jump(charge);
 			charge = 0;
 		}
