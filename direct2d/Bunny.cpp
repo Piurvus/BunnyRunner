@@ -71,6 +71,11 @@ void Bunny::updateBunny(double speed)
 		speedY += 0.2;
 	}
 
+	//	Crouch
+	if (crouched) {
+		speedY += 0.7;
+	}
+
 	//	Jump
 	y += speedY;
 
