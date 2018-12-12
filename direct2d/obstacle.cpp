@@ -37,8 +37,8 @@ void Obstacle::show()
 	if (stone2 != NULL)
 		stone2->Draw(x, y - height + 170*size, size);
 	if (trunk != NULL)
-		trunk->Draw(x, y - height, size);
-	gfx->DrawRectangle(rect);
+		trunk->Draw(x, y - height - 50*size, size);
+	// gfx->DrawRectangle(rect);
 
 }
 
@@ -53,6 +53,8 @@ void Obstacle::update(double speed)
 			rect = { x+170*size , y - height+50*size, x + width - 150*size, y };
 		if(stone2)
 			rect = { x + 120 * size , y - height + 220 * size, x + width - 150 * size, y };
+		if(trunk)
+			rect = { x + 200 * size , y - height + 100 * size, x + width - 150 * size, y };
 	}
 	else {
 		rect = { x, (y - height / 2) - 200 , x + width, (y + height / 2) - 200 };
@@ -69,8 +71,8 @@ void Obstacle::renew()
 	float heighta = height;
 	
 	if (!ownSprite) {
-		//dist(rng) % 3
-		switch (2) {
+		
+		switch (dist(rng) % 3) {
 		case 0:
 			size = float(dist(rng) %5)/10 + 0.25f;
 			stone = new SpriteSheet(L"stone.png", gfx, 1.0f);
@@ -88,7 +90,7 @@ void Obstacle::renew()
 			trunk = NULL;
 			break;
 		case 2:
-			size = float(dist(rng) % 4) / 10 + 0.15f;
+			size = float(dist(rng) % 3) / 10 + 0.15f;
 			width = 840 * size;
 			height = spriteHeights[2] * size;
 			stone = NULL;
