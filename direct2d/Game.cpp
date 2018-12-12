@@ -180,7 +180,7 @@ void Game::ComposeFrame()
 
 		
 		D2D1_RECT_F a = bunny->returnPos();
-		D2D1_RECT_F b = fox->returnPos();
+		D2D1_RECT_F b = obj->returnPos();
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
 		

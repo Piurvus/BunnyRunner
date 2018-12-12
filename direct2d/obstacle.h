@@ -4,20 +4,30 @@
 #include <random>
 #include <iostream>
 #include "SpriteSheet.h"
+#include <vector>
+
 
 class Obstacle {
-	
-	
+
 private:
 
+	SpriteSheet* stone;
+	SpriteSheet* stone2;
+	SpriteSheet* trunk;
+
 	Graphics* gfx;
+	
+	std::vector<int> spriteHeights;
+
+	float size;
 	float x;
 	float y = 435;
 	bool ownSprite = false;
 
 public:
 
-	float width, height;
+	float width = 0;
+	float height = 0;
 
 	D2D_RECT_F rect;
 	SpriteSheet* sprite;
