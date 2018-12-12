@@ -67,7 +67,7 @@ SpriteSheet::SpriteSheet(LPCWSTR filename, Graphics * gfx, float a, int spriteWi
 
 SpriteSheet::~SpriteSheet()
 {
-	if (bmp) bmp->Release();	
+		if (bmp) bmp->Release();	
 }
 
 

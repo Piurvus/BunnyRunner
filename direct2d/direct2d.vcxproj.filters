@@ -97,5 +97,26 @@
     <Image Include="log2.PNG">
       <Filter>Ressourcendateien</Filter>
     </Image>
+    <Image Include="mushroom1.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="mushroom2.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="trunk.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="stone.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="stone2.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="puff.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
+    <Image Include="cloud.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
   </ItemGroup>
 </Project>
