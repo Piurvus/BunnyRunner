@@ -76,9 +76,9 @@ void Game::UpdateModel()
 		if (abs(obj->returnPos().left - carrot->returnPos().left) < 100) {
 			carrot->renew();
 		}
-		if (GetAsyncKeyState(VK_DOWN)//Crouch
+		if (GetAsyncKeyState(VK_DOWN))//Crouch
 		{
-			bunny->crouch()
+			bunny->crouch();
 		}
 
 		if (GetAsyncKeyState(VK_UP) && bunny->onGround())

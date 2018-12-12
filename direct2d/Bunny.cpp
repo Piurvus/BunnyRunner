@@ -118,6 +118,7 @@ void Bunny::crouch()
 {
 	crouched = true;
 }
+
 bool Bunny::isCrouched()
 {
 	if (crouched)
