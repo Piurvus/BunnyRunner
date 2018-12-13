@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Bunny.cpp" />
     <ClCompile Include="Carrot.cpp" />
     <ClCompile Include="Fox.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Water.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Bunny.h" />
     <ClInclude Include="Carrot.h" />
     <ClInclude Include="Fox.h" />
@@ -166,10 +168,12 @@
   <ItemGroup>
     <Image Include="..\..\..\..\..\Downloads\21807063.jpg" />
     <Image Include="background.png" />
+    <Image Include="backgroundnew.png" />
     <Image Include="carrot.png" />
     <Image Include="cloud.png" />
     <Image Include="deadle.png" />
     <Image Include="fox.png" />
+    <Image Include="grass.png" />
     <Image Include="log1.PNG" />
     <Image Include="log2.PNG" />
     <Image Include="mushroom1.png" />

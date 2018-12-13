@@ -9,17 +9,17 @@
 #include "Fox.h"
 #include "Water.h"
 #include <fstream>
-
+#include "Background.h"
 
 class Game {
 
 	Fox* fox;
 	Water* water;
 	Carrot* carrot;
-	SpriteSheet* sprites;
 	Bunny* bunny;
 	Graphics* gfx;
 	Obstacle* obj; 
+	Background* background;
 	std::ofstream outfile;
 	std::ifstream infile;
 
@@ -34,9 +34,7 @@ public:
 
 private:
 
-	double xScreen1, xScreen2, xScreen3;
-
-	D2D1_RECT_F bottom = D2D1::Rect(0, 451, 1600, 600);
+	D2D1_RECT_F bottom = D2D1::Rect(0, 471, 1600, 600);
 	D2D1_COLOR_F color = D2D1::ColorF(50, 50, 255);
 
 	wchar_t distanceCountText[256];
@@ -54,7 +52,6 @@ private:
 	wchar_t highscoreWchar[100];
 	int highscoreInt = 0;
 	void updateHighscore();
-
 
 	double charge = 0;
 	bool checkCollision(D2D1_RECT_F rect1, D2D1_RECT_F rect2); 

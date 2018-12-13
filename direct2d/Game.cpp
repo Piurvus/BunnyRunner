@@ -12,17 +12,14 @@
 Game::Game(Graphics * gfx):
 	gfx(gfx)
 {
-	xScreen1 = 0;
-	xScreen2 = 1224;
-	xScreen3 = 2*xScreen2;
 
 	//-------Sprites-----------
 	water = new Water(gfx, 5);
-	sprites = new SpriteSheet(L"background.png", gfx, 1.0f);
 	fox = new Fox(gfx);
 	carrot = new Carrot(gfx, L"carrot.png");
 	bunny = new Bunny(gfx);
 	obj = new Obstacle(gfx); 
+	background = new Background(gfx);
 	//-------------------------
 
 
@@ -49,7 +46,7 @@ Game::~Game()
 	delete water;
 	delete carrot;
 	delete fox;
-	delete sprites;
+	delete background;
 	delete bunny;
 	delete obj;
 	outfile.close();
@@ -113,20 +110,6 @@ void Game::UpdateModel()
 			carrot->renew();
 		}
 
-		if (xScreen1 + 1224.0 <= 0) {
-			xScreen1 = 2 * 1224-0.1;
-		}
-		else if (xScreen2 + 1224.0 <= 0) {
-			xScreen2 = 2 * 1224.0-0.1;
-		}
-		else if (xScreen3 + 1224.0 <= 0) {
-			xScreen3 = 2 * 1224.0-0.1;
-		}
-
-		xScreen1 -= 2*(int)speed; 
-		xScreen2 -= 2*(int)speed;
-		xScreen3 -= 2*(int)speed;
-
 		swprintf_s(distanceCountText, L"%d", (int)distanceCount);
 		swprintf_s(carrotCountText, L"%d", carrots);
 
@@ -136,6 +119,7 @@ void Game::UpdateModel()
 		fox->update(speed);
 		obj->update(speed);
 		bunny->updateBunny(speed);
+		background->update(speed);
 
 		clock = std::clock();
 	}
@@ -164,10 +148,8 @@ void Game::ComposeFrame()
 
 		gfx->ClearScreen(255, 255, 255);
 
-		sprites->Draw(xScreen1, -10.0f, 0.6f, 1.0f, true);
-		sprites->Draw(xScreen2, -10.0f, 0.6f, 1.0f, true);
-		sprites->Draw(xScreen3, -10.0f, 0.6f, 1.0f, true);
-
+		background->draw();
+		obj->show();
 		water->showWaterArea(bottom, speed);
 
 		fox->show();
@@ -177,14 +159,12 @@ void Game::ComposeFrame()
 
 		carrot->show();
 
-
 		/*
 		D2D1_RECT_F a = bunny->returnPos();
 		D2D1_RECT_F b = obj->returnPos();
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
 		*/
-
 
 		if (bunny->isCrouched())
 			gfx->DrawTEXT(&D2D1::Rect(50, 500, 500, 500), 50, L"Crouched");
@@ -224,7 +204,5 @@ void Game::updateHighscore()
 
 bool Game::checkCollision(D2D1_RECT_F a, D2D1_RECT_F b)
 {
-	
-
 	return (b.top <= a.bottom && b.bottom >= a.top && b.left <= a.right && b.right >= a.left);
 }

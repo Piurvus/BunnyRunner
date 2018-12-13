@@ -89,8 +89,8 @@ Water::Wave::Wave(Graphics* gfx):
 	x = dist(rng);
 	y = (dist(rng) % 200) + 450;
 	
-	while (y > 500) {
-		y = (dist(rng) % 200) + 450;
+	while (y > 535 || y < 420) {
+		y = (dist(rng) % 200) + 400;
 	}
 	if (dist(rng) % 2 == 1) {
 		vec.y = dist(rng) % 20;

@@ -50,7 +50,7 @@ void Obstacle::update(double speed)
 	}
 	if (!ownSprite) {
 		if(stone)
-			rect = { x+170*size , y - height+50*size, x + width - 150*size, y };
+			rect = { x + 170 * size , y - height +  50 * size, x + width - 150 * size, y };
 		if(stone2)
 			rect = { x + 120 * size , y - height + 220 * size, x + width - 150 * size, y };
 		if(trunk)
