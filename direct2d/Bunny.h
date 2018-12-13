@@ -6,6 +6,7 @@ class Bunny {
 
 	Graphics* gfx;
 	SpriteSheet* bunny;
+	SpriteSheet* bunnyCarrot;
 	SpriteSheet* deadBunny;
 	SpriteSheet* puff;
 	D2D1_RECT_F rect;
@@ -29,7 +30,7 @@ public:
 	Bunny(Graphics * gfx);
 	~Bunny();
 
-	void showBunny();
+	void showBunny(bool carrot);
 	void updateBunny(double speed);
 	void jump(double charge);
 	bool onGround();

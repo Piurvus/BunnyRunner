@@ -5,6 +5,7 @@ Bunny::Bunny(Graphics * gfx):
 {
 	deadBunny = new SpriteSheet(L"deadle.png", gfx, 1.0f);
 	bunny = new SpriteSheet(L"rabbit.png", gfx, 1.0f, 8.233333 * 40, 80 * 4);
+	bunnyCarrot = new SpriteSheet(L"rabbitcarrot.png", gfx, 1.0f, 8.233333 * 40, 80 * 4);
 	puff = new SpriteSheet(L"puff.png", gfx, 1.0f);
 	
 	x = 50;
@@ -21,11 +22,15 @@ Bunny::~Bunny()
 	delete bunny;
 }
 
-void Bunny::showBunny()
+void Bunny::showBunny(bool carrot)
 {
-	
 	if (!dead) {
-		bunny->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);
+		if (carrot) {
+			bunnyCarrot->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);
+		}
+		else {
+			bunny->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);
+		}
 	}
 	else {
 		deadBunny->Draw(x-100, y-50, sizeX);

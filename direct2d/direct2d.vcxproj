@@ -176,6 +176,7 @@
     <Image Include="mushroom2.png" />
     <Image Include="puff.png" />
     <Image Include="rabbit.png" />
+    <Image Include="rabbitcarrot.png" />
     <Image Include="stone.png" />
     <Image Include="stone2.png" />
     <Image Include="test.png" />

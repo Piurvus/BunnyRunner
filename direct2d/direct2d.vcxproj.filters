@@ -118,5 +118,8 @@
     <Image Include="cloud.png">
       <Filter>Ressourcendateien</Filter>
     </Image>
+    <Image Include="rabbitcarrot.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
   </ItemGroup>
 </Project>

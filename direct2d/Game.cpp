@@ -174,7 +174,7 @@ void Game::ComposeFrame()
 		obj->show();
 
 		//gfx->DrawLine(0, 435, 1600, 435);
-		
+
 		carrot->show();
 
 
@@ -184,12 +184,13 @@ void Game::ComposeFrame()
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
 		*/
-		
 
-		if(bunny->isCrouched())
+
+		if (bunny->isCrouched())
 			gfx->DrawTEXT(&D2D1::Rect(50, 500, 500, 500), 50, L"Crouched");
 
-		bunny->showBunny();
+		bunny->showBunny(carrots > 0);
+
 		gfx->DrawTEXT(&D2D1::Rect(50, 10, 500, 500), 50, L"Score:");
 		gfx->DrawTEXT(&D2D1::Rect(250, 10, 500, 500), 50, distanceCountText);
 
