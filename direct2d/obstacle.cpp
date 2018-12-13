@@ -71,35 +71,38 @@ void Obstacle::renew()
 	float heighta = height;
 	
 	if (!ownSprite) {
-		
-		switch (dist(rng) % 3) {
-		case 0:
-			size = float(dist(rng) %5)/10 + 0.25f;
-			stone = new SpriteSheet(L"stone.png", gfx, 1.0f);
-			width = 640 * size;
-			height = spriteHeights[0] * size;
-			stone2 = NULL;
-			trunk = NULL;
-			break;
-		case 1:
-			size = float(dist(rng) % 6) / 10 + 0.3f;
-			height = spriteHeights[1] * size;
-			stone = NULL;
-			width = 640 * size;
-			stone2 = new SpriteSheet(L"stone2.png", gfx, 1.0f);
-			trunk = NULL;
-			break;
-		case 2:
-			size = float(dist(rng) % 3) / 10 + 0.15f;
-			width = 840 * size;
-			height = spriteHeights[2] * size;
-			stone = NULL;
-			stone2 = NULL;
-			trunk = new SpriteSheet(L"trunk.png", gfx, 1.0f);
-			break;
-		default:
-			break;
-			//EEEEEEEEEERROR
+
+		height = 900;
+		while (height > 300) {
+			switch (dist(rng) % 3) {
+			case 0:
+				size = float(dist(rng) % 5) / 10 + 0.25f;
+				stone = new SpriteSheet(L"stone.png", gfx, 1.0f);
+				width = 640 * size;
+				height = spriteHeights[0] * size;
+				stone2 = NULL;
+				trunk = NULL;
+				break;
+			case 1:
+				size = float(dist(rng) % 6) / 10 + 0.3f;
+				height = spriteHeights[1] * size;
+				stone = NULL;
+				width = 640 * size;
+				stone2 = new SpriteSheet(L"stone2.png", gfx, 1.0f);
+				trunk = NULL;
+				break;
+			case 2:
+				size = float(dist(rng) % 3) / 10 + 0.15f;
+				width = 840 * size;
+				height = spriteHeights[2] * size;
+				stone = NULL;
+				stone2 = NULL;
+				trunk = new SpriteSheet(L"trunk.png", gfx, 1.0f);
+				break;
+			default:
+				break;
+				//EEEEEEEEEERROR
+			}
 		}
 
 	}
