@@ -45,9 +45,6 @@
     <ClCompile Include="Background.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Shroom.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -65,9 +62,6 @@
     <ClInclude Include="obstacle.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Carrot.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Fox.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -77,7 +71,7 @@
     <ClInclude Include="Background.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="Shroom.h">
+    <ClInclude Include="Carrot.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

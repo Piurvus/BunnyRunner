@@ -5,7 +5,6 @@
 #include <iostream>
 #include "SpriteSheet.h"
 #include <vector>
-#include "Shroom.h"
 
 
 class Obstacle {

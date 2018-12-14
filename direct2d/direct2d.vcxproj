@@ -151,7 +151,6 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="obstacle.cpp" />
-    <ClCompile Include="Shroom.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="Water.cpp" />
   </ItemGroup>
@@ -163,7 +162,6 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="obstacle.h" />
-    <ClInclude Include="Shroom.h" />
     <ClInclude Include="SpriteSheet.h" />
     <ClInclude Include="Water.h" />
   </ItemGroup>
