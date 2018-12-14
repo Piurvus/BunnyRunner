@@ -105,9 +105,14 @@ void Game::UpdateModel()
 		}
 		
 		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
-			speed += 0.1;
+			if (speed <= 3.0)
+				speed += 0.1;
 			carrots++;
 			carrot->renew();
+		}
+
+		if (checkCollision(fox->returnPos(), obj->returnPos())) {
+			fox->changeDir();
 		}
 
 		swprintf_s(distanceCountText, L"%d", (int)distanceCount);
@@ -159,12 +164,12 @@ void Game::ComposeFrame()
 
 		carrot->show();
 
-		
+		/*
 		D2D1_RECT_F a = bunny->returnPos();
 		D2D1_RECT_F b = obj->returnPos();
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
-		
+		*/
 
 		if (bunny->isCrouched())
 			gfx->DrawTEXT(&D2D1::Rect(50, 500, 500, 500), 50, L"Crouched");

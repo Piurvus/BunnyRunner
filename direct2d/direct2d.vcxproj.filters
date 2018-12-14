@@ -139,5 +139,8 @@
     <Image Include="grass.png">
       <Filter>Ressourcendateien</Filter>
     </Image>
+    <Image Include="fox2.png">
+      <Filter>Ressourcendateien</Filter>
+    </Image>
   </ItemGroup>
 </Project>

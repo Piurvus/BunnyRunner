@@ -175,6 +175,7 @@
     <Image Include="cloud.png" />
     <Image Include="deadle.png" />
     <Image Include="fox.png" />
+    <Image Include="fox2.png" />
     <Image Include="grass.png" />
     <Image Include="log1.PNG" />
     <Image Include="log2.PNG" />
