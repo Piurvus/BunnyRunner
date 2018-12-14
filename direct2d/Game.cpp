@@ -176,8 +176,8 @@ void Game::ComposeFrame()
 
 		//mbstowcs(outpuet, output, strlen(output + 1));
 		//if((std::stoi(highscore)) >=0 )
-		gfx->DrawTEXT(&D2D1::Rect(1100, 10, 1600, 500), 50, L"Highscore:");
-		gfx->DrawTEXT(&D2D1::Rect(1300, 10, 1600, 500), 50, highscoreWchar);
+		gfx->DrawTEXT(&D2D1::Rect(800, 10, 1000, 500), 50, L"Highscore:");
+		gfx->DrawTEXT(&D2D1::Rect(1000, 10, 1500, 500), 50, highscoreWchar);
 		gfx->DrawTEXT(&D2D1::Rect(50, 60, 500, 500), 50, L"Carrots:");
 		gfx->DrawTEXT(&D2D1::Rect(250, 60, 500, 500), 50, carrotCountText);
 	}
