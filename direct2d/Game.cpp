@@ -159,12 +159,12 @@ void Game::ComposeFrame()
 
 		carrot->show();
 
-		/*
+		
 		D2D1_RECT_F a = bunny->returnPos();
 		D2D1_RECT_F b = obj->returnPos();
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
-		*/
+		
 
 		if (bunny->isCrouched())
 			gfx->DrawTEXT(&D2D1::Rect(50, 500, 500, 500), 50, L"Crouched");

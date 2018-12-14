@@ -1,6 +1,11 @@
 #include "obstacle.h"
 #include <random>
 
+void Obstacle::setGfx(Graphics * gfx)
+{
+	this->gfx = gfx;
+}
+
 Obstacle::Obstacle(Graphics * gfx):
 	gfx(gfx)
 {
@@ -50,11 +55,11 @@ void Obstacle::update(double speed)
 	}
 	if (!ownSprite) {
 		if(stone)
-			rect = { x + 170 * size , y - height +  50 * size, x + width - 150 * size, y };
+			rect = { x + 210 * size , y - height +  100 * size, x + width - 200 * size, y };
 		if(stone2)
-			rect = { x + 120 * size , y - height + 220 * size, x + width - 150 * size, y };
+			rect = { x + 150 * size , y - height + 230 * size, x + width - 150 * size, y };
 		if(trunk)
-			rect = { x + 200 * size , y - height + 100 * size, x + width - 150 * size, y };
+			rect = { x + 230 * size , y - height + 100 * size, x + width - 170 * size, y };
 	}
 	else {
 		rect = { x, (y - height / 2) - 200 , x + width, (y + height / 2) - 200 };
@@ -73,6 +78,7 @@ void Obstacle::renew()
 	if (!ownSprite) {
 
 		height = 900;
+
 		while (height > 300) {
 			switch (dist(rng) % 3) {
 			case 0:
@@ -118,3 +124,4 @@ D2D_RECT_F Obstacle::returnPos()
 	*/
 	return rect;
 }
+

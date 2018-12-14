@@ -5,6 +5,7 @@
 #include <iostream>
 #include "SpriteSheet.h"
 #include <vector>
+#include "Shroom.h"
 
 
 class Obstacle {
@@ -25,6 +26,8 @@ private:
 	bool ownSprite = false;
 
 public:
+
+	void setGfx(Graphics* gfx);
 
 	float width = 0;
 	float height = 0;
