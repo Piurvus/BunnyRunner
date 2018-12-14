@@ -1,10 +1,7 @@
 #include "obstacle.h"
 #include <random>
 
-void Obstacle::setGfx(Graphics * gfx)
-{
-	this->gfx = gfx;
-}
+
 
 Obstacle::Obstacle(Graphics * gfx):
 	gfx(gfx)
@@ -125,3 +122,13 @@ D2D_RECT_F Obstacle::returnPos()
 	return rect;
 }
 
+int setX(Obstacle &obj)
+{
+	std::mt19937 rng;
+	rng.seed(std::random_device()());
+	std::uniform_int_distribution<std::mt19937::result_type> dist(1800, 2400);
+
+	obj.x = dist(rng);
+
+	return dist(rng) % 2;
+}

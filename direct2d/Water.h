@@ -13,6 +13,7 @@ class Water {
 	class Wave {
 
 		Graphics* gfx;
+		int random;
 
 	public:
 
@@ -35,7 +36,6 @@ class Water {
 
 	float r, g, b;
 	int count = 30;
-
 
 	std::vector<Wave> waves;
 	std::vector<Wave> SortWaveBySize();

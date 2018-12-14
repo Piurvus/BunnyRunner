@@ -10,6 +10,7 @@
 #include "Water.h"
 #include <fstream>
 #include "Background.h"
+#include "Shroom.h"
 
 class Game {
 
@@ -20,6 +21,7 @@ class Game {
 	Graphics* gfx;
 	Obstacle* obj; 
 	Background* background;
+	Shroom* shroom;
 	std::ofstream outfile;
 	std::ifstream infile;
 

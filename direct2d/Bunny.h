@@ -9,6 +9,7 @@ class Bunny {
 	SpriteSheet* bunnyCarrot;
 	SpriteSheet* deadBunny;
 	SpriteSheet* puff;
+	SpriteSheet* cloudy;
 	D2D1_RECT_F rect;
 
 	float puffi = 0;
@@ -25,6 +26,10 @@ class Bunny {
 	bool crouched = false;
 	int crouchLatency = 3;
 
+	bool up = false;
+	bool clouded = false;
+	int cloudTimer;
+
 public:
 
 	Bunny(Graphics * gfx);
@@ -33,11 +38,15 @@ public:
 	void showBunny(bool carrot);
 	void updateBunny(double speed);
 	void jump(double charge);
+	void jump(double charge, bool cloud);
 	bool onGround();
 	bool isDead();
 	void die();
 	void crouch();
 	bool isCrouched();
+	void getClouded();
+	bool isClouded();
+
 	D2D1_RECT_F returnPos();
 	
 	//void crouch();

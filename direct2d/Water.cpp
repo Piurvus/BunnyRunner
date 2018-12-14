@@ -76,7 +76,7 @@ Water::Wave::Wave(Graphics* gfx):
 	rng.seed(std::random_device()());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(0, 1800);
 
-	int random = dist(rng) % 2;
+	random = dist(rng) % 2;
 
 	/*
 	thickness = (dist(rng) % 20) / 10;

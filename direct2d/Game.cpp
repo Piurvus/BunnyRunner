@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <fstream>
 #include <iostream>
+#include "Shroom.h"
 
 Game::Game(Graphics * gfx):
 	gfx(gfx)
@@ -20,6 +21,7 @@ Game::Game(Graphics * gfx):
 	bunny = new Bunny(gfx);
 	obj = new Obstacle(gfx); 
 	background = new Background(gfx);
+	shroom = new Shroom(gfx);
 	//-------------------------
 
 
@@ -43,6 +45,7 @@ Game::Game(Graphics * gfx):
 
 Game::~Game()
 {
+	delete shroom;
 	delete water;
 	delete carrot;
 	delete fox;
@@ -74,21 +77,21 @@ void Game::UpdateModel()
 			carrot->renew();
 		}
 
-		if (GetAsyncKeyState(VK_DOWN)) {
+		if (GetAsyncKeyState(VK_DOWN)&&!bunny->isClouded()) {
 			bunny->crouch();
 		}
 
-		if (GetAsyncKeyState(VK_UP) && bunny->onGround())
+		if (GetAsyncKeyState(VK_UP) && bunny->onGround() && !bunny->isClouded())
 			charge += 1.5;
 
-		if (GetAsyncKeyState(VK_UP) && !bunny->onGround() && carrots && 	(std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 0.5f) {
+		if (GetAsyncKeyState(VK_UP) && !bunny->onGround() && carrots && (std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 0.5f && !bunny->isClouded()) {
 			carrotsTimer = clock;
 			carrots--;
 			charge = 0;
 			bunny->jump(30);
 		}
 
-		if (!GetAsyncKeyState(VK_UP) && charge != 0 && bunny->onGround()) {
+		if (!GetAsyncKeyState(VK_UP) && charge != 0 && bunny->onGround() && !bunny->isClouded()) {
 			bunny->jump(charge);
 			charge = 0;
 		}
@@ -98,6 +101,11 @@ void Game::UpdateModel()
 			distanceCount -= speed;
 			updateHighscore();
 		}
+
+		if (checkCollision(obj->returnPos(), shroom->returnPos())) {
+			obj->renew();
+		}
+
 		if (checkCollision(bunny->returnPos(), fox->returnPos())) {
 			bunny->die();
 			distanceCount -= speed;
@@ -109,6 +117,16 @@ void Game::UpdateModel()
 				speed += 0.1;
 			carrots++;
 			carrot->renew();
+		}	
+		
+		if (checkCollision(bunny->returnPos(), shroom->returnPos())) {
+			if (shroom->isBroom()) {
+				bunny->jump(60, false);
+			}
+			else {
+				bunny->jump(60, false);
+				bunny->getClouded();
+			}
 		}
 
 		if (checkCollision(fox->returnPos(), obj->returnPos())) {
@@ -125,6 +143,7 @@ void Game::UpdateModel()
 		obj->update(speed);
 		bunny->updateBunny(speed);
 		background->update(speed);
+		shroom->update(speed);
 
 		clock = std::clock();
 	}
@@ -155,6 +174,7 @@ void Game::ComposeFrame()
 
 		background->draw();
 		obj->show();
+		shroom->show();
 		water->showWaterArea(bottom, speed);
 
 		fox->show();
@@ -166,7 +186,7 @@ void Game::ComposeFrame()
 
 		/*
 		D2D1_RECT_F a = bunny->returnPos();
-		D2D1_RECT_F b = obj->returnPos();
+		D2D1_RECT_F b = shroom->returnPos();
 		gfx->DrawRectangle(a);
 		gfx->DrawRectangle(b);
 		*/

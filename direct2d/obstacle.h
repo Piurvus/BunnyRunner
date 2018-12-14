@@ -14,19 +14,20 @@ private:
 	SpriteSheet* stone;
 	SpriteSheet* stone2;
 	SpriteSheet* trunk;
-
-	Graphics* gfx;
 	
 	std::vector<int> spriteHeights;
 
 	float size;
-	float x;
-	float y = 435;
 	bool ownSprite = false;
 
-public:
+protected:
 
-	void setGfx(Graphics* gfx);
+	Graphics* gfx;
+
+	float x;
+	float y = 435;
+
+public:
 
 	float width = 0;
 	float height = 0;
@@ -43,4 +44,5 @@ public:
 	void renew();
 	D2D_RECT_F returnPos();
 
+	friend int setX(Obstacle &obj);
 };
