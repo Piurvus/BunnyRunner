@@ -10,7 +10,7 @@
 #include <iostream>
 #include "Shroom.h"
 
-Game::Game(Graphics * gfx):
+Game::Game(Graphics * gfx) :
 	gfx(gfx)
 {
 
@@ -19,14 +19,14 @@ Game::Game(Graphics * gfx):
 	fox = new Fox(gfx);
 	carrot = new Carrot(gfx, L"carrot.png");
 	bunny = new Bunny(gfx);
-	obj = new Obstacle(gfx); 
+	obj = new Obstacle(gfx);
 	background = new Background(gfx);
 	shroom = new Shroom(gfx);
 	//-------------------------
 
 
 	//---------Read File----------------
-	
+
 	infile.open("Highscore.txt");
 	int compare = 0;
 	while (std::getline(infile, highscoreString)) {
@@ -58,11 +58,17 @@ Game::~Game()
 void Game::Run()
 {
 	gfx->BeginDraw();
-	UpdateModel();
-	ComposeFrame();
+	if ((std::clock() - clockR) / (double)CLOCKS_PER_SEC >= refreshRate)
+		UpdateModel();
+	if ((std::clock() - clockFPS) / (double)CLOCKS_PER_SEC >= frameRate)
+		ComposeFrame();
 	gfx->EndDraw();
+	
+	/*
+	AllocConsole();
+	freopen("CONOUT$", "w", stdout);
+	*/
 }
-//float a = 0.0f;
 
 void Game::UpdateModel()
 {
@@ -70,14 +76,14 @@ void Game::UpdateModel()
 		speed = 1.0;
 	}
 
-	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate && !bunny->isDead())
+	if (!bunny->isDead())
 	{
-		
+
 		if (abs(obj->returnPos().left - carrot->returnPos().left) < 100) {
 			carrot->renew();
 		}
 
-		if (GetAsyncKeyState(VK_DOWN)&&!bunny->isClouded()) {
+		if (GetAsyncKeyState(VK_DOWN) && !bunny->isClouded()) {
 			bunny->crouch();
 		}
 
@@ -85,7 +91,7 @@ void Game::UpdateModel()
 			charge += 1.5;
 
 		if (GetAsyncKeyState(VK_UP) && !bunny->onGround() && carrots && (std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 0.5f && !bunny->isClouded()) {
-			carrotsTimer = clock;
+			carrotsTimer = clockR;
 			carrots--;
 			charge = 0;
 			bunny->jump(30);
@@ -111,14 +117,14 @@ void Game::UpdateModel()
 			distanceCount -= speed;
 			updateHighscore();
 		}
-		
+
 		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
 			if (speed <= 3.0)
 				speed += 0.1;
 			carrots++;
 			carrot->renew();
-		}	
-		
+		}
+
 		if (checkCollision(bunny->returnPos(), shroom->returnPos())) {
 			if (shroom->isBroom()) {
 				bunny->jump(60, false);
@@ -145,7 +151,7 @@ void Game::UpdateModel()
 		background->update(speed);
 		shroom->update(speed);
 
-		clock = std::clock();
+		clockR = std::clock();
 	}
 	else if (bunny->isDead()) {
 		bunny->updateBunny(speed);
@@ -167,50 +173,45 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
-	if ((std::clock() - clock) / (double)CLOCKS_PER_SEC >= refreshRate)
-	{
+	gfx->ClearScreen(255, 255, 255);
 
-		gfx->ClearScreen(255, 255, 255);
+	background->draw();
+	obj->show();
+	shroom->show();
+	water->showWaterArea(bottom, speed);
 
-		background->draw();
-		obj->show();
-		shroom->show();
-		water->showWaterArea(bottom, speed);
+	fox->show();
+	obj->show();
 
-		fox->show();
-		obj->show();
+	//gfx->DrawLine(0, 435, 1600, 435);
 
-		//gfx->DrawLine(0, 435, 1600, 435);
+	carrot->show();
 
-		carrot->show();
+	/*
+	D2D1_RECT_F a = bunny->returnPos();
+	D2D1_RECT_F b = shroom->returnPos();
+	gfx->DrawRectangle(a);
+	gfx->DrawRectangle(b);
+	*/
 
-		/*
-		D2D1_RECT_F a = bunny->returnPos();
-		D2D1_RECT_F b = shroom->returnPos();
-		gfx->DrawRectangle(a);
-		gfx->DrawRectangle(b);
-		*/
+	if (bunny->isCrouched())
+		gfx->DrawTEXT(&D2D1::Rect(50, 500, 500, 500), 50, L"Crouched");
 
-		if (bunny->isCrouched())
-			gfx->DrawTEXT(&D2D1::Rect(50, 500, 500, 500), 50, L"Crouched");
+	bunny->showBunny(carrots > 0);
 
-		bunny->showBunny(carrots > 0);
+	gfx->DrawTEXT(&D2D1::Rect(50, 10, 500, 500), 50, L"Score:");
+	gfx->DrawTEXT(&D2D1::Rect(250, 10, 500, 500), 50, distanceCountText);
 
-		gfx->DrawTEXT(&D2D1::Rect(50, 10, 500, 500), 50, L"Score:");
-		gfx->DrawTEXT(&D2D1::Rect(250, 10, 500, 500), 50, distanceCountText);
+	//mbstowcs(outpuet, output, strlen(output + 1));
+	//if((std::stoi(highscore)) >=0 )
+	gfx->DrawTEXT(&D2D1::Rect(1100, 10, 1600, 500), 50, L"Highscore:");
+	gfx->DrawTEXT(&D2D1::Rect(1300, 10, 1600, 500), 50, highscoreWchar);
+	gfx->DrawTEXT(&D2D1::Rect(50, 60, 500, 500), 50, L"Carrots:");
+	gfx->DrawTEXT(&D2D1::Rect(250, 60, 500, 500), 50, carrotCountText);
 
-		//mbstowcs(outpuet, output, strlen(output + 1));
-		//if((std::stoi(highscore)) >=0 )
-		gfx->DrawTEXT(&D2D1::Rect(1100, 10, 1600, 500), 50, L"Highscore:");
-		gfx->DrawTEXT(&D2D1::Rect(1300, 10, 1600, 500), 50, highscoreWchar);
-		gfx->DrawTEXT(&D2D1::Rect(50, 60, 500, 500), 50, L"Carrots:");
-		gfx->DrawTEXT(&D2D1::Rect(250, 60, 500, 500), 50, carrotCountText);
-	}
-	
-
-
+	clockFPS = std::clock();
 	//}
-	
+
 }
 
 void Game::updateHighscore()

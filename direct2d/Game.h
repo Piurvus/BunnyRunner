@@ -45,9 +45,11 @@ private:
 
 	int carrots = 0;
 	double speed = 1.0;
-	double refreshRate = 1/30;
+	double refreshRate = 1.0 / 80.0;	//	GameFlow
+	double frameRate = 1.0 / 165.0;		//	FPS
 
-	std::clock_t clock;
+	std::clock_t clockR;
+	std::clock_t clockFPS;
 	std::clock_t carrotsTimer = 0;
 	
 	std::string highscoreString;

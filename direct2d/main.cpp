@@ -89,23 +89,8 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 
 	myGame = new Game(graphics);
 
-	bool console = false;
-
 	while (message.message != WM_QUIT)
 	{
-		if (GetAsyncKeyState(VK_F2) & 1) {
-			if (!console) {
-				AllocConsole();
-				freopen("CONOUT$", "w", stdout);
-				SetConsoleTitle(L"very awesome console");
-				console = !console;
-			}
-			else {
-				fclose(stdout);
-				FreeConsole();
-				console = !console;
-			}
-		}
 
 		if (PeekMessage(&message, NULL, 0, 0, PM_REMOVE)) {
 			DispatchMessage(&message);
