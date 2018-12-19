@@ -60,7 +60,9 @@ void Bunny::updateBunny(double speed)
 		if (GetAsyncKeyState(VK_UP))
 			speedY -= 0.5;
 
-		speedY += 0.2;
+		else if (GetAsyncKeyState(VK_DOWN))
+			speedY += 0.5;
+		else speedY += 0.2;
 		y += speedY;
 
 		if (y >= 800)
