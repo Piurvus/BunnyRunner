@@ -6,18 +6,17 @@
 Obstacle::Obstacle(Graphics * gfx):
 	gfx(gfx)
 {
-
 	spriteHeights.push_back(547);	//	Stone
 	spriteHeights.push_back(403);	//	Trunk
 	spriteHeights.push_back(320);	//	Stone2
 
 	renew();
-	
 }
 
 Obstacle::Obstacle(Graphics * gfx, LPCWSTR name):
 	gfx(gfx)
 {
+	//	Konstruktor der Karotte
 	ownSprite = true;
 	sprite = new SpriteSheet(name, gfx, 1.0f);
 	height = 80;
@@ -26,6 +25,9 @@ Obstacle::Obstacle(Graphics * gfx, LPCWSTR name):
 
 Obstacle::~Obstacle()
 {
+	delete stone;
+	delete stone2;
+	delete trunk;
 	delete sprite;
 	delete &rect;
 	delete gfx;
@@ -33,7 +35,7 @@ Obstacle::~Obstacle()
 
 void Obstacle::show()
 {
-
+	//	je nach dem welches Objekt existiert wird dieses dargestellt
 	if (stone != NULL)
 		stone->Draw(x, y - height + 50*size, size);
 	if (stone2 != NULL)
@@ -41,15 +43,19 @@ void Obstacle::show()
 	if (trunk != NULL)
 		trunk->Draw(x, y - height - 50*size, size);
 	// gfx->DrawRectangle(rect);
-
 }
 
 void Obstacle::update(double speed)
 {
+	//	x Wert wird passend zur Spielgeschwindigkeit angepasst
 	x -= speed*5;
+
+	//	falls ausserhalb
 	if (x + width <= 0) {
 		renew();
 	}
+
+	//	Die verschiedenen Rechtecke der jeweiligen Position der Objekte
 	if (!ownSprite) {
 		if(stone)
 			rect = { x + 210 * size , y - height +  100 * size, x + width - 200 * size, y };
@@ -58,7 +64,7 @@ void Obstacle::update(double speed)
 		if(trunk)
 			rect = { x + 230 * size , y - height + 100 * size, x + width - 170 * size, y };
 	}
-	else {
+	else {	//	Karotte
 		rect = { x, (y - height / 2) - 200 , x + width, (y + height / 2) - 200 };
 	}
 
@@ -66,17 +72,20 @@ void Obstacle::update(double speed)
 
 void Obstacle::renew()
 {
+	//	random Zahl
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(1800, 2400);
 
-	float heighta = height;
+	float heighta = height;	//	Zwischenspeicher der alten Höhe damit diese nicht wiederverwendet wird
 	
 	if (!ownSprite) {
 
 		height = 900;
 
+		//	damit nicht zu gross
 		while (height > 300) {
+			//	random wird eines der Objekte ausgewählt und erstellt
 			switch (dist(rng) % 3) {
 			case 0:
 				size = float(dist(rng) % 5) / 10 + 0.25f;
@@ -109,7 +118,7 @@ void Obstacle::renew()
 		}
 
 	}
-
+	//	random Position auf der x-Achse
 	x = dist(rng) - width;
 }
 
@@ -124,6 +133,7 @@ D2D_RECT_F Obstacle::returnPos()
 
 int setX(Obstacle &obj)
 {
+	//	das Objekt kriegt eine zufällige Position und 1 oder 0 wird zurückgegeben
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(1800*3, 2400*3);

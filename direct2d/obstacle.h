@@ -11,24 +11,28 @@ class Obstacle {
 
 private:
 
+	//	Die verschiedenen Objekte
 	SpriteSheet* stone;
 	SpriteSheet* stone2;
 	SpriteSheet* trunk;
 	
+	//	Höhen der Objekte
 	std::vector<int> spriteHeights;
 
 	float size;
-	bool ownSprite = false;
+	bool ownSprite = false;	//	wichtig für Karotte
 
 protected:
 
 	Graphics* gfx;
 
+	//	Position
 	float x;
 	float y = 435;
 
 public:
 
+	//	Grösse des Objekts
 	float width = 0;
 	float height = 0;
 
@@ -41,8 +45,11 @@ public:
 
 	void show();
 	void update(double speed);
+
+	//	Erneuerung falls das Objekt ausser Sicht ist
 	void renew();
 	D2D_RECT_F returnPos();
 
-	friend int setX(Obstacle &obj);
+	//	setzt ein neues x und gibt 1 oder 0 zurück
+	friend int setX(Obstacle &obj);	//	wichtig für die Klasse Shroom
 };

@@ -10,9 +10,10 @@ class SpriteSheet
 private:
 	Graphics* gfx;
 	ID2D1Bitmap* bmp;
-	float a;
-	int spriteWidth, spriteHeight;
-	int spritesAccross;
+
+	float a;	//	alpha
+	int spriteWidth, spriteHeight;	//	Grösse der Sprites
+	int spritesAccross;	//	wieviele Sprites sich in einer Reihe befinden
 
 public:
 	

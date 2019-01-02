@@ -16,6 +16,7 @@ Shroom::~Shroom()
 
 void Shroom::renew()
 {
+	//	siehe .h
 	if (setX(*this) == 0)
 		broom = true;
 	else
@@ -24,10 +25,15 @@ void Shroom::renew()
 
 void Shroom::update(double speed)
 {
+	//	bewegt sich passend zur Spielgeschwindigkeit gegen vorne
 	x -= speed * 5;
+
+	//	falls ausserhalb des Fensters
 	if (x + width <= 0) {
 		renew();
 	}
+
+	//	Hitbox je nach Pilz unterschiedlich
 	if (broom)
 		rect = { x, y - 50, x + 50, y };
 	else
@@ -36,6 +42,7 @@ void Shroom::update(double speed)
 
 void Shroom::show()
 {
+	//	Pilze werden gezeichnet
 	if (broom)
 		shroom->Draw(x, y-50, 0.025);
 	else

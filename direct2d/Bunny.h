@@ -22,18 +22,20 @@ class Bunny {
 	float puffi = 0;
 	float puffiX, puffiY;
 
-	double frame;
-	double bunnySpeed;
-	float x, y;
-	float sizeX, sizeY;
-	double speedY;
-	double height;
+	double frame;	//	die Ganzzahl davon steht für das jeweilige Bild von der Animation
+	double bunnySpeed;	//	die Änderungsrate der verschiedenen Animationsbilder
+	float x, y;	//	Position
+	float sizeX, sizeY;	//	Grösse
+	double speedY;	//	die momentane Fallgeschwindigkeit
+	double height;	//	die maximale Höhe eines Sprunges
 	bool dead = false;
 
 	bool crouched = false;
 	int crouchLatency = 3;
 
-	bool up = false;
+	bool up = false;	//	wird nichtmehr verwendet
+
+	//	Die Wolke
 	bool clouded = false;
 	int cloudTimer;
 
@@ -46,12 +48,13 @@ public:
 	void updateBunny(double speed);
 	void jump(double charge);
 	void jump(double charge, bool cloud);
-	bool onGround();
-	bool isDead();
+	void getClouded();
 	void die();
 	void crouch();
+
+	bool onGround();
+	bool isDead();
 	bool isCrouched();
-	void getClouded();
 	bool isClouded();
 
 	D2D1_RECT_F returnPos();
