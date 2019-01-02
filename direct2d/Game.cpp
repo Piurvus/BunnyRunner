@@ -26,7 +26,6 @@ Game::Game(Graphics * gfx) :
 
 
 	//---------Read File----------------
-
 	infile.open("Highscore.txt");
 	int compare = 0;
 	while (std::getline(infile, highscoreString)) {
@@ -58,10 +57,13 @@ Game::~Game()
 void Game::Run()
 {
 	gfx->BeginDraw();
+
+	//	Mit den beiden if's wird eine konstante Framerate erzielt
 	if ((std::clock() - clockR) / (double)CLOCKS_PER_SEC >= refreshRate)
 		UpdateModel();
 	if ((std::clock() - clockFPS) / (double)CLOCKS_PER_SEC >= frameRate)
 		ComposeFrame();
+	
 	gfx->EndDraw();
 	
 	/*
@@ -78,7 +80,7 @@ void Game::UpdateModel()
 
 	if (!bunny->isDead())
 	{
-
+		//	Erneuerung der Karotten
 		if (abs(obj->returnPos().left - carrot->returnPos().left) < 100) {
 			carrot->renew();
 		}
@@ -87,9 +89,11 @@ void Game::UpdateModel()
 			bunny->crouch();
 		}
 
+		//	Sprung aufladen
 		if (GetAsyncKeyState(VK_UP) && bunny->onGround() && !bunny->isClouded())
 			charge += 1.5;
 
+		//	Mehrfach Sprung
 		if (GetAsyncKeyState(VK_UP) && !bunny->onGround() && carrots && (std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 0.5f && !bunny->isClouded()) {
 			carrotsTimer = clockR;
 			carrots--;
@@ -97,27 +101,32 @@ void Game::UpdateModel()
 			bunny->jump(30);
 		}
 
+		//	normale Sprung
 		if (!GetAsyncKeyState(VK_UP) && charge != 0 && bunny->onGround() && !bunny->isClouded()) {
 			bunny->jump(charge);
 			charge = 0;
 		}
 
+		//	Kollision mit Objekt
 		if (checkCollision(bunny->returnPos(), obj->returnPos())) {
 			bunny->die();
 			distanceCount -= speed;
 			updateHighscore();
 		}
 
+		//	Kollision zwischen Objekt und Pilz
 		if (checkCollision(obj->returnPos(), shroom->returnPos())) {
 			obj->renew();
 		}
 
+		//	Kollision mit Fuchs
 		if (checkCollision(bunny->returnPos(), fox->returnPos())) {
 			bunny->die();
 			distanceCount -= speed;
 			updateHighscore();
 		}
 
+		//	Kollision mit Karotte
 		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
 			if (speed <= 3.0)
 				speed += 0.1;
@@ -125,6 +134,7 @@ void Game::UpdateModel()
 			carrot->renew();
 		}
 
+		//	Kollision mit Pilz
 		if (checkCollision(bunny->returnPos(), shroom->returnPos())) {
 			if (shroom->isBroom()) {
 				bunny->jump(60, false);
@@ -135,15 +145,18 @@ void Game::UpdateModel()
 			}
 		}
 
+		//	Kollision zwischen Fuchs und Objekt
 		if (checkCollision(fox->returnPos(), obj->returnPos())) {
 			fox->changeDir();
 		}
 
+		//	Aktualisierung der Anzeige
 		swprintf_s(distanceCountText, L"%d", (int)distanceCount);
 		swprintf_s(carrotCountText, L"%d", carrots);
 
 		distanceCount += speed;
 
+		//	Aktualisierung der Objekte
 		carrot->update(speed);
 		fox->update(speed);
 		obj->update(speed);
@@ -151,12 +164,14 @@ void Game::UpdateModel()
 		background->update(speed);
 		shroom->update(speed);
 
+		//	Aktualisierung der Uhr
 		clockR = std::clock();
 	}
 	else if (bunny->isDead()) {
 		bunny->updateBunny(speed);
 	}
 
+	//	Neustart
 	if (GetAsyncKeyState(VK_F9)) {
 		Sleep(10);
 		water = new Water(gfx, 5);
@@ -173,18 +188,16 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	//	Fenster auf weiss
 	gfx->ClearScreen(255, 255, 255);
 
+	//	Zeichnen der verschiedenen Elemente
 	background->draw();
 	obj->show();
 	shroom->show();
 	water->showWaterArea(bottom, speed);
-
 	fox->show();
 	obj->show();
-
-	//gfx->DrawLine(0, 435, 1600, 435);
-
 	carrot->show();
 
 	/*
@@ -194,14 +207,17 @@ void Game::ComposeFrame()
 	gfx->DrawRectangle(b);
 	*/
 
+	/*
 	if (bunny->isCrouched())
 		gfx->DrawTEXT(&D2D1::Rect(50, 500, 500, 500), 50, L"Crouched");
+	*/
 
+	//	Anzeigen von dem Hasen abhängig von Karotten
 	bunny->showBunny(carrots > 0);
 
+	// Anzeige von den Texten
 	gfx->DrawTEXT(&D2D1::Rect(50, 10, 500, 500), 50, L"Score:");
 	gfx->DrawTEXT(&D2D1::Rect(250, 10, 500, 500), 50, distanceCountText);
-
 	//mbstowcs(outpuet, output, strlen(output + 1));
 	//if((std::stoi(highscore)) >=0 )
 	gfx->DrawTEXT(&D2D1::Rect(1100, 10, 1600, 500), 50, L"Highscore:");
@@ -209,6 +225,7 @@ void Game::ComposeFrame()
 	gfx->DrawTEXT(&D2D1::Rect(50, 60, 500, 500), 50, L"Carrots:");
 	gfx->DrawTEXT(&D2D1::Rect(250, 60, 500, 500), 50, carrotCountText);
 
+	//	Aktualisierung der Uhr
 	clockFPS = std::clock();
 	//}
 
@@ -218,6 +235,7 @@ void Game::updateHighscore()
 {
 	distanceCount += 0.5;
 
+	//	Falls der aktuelle Highscore höher als der damalige ist, wird dieser aktualisiert
 	if ((int)distanceCount >= highscoreInt) {
 		outfile << (int)distanceCount << std::endl;
 		highscoreInt = (int)distanceCount;

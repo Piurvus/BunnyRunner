@@ -14,6 +14,7 @@
 
 class Game {
 
+	//	Alle Objekte im Spiel
 	Fox* fox;
 	Water* water;
 	Carrot* carrot;
@@ -30,8 +31,13 @@ public:
 	Game(Graphics* gfx);
 	~Game();
 
+	//	Die Funktion, welche in main.cpp ausgeführt wird
 	void Run();
+
+	//	Die Funktionen, welche in Run() ausgeführt werden
+	//	Aktualisierung der Logik
 	void UpdateModel();
+	//	Aktualisierung der Graphik
 	void ComposeFrame();
 
 private:

@@ -20,8 +20,11 @@ public:
 
 	bool Init(const HWND windowHandle);
 
+	//	Die beiden Funktionen, welche bei jeder Frame wichtig sind
 	void BeginDraw();
 	void EndDraw();
+
+	//	Alle Zeichnungsfunktionen
 	void fillRect(const D2D_RECT_F & rect, float r, float g, float b);
 	void ClearScreen(float r, float g, float b);
 	void DrawCircle(float x, float y, float  radius, float r, float g, float b, float a);

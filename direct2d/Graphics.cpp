@@ -23,6 +23,7 @@ Graphics::~Graphics()
 		brush->Release();
 }
 
+//	Das Initialisieren von factory und renderTarget, also der D2D1 Hilfsmittel zur Darstellung
 bool Graphics::Init(const HWND windowHandle)
 {
 	HRESULT res = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &factory);
@@ -44,7 +45,6 @@ bool Graphics::Init(const HWND windowHandle)
 		return false;
 
 	return true;
-
 }
 
 void Graphics::BeginDraw()

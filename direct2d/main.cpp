@@ -4,40 +4,41 @@
 #include <iostream>
 #include "Game.h"
 
+
+
+//	Die beiden wichtigen Objekte
 Graphics* graphics;
 Game* myGame;
 
+
+//	Message Handling
 LRESULT CALLBACK WindowProc(HWND hwnd,
 	UINT uMsg,
 	WPARAM wParam,
 	LPARAM lParam)
 {
+
+	//	Programm Ende
 	if (uMsg == WM_DESTROY) {
+
 		//	exit(0);
+		delete myGame;
+		delete graphics;
 		PostQuitMessage(0);
 		return 0;
 	}
 
-	
-
-	/*if (uMsg == WM_PAINT){
-		graphics->BeginDraw();
-
-		graphics->ClearScreen(0, 255, 255);
-		graphics->DrawCircle(100, 100, 50, 255, 0, 0, 1);
-
-		graphics->EndDraw();
-	}*/
-
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
+//	Einstiegspunkt des Programms
 int WINAPI wWinMain(HINSTANCE hInstance,
 	HINSTANCE prevInstance,
 	LPWSTR cmd,
 	int nCmdShow)
 {
 
+	//	Das erstellen der Windowklasse für das Fenster
 	WNDCLASSEX windowclass;
 	ZeroMemory(&windowclass, sizeof(WNDCLASSEX));
 
@@ -50,7 +51,7 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 
 	RegisterClassEx(&windowclass);
 
-	RECT rect = { 0, 0, 1600, 600 };
+	RECT rect = { 0, 0, 1600, 600 };	//	Damit der INHALT des Fensters die gewünschte Auflösung besitzt
 	AdjustWindowRectEx(&rect, WS_OVERLAPPEDWINDOW, false, WS_EX_OVERLAPPEDWINDOW);
 
 	HWND windowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW,
@@ -78,28 +79,25 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 
 	ShowWindow(windowHandle, nCmdShow);
 
-
 	MSG message;
-	/*while (GetMessage(&message, NULL, 0, 0))
-	{
-		DispatchMessage(&message);
-	}*/
 
 	message.message = WM_NULL;
 
 	myGame = new Game(graphics);
 
+	//	Die Schleife des Fensters	
 	while (message.message != WM_QUIT)
 	{
-
+		
 		if (PeekMessage(&message, NULL, 0, 0, PM_REMOVE)) {
 			DispatchMessage(&message);
 		}
 
 		//graphics->BeginDraw();
-		
-		myGame->Run();
 
+		//	Das eigentliche Spiel:
+		myGame->Run();
+		
 		//graphics->EndDraw();
 	}
 
