@@ -5,13 +5,20 @@
 class Bunny {
 
 	Graphics* gfx;
+
+	//	Das Bild mit den verschiedenen Hasen
 	SpriteSheet* bunny;
+	//	Das Bild mit den verschiedenen Hasen mit einer Karotte im Mund
 	SpriteSheet* bunnyCarrot;
+	//	toter Hase
 	SpriteSheet* deadBunny;
+	//	Jump-Wolke
 	SpriteSheet* puff;
+	//	Wolke
 	SpriteSheet* cloudy;
 	D2D1_RECT_F rect;
 
+	//	Werte der Jump-Wolke
 	float puffi = 0;
 	float puffiX, puffiY;
 

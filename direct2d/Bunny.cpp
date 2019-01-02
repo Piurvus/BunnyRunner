@@ -26,17 +26,17 @@ Bunny::~Bunny()
 
 void Bunny::showBunny(bool carrot)
 {
-
+	//	Falls auf Wolke
 	if (clouded) {
 		if (carrot) {
-			bunnyCarrot->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);
+			bunnyCarrot->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);	//	Hase mit Karotte (Bild abhängig von frame) wird gezeichnet
 		}
 		else {
-			bunny->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);
+			bunny->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);	//	Hase (Bild abhängig von frame) wird gezeichnet
 		}
-		cloudy->Draw(x-100, y+70, 0.4, cloudTimer/(30.0*15.0)+0.3, true);
+		cloudy->Draw(x-100, y+70, 0.4, cloudTimer/(30.0*15.0)+0.3, true);	//	Die Wolke wird abhängig von dem cloudTimer stärker oder schwächer gezeichnet
 	}
-	if (!dead) {
+	if (!dead) {	//	else if nicht möglich
 		if (carrot) {
 			bunnyCarrot->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);
 		}
@@ -45,29 +45,32 @@ void Bunny::showBunny(bool carrot)
 		}
 	}
 	else {
-		deadBunny->Draw(x-100, y-50, sizeX);
+		deadBunny->Draw(x-100, y-50, sizeX);	//	toter Hase wird gezeichnet
 	}
 	if (puffi) {
-		puff->Draw(puffiX, puffiY, 0.5, puffi/100, true);
+		puff->Draw(puffiX, puffiY, 0.5, puffi/100, true);	//	Jump-Wolke wird gezeichnet
 	}
 }
 
 void Bunny::updateBunny(double speed)
 {
+	//	Falls auf Wolke
 	if (clouded) {
 		cloudTimer--;
 
+		// Fallgeschwindigkeit wird verringert
 		if (GetAsyncKeyState(VK_UP))
 			speedY -= 0.5;
 
+		// Fallgeschwindigkeit wird erhöht
 		else if (GetAsyncKeyState(VK_DOWN))
 			speedY += 0.5;
 		else speedY += 0.2;
 		y += speedY;
 
-		if (y >= 800)
+		if (y >= 800)	//	Falls ausserhalb des Bildes
 			die();
-		if (!cloudTimer)
+		if (!cloudTimer)	//	Zeitlimite
 			clouded = false;
 
 	}
@@ -78,7 +81,7 @@ void Bunny::updateBunny(double speed)
 		else {
 			crouched = false;
 		}
-		if (puffi)
+		if (puffi)	//	Timer der Jump-Wolke
 			puffi--;
 
 		//	Animation Jump
@@ -98,6 +101,7 @@ void Bunny::updateBunny(double speed)
 			frame = 1;
 		}
 
+		//	Bewegung des Hasens abhängig von seiner Geschwindigkeit
 		frame += bunnySpeed * speed;
 
 		//	Gravitiy
@@ -113,8 +117,10 @@ void Bunny::updateBunny(double speed)
 		//	Jump
 		y += speedY;
 
+		//	Bewegung der Jump-Wolke abhängig von Geschwindigkeit
 		puffiX -= 5 * speed;
 
+		//	Der Boden ist nicht durchlässig (sozusagen anti-leporidaepermeable)
 		if (y >= 300.0f) {
 			speedY = 0;
 			y = 300.0f;
@@ -124,21 +130,27 @@ void Bunny::updateBunny(double speed)
 
 void Bunny::jump(double charge)
 {
+	//	Falls mehrfachsprung -> Sprung-Wolke
 	if (!onGround()) {
 		puffi = 100;
 		puffiX = x;
 		puffiY = y+130;
 	}
+
+	//	maximal
 	if (charge >= 60)
 		charge = 60;
 
 	charge *= 2;
 
+	//	notwendig für Jumpanimation (max Höhe des Sprungs)
 	height = charge / 0.6;
 
+	//	die Anfangsgeschwindigkeit des Sprungs
 	speedY = - sqrt(charge);
 }
 
+//	jump falls Kollision mit Pilz
 void Bunny::jump(double charge, bool cloud)
 {
 	if (charge >= 60)

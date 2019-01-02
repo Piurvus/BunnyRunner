@@ -2,6 +2,7 @@
 
 void Background::draw()
 {
+	//	Das Bild wird an den drei verschiedenen x Positionen gezeichnet
 	sprites->Draw((int)xScreen1, -10.0f, 0.6, 1.0, true);
 	sprites->Draw((int)xScreen2, -10.0f, 0.6, 1.0, true);
 	sprites->Draw((int)xScreen3, -10.0f, 0.6, 1.0, true);
@@ -13,6 +14,7 @@ void Background::draw()
 
 void Background::update(double speed)
 {
+	//	Falls das Bild im Fenster nicht mehr sichtbar ist, wird es nach rechnts verschoben
 	if (xScreen1 + 1224.0 <= 0) {
 		xScreen1 = xScreen1 + 3 * 1224.0;
 	}
@@ -23,10 +25,12 @@ void Background::update(double speed)
 		xScreen3 = xScreen3 + 3 * 1224.0;
 	}
 
+	//	Bild wird abhängig von der Gamegeschwindigkeit nach links verschoben
 	xScreen1 -= speed;
 	xScreen2 -= speed;
 	xScreen3 -= speed;	
 
+	//	Falls das Bild im Fenster nicht mehr sichtbar ist, wird es nach rechnts verschoben
 	if (xgScreen1 + 4080.0 <= 0) {
 		xgScreen1 = xgScreen1 + 2 * 4080.0;
 	}
@@ -37,6 +41,7 @@ void Background::update(double speed)
 		xgScreen3 = xgScreen3 + 3 * 2040.0;
 	}*/
 
+	//	Bild wird abhängig von der Gamegeschwindigkeit nach links verschoben
 	xgScreen1 -= 5.0 * speed;
 	xgScreen2 -= 5.0 * speed;
 	//xgScreen3 -= 5.0 * speed;
