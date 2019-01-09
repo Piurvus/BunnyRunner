@@ -1,3 +1,15 @@
+/*
+Datum: 09.01.2019
+Projektname: Bunny Runner
+von: Florian Kaufmannm, Yann Huynh, Philipp Scherer
+main, Background, Bunny, Carrot, Fox, Graphics, obstacle, SpriteSheet, Water von Philipp
+Background, Shroom, Water, Fox von Florian
+obstacle, Carrot, Fox, Bunny von Yann
+
+
+Window.h um ein Fenster zu erstellen.
+iostream um eine Konsolen Ausgabe zu machen.
+*/
 #include <Windows.h>
 #include "Graphics.h"
 #include "SpriteSheet.h"
@@ -77,7 +89,7 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 		return -1;
 	}
 
-	ShowWindow(windowHandle, nCmdShow);
+	ShowWindow(windowHandle, nCmdShow); // Fenster anzeigen.
 
 	MSG message;
 
