@@ -1,11 +1,17 @@
+// Diese Datei ist verantwortlich für den GameFlow.
+
 #include "Game.h"
 #include "SpriteSheet.h"
+//	Für die Timer
 #include <ctime>
 #include "Bunny.h"
 #include "Carrot.h"
 #include "Fox.h"
+//	Für strings
 #include <string>
+// Standartlibrary
 #include <stdio.h>
+//	Ausgaben
 #include <fstream>
 #include <iostream>
 #include "Shroom.h"

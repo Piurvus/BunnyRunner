@@ -1,3 +1,5 @@
+// Diese Datei macht die Powerups Pilze.
+
 #include "Shroom.h"
 
 Shroom::Shroom(Graphics * gfx):

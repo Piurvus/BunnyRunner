@@ -1,3 +1,5 @@
+// Diese Datei macht die ganzen Grafiken.
+
 #include "Graphics.h"
 #include <d2d1_1.h>
 #include <dwrite.h>

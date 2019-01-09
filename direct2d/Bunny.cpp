@@ -1,3 +1,5 @@
+//	Diese Datei ist für den Hasen.
+
 #include "Bunny.h"
 
 Bunny::Bunny(Graphics * gfx):

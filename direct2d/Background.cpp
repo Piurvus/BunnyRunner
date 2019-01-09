@@ -1,3 +1,5 @@
+//	Diese Datei macht einen dynamischen Hintergrund.
+
 #include "Background.h"
 
 void Background::draw()

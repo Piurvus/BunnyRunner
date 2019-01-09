@@ -6,9 +6,12 @@ main, Background, Bunny, Carrot, Fox, Graphics, obstacle, SpriteSheet, Water von
 Background, Shroom, Water, Fox von Florian
 obstacle, Carrot, Fox, Bunny von Yann
 
+Man braucht die DirectX SDK.
 
 Window.h um ein Fenster zu erstellen.
 iostream um eine Konsolen Ausgabe zu machen.
+
+Es ist die Main Datei.
 */
 #include <Windows.h>
 #include "Graphics.h"

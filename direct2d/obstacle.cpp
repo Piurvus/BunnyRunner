@@ -1,4 +1,7 @@
+// Diese Programm macht die Hindernisse: Baumstämme und Steinen.
+
 #include "obstacle.h"
+//Zufallgenerator
 #include <random>
 
 

@@ -1,3 +1,5 @@
+//	Diese Datei macht das Powerup Karotte.
+
 #include "Carrot.h"
 
 D2D_RECT_F Carrot::returnPos()
