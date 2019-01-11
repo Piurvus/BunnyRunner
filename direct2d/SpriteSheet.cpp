@@ -1,3 +1,5 @@
+// Diese Datei ist dazu da, um die Spritesheets darzustellen.
+
 #include "SpriteSheet.h"
 
 

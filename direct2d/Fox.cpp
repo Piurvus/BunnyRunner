@@ -1,6 +1,10 @@
+//	Diese Datei macht einen Feind, den Fuchs.
+
 #include "Fox.h"
+//	Um Zufallszahlen zu generieren
 #include <random>
-#include <iostream>
+//	Cin und Cout.
+#include <iostream> 
 
 
 
