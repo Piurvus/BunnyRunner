@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Background">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAgAiAAAAIIAggAAAAAAAAAAAAAgAACEAAA=</HashCode>
+      <FileName>Background.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Bunny">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAADAEABQCCI0EQAABJAIAAAQBAAAQAJEADhYwBAAEA=</HashCode>
+      <FileName>Bunny.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Carrot">
+    <Position X="2.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAAAAIAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Carrot.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fox">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAIgQQAQIAgKAAAIAAACAAADABkAQAEAAg=</HashCode>
+      <FileName>Fox.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Game">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAQABQAAACAAoBQAAAB4IUAIAIiAIQCAKAACAQQIIFI=</HashCode>
+      <FileName>Game.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Graphics">
+    <Position X="4.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAgAQAgAgAABQAAABAAIACAAAABAAIEACAAAAAAE=</HashCode>
+      <FileName>Graphics.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Obstacle">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAIgAQAQIgAIAQAABAQAAAABgBgCAAEAAg=</HashCode>
+      <FileName>obstacle.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Shroom">
+    <Position X="2.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAQCAAAACgAAAAAAAAAAAAAAAABAABAAAEAAg=</HashCode>
+      <FileName>Shroom.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SpriteSheet">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAggIAEAAAAEAEAIAAAAAgAAAAAAAQAAA=</HashCode>
+      <FileName>SpriteSheet.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Water">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Water::Wave" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Water.h</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAUgEAABAAAAAAAAAAkAAAIAQBBAAgAAAA=</HashCode>
+      <FileName>Water.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

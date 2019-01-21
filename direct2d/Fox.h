@@ -1,3 +1,4 @@
+//	Header Datei für den Fuchs
 #pragma once
 #include "SpriteSheet.h"
 

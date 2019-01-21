@@ -1,3 +1,7 @@
+//	Headerdatei für Grafiken
+//	Windows.h um ein Fenster zu erstellen
+//	<d2d1.h> direct2D Bibliothek für Grafische Darstellungen
+
 #pragma once
 #include <Windows.h>
 #include <d2d1.h>
@@ -7,7 +11,7 @@ class Graphics
 
 private:
 	ID2D1Factory* factory;
-	ID2D1HwndRenderTarget* renderTarget;	//place in ram to render to
+	ID2D1HwndRenderTarget* renderTarget;	//Ort im Ram, wohin gerendert wird.
 	ID2D1SolidColorBrush* brush;
 
 public:

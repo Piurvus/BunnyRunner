@@ -1,14 +1,15 @@
+//	Header Datei für den Gameflow
 #pragma once
 
 #include "Graphics.h"
 #include "SpriteSheet.h"
-#include <ctime>
+#include <ctime> //	Timer
 #include "Bunny.h"
 #include "obstacle.h"
 #include "Carrot.h"
 #include "Fox.h"
 #include "Water.h"
-#include <fstream>
+#include <fstream> //	In eine Datei schreiben und lesen.
 #include "Background.h"
 #include "Shroom.h"
 

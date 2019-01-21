@@ -1,3 +1,4 @@
+// Header Datei für den Hasen
 #pragma once
 #include "Graphics.h"
 #include "SpriteSheet.h"
@@ -33,7 +34,7 @@ class Bunny {
 	bool crouched = false;
 	int crouchLatency = 3;
 
-	bool up = false;	//	wird nichtmehr verwendet
+	bool up = false;	//	wird nicht mehr verwendet
 
 	//	Die Wolke
 	bool clouded = false;

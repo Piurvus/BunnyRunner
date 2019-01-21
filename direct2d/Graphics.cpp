@@ -1,5 +1,6 @@
-// Diese Datei macht die ganzen Grafiken.
-
+//	Diese Datei macht die ganzen Grafiken.
+//	Die d2d1 Dateien sind von Direct2D.
+//	string und cwchar um Text darzustellen.
 #include "Graphics.h"
 #include <d2d1_1.h>
 #include <dwrite.h>
@@ -48,6 +49,8 @@ bool Graphics::Init(const HWND windowHandle)
 
 	return true;
 }
+
+//	Verschiedene Zeichnenfunktionen
 
 void Graphics::BeginDraw()
 {

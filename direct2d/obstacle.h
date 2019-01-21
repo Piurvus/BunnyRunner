@@ -1,10 +1,11 @@
+//	Header Datei für die Hindernisse
 #pragma once
 
 #include "Graphics.h"
-#include <random>
+#include <random> //	Um Zufallszahlen zu generieren
 #include <iostream>
 #include "SpriteSheet.h"
-#include <vector>
+#include <vector> //	Um Vektoren zu erstellen
 
 
 class Obstacle {

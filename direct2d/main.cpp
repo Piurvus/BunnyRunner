@@ -1,14 +1,15 @@
 /*
 Datum: 09.01.2019
 Projektname: Bunny Runner
-von: Florian Kaufmannm, Yann Huynh, Philipp Scherer
+von: Florian Kaufmann, Yann Huynh, Philipp Scherer
+Hauptquellen: MSDN https://docs.microsoft.com/en-us/windows/desktop/api/index
 main, Background, Bunny, Carrot, Fox, Graphics, obstacle, SpriteSheet, Water von Philipp
 Background, Shroom, Water, Fox von Florian
 obstacle, Carrot, Fox, Bunny von Yann
 
 Man braucht die DirectX SDK.
 
-Window.h um ein Fenster zu erstellen.
+Windows.h um ein Fenster zu erstellen.
 iostream um eine Konsolen Ausgabe zu machen.
 
 Es ist die Main Datei.
@@ -53,7 +54,7 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 	int nCmdShow)
 {
 
-	//	Das erstellen der Windowklasse für das Fenster
+	//	Das Erstellen der Windowklasse für das Fenster
 	WNDCLASSEX windowclass;
 	ZeroMemory(&windowclass, sizeof(WNDCLASSEX));
 
@@ -69,6 +70,7 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 	RECT rect = { 0, 0, 1600, 600 };	//	Damit der INHALT des Fensters die gewünschte Auflösung besitzt
 	AdjustWindowRectEx(&rect, WS_OVERLAPPEDWINDOW, false, WS_EX_OVERLAPPEDWINDOW);
 
+	//	Handle des Fensters
 	HWND windowHandle = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW,
 		L"MainWindow",
 		L"D2d",
