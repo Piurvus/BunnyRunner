@@ -11,6 +11,7 @@
 
 Graphics::Graphics()
 {
+	//	Alles wird sicherheitshalber auf NULL gesetzt
 	factory = NULL;
 	renderTarget = NULL;
 	brush = NULL;
@@ -18,6 +19,7 @@ Graphics::Graphics()
 
 Graphics::~Graphics()
 {
+	//	Aufräumen
 	if (factory)
 		factory->Release();
 	if (renderTarget)
@@ -29,6 +31,8 @@ Graphics::~Graphics()
 //	Das Initialisieren von factory und renderTarget, also der D2D1 Hilfsmittel zur Darstellung
 bool Graphics::Init(const HWND windowHandle)
 {
+	//	Mit if (res != S_OK) wird jeweils überprüft, ob der Vorgang erfolgreich war
+
 	HRESULT res = D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED, &factory);
 	if (res != S_OK)
 		return false;
@@ -39,7 +43,6 @@ bool Graphics::Init(const HWND windowHandle)
 	res = factory->CreateHwndRenderTarget(D2D1::RenderTargetProperties(),
 		D2D1::HwndRenderTargetProperties(windowHandle, D2D1::SizeU(rect.right, rect.bottom)),
 		&renderTarget);
-
 	if (res != S_OK)
 		return false;
 

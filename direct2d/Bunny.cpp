@@ -5,12 +5,16 @@
 Bunny::Bunny(Graphics * gfx):
 	gfx(gfx)
 {
+	//	Die verwendeten Bilder werden geladen
 	deadBunny = new SpriteSheet(L"deadle.png", gfx, 1.0f);
-	bunny = new SpriteSheet(L"rabbit.png", gfx, 1.0f, 8.233333 * 40, 80 * 4);
-	bunnyCarrot = new SpriteSheet(L"rabbitcarrot.png", gfx, 1.0f, 8.233333 * 40, 80 * 4);
 	puff = new SpriteSheet(L"puff.png", gfx, 1.0f);
 	cloudy = new SpriteSheet(L"cloud.png", gfx, 1.0f);
+
+	//	Die Animationsbilder werden geladen (Höhe und Breite eines solchen Bildes wird mitgegeben)
+	bunny = new SpriteSheet(L"rabbit.png", gfx, 1.0f, 8.233333 * 40, 80 * 4);
+	bunnyCarrot = new SpriteSheet(L"rabbitcarrot.png", gfx, 1.0f, 8.233333 * 40, 80 * 4);
 	
+	//	Defaultwerte des Hasens
 	x = 50;
 	y = 300;
 	sizeX = 0.5;
@@ -21,6 +25,7 @@ Bunny::Bunny(Graphics * gfx):
 
 Bunny::~Bunny()
 {
+	//	Aufräumen
 	delete deadBunny;
 	delete bunny;
 	delete cloudy;
@@ -31,14 +36,15 @@ void Bunny::showBunny(bool carrot)
 	//	Falls auf Wolke
 	if (clouded) {
 		if (carrot) {
-			bunnyCarrot->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);	//	Hase mit Karotte (Bild abhängig von frame) wird gezeichnet
+			bunnyCarrot->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);		//	Hase mit Karotte (Bild abhängig von frame) wird gezeichnet
 		}
 		else {
-			bunny->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);	//	Hase (Bild abhängig von frame) wird gezeichnet
+			bunny->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);			//	Hase (Bild abhängig von frame) wird gezeichnet
 		}
 		cloudy->Draw(x-100, y+70, 0.4, cloudTimer/(30.0*15.0)+0.3, true);	//	Die Wolke wird abhängig von dem cloudTimer stärker oder schwächer gezeichnet
 	}
-	if (!dead) {	//	else if nicht möglich
+	//	Nochmals das selbe, falls der Hase nicht auf der Wolke ist
+	if (!dead) {															//	else if nicht möglich
 		if (carrot) {
 			bunnyCarrot->Draw((int)(frame) % 6, (int)x, (int)y, sizeX);
 		}
@@ -47,10 +53,10 @@ void Bunny::showBunny(bool carrot)
 		}
 	}
 	else {
-		deadBunny->Draw(x-100, y-50, sizeX);	//	toter Hase wird gezeichnet
+		deadBunny->Draw(x-100, y-50, sizeX);								//	toter Hase wird gezeichnet
 	}
 	if (puffi) {
-		puff->Draw(puffiX, puffiY, 0.5, puffi/100, true);	//	Jump-Wolke wird gezeichnet
+		puff->Draw(puffiX, puffiY, 0.5, puffi/100, true);					//	Sprung-Wolke wird gezeichnet
 	}
 }
 
@@ -60,33 +66,42 @@ void Bunny::updateBunny(double speed)
 	if (clouded) {
 		cloudTimer--;
 
-		// Fallgeschwindigkeit wird verringert
+		//  Fallgeschwindigkeit wird verringert
 		if (GetAsyncKeyState(VK_UP))
 			speedY -= 0.5;
 
-		// Fallgeschwindigkeit wird erhöht
+		//  Fallgeschwindigkeit wird erhöht
 		else if (GetAsyncKeyState(VK_DOWN))
 			speedY += 0.5;
+		//	Default Fallgeschwindigkeit
 		else speedY += 0.2;
+
+		//	Die Höhe des Hasens wird aktualisiert
 		y += speedY;
 
-		if (y >= 800)	//	Falls ausserhalb des Bildes
+		//	Falls ausserhalb des Bildes
+		if (y >= 800)	
 			die();
-		if (!cloudTimer)	//	Zeitlimite
+
+		//	Zeitlimite
+		if (!cloudTimer)	
 			clouded = false;
 
 	}
 	else {
+		//	Verzögert das "Crouchen"
 		if (crouchLatency) {
 			crouchLatency--;
 		}
 		else {
 			crouched = false;
 		}
-		if (puffi)	//	Timer der Jump-Wolke
+
+		//	Timer der Sprung-Wolke
+		if (puffi)	
 			puffi--;
 
-		//	Animation Jump
+		//	Animation Jump abhängig von Position in Luft
 		if (y < 300 && y > 300 - height && speedY < 0) {
 			frame = 3;
 		}
@@ -116,10 +131,10 @@ void Bunny::updateBunny(double speed)
 			speedY += 0.7;
 		}
 
-		//	Jump
+		//	Sprung (Y wird aktualisiert)
 		y += speedY;
 
-		//	Bewegung der Jump-Wolke abhängig von Geschwindigkeit
+		//	Bewegung der Sprung-Wolke abhängig von Geschwindigkeit
 		puffiX -= 5 * speed;
 
 		//	Der Boden ist nicht durchlässig (sozusagen anti-leporidaepermeable)
@@ -132,7 +147,7 @@ void Bunny::updateBunny(double speed)
 
 void Bunny::jump(double charge)
 {
-	//	Falls mehrfachsprung -> Sprung-Wolke
+	//	Falls Mehrfachsprung -> Sprung-Wolke
 	if (!onGround()) {
 		puffi = 100;
 		puffiX = x;
@@ -152,7 +167,7 @@ void Bunny::jump(double charge)
 	speedY = - sqrt(charge);
 }
 
-//	jump falls Kollision mit Pilz
+//	Sprung falls Kollision mit Pilz (keine Sprung-Wolke)
 void Bunny::jump(double charge, bool cloud)
 {
 	if (charge >= 60)
@@ -215,6 +230,7 @@ bool Bunny::isClouded()
 
 D2D1_RECT_F Bunny::returnPos()
 {
+	//	Angepasste Hitbox
 	rect = { x + 65, y + 25, x -25 + 8.233333f * 40 * sizeX, y - 25 + 80 * 4 * sizeX };
 	return rect;
 }

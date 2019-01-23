@@ -10,18 +10,20 @@ class Graphics
 {
 
 private:
-	ID2D1Factory* factory;
-	ID2D1HwndRenderTarget* renderTarget;	//Ort im Ram, wohin gerendert wird.
-	ID2D1SolidColorBrush* brush;
+	ID2D1Factory* factory;					//	Wird dazu benötigt renderTarget zu initialisieren
+	ID2D1HwndRenderTarget* renderTarget;	//	Ort im Ram, wohin gerendert wird.
+	ID2D1SolidColorBrush* brush;			//	Pinsel für die Farbe
 
 public:
 	Graphics();
 	~Graphics();
 
+	//	Damit Spritesheet als eigene Klasse stehen kann wird renderTarget zurückgegeben
 	ID2D1RenderTarget* GetRenderTarget() {
 		return renderTarget;
 	}
-
+	
+	//	Initialisieren der obigen Objekte
 	bool Init(const HWND windowHandle);
 
 	//	Die beiden Funktionen, welche bei jeder Frame wichtig sind

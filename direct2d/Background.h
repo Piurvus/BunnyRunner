@@ -21,7 +21,9 @@ public:
 	Background(Graphics* gfx);
 	~Background();
 
+	//	Darstellen des Hintergrundes
 	void draw();
+	//	Aktualisieren des Hintergrundes
 	void update(double speed);
 
 };

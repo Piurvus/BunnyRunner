@@ -5,12 +5,12 @@
 
 class Carrot : public Obstacle {
 
-	float size = 0.15;	//	Grösse von der Karotte
+	float size = 0.15;			//	Grösse von der Karotte
 
 public:
 	using Obstacle::Obstacle;	//	Konstruktor von Obstacle wird verwendet, welcher einen anderen y Wert gibt
 
-	D2D_RECT_F returnPos();
-	void show();
+	D2D_RECT_F returnPos();		//	Hitbox der Karotte
+	void show();				//	Darstellen der Karotte
 
 };

@@ -11,7 +11,7 @@
 Fox::Fox(Graphics * gfx):
 	gfx(gfx)
 {
-	//	Füchse werden erstellt
+	//	Füchse werden erstellt (in beide Richtungen)
 	fox = new SpriteSheet(L"fox.png", gfx, 1.0f, width, height);
 	fox2 = new SpriteSheet(L"fox2.png", gfx, 1.0f, width, height);
 
@@ -19,12 +19,12 @@ Fox::Fox(Graphics * gfx):
 	frame = 0;
 	foxFrame = 0.3;
 
-	//	random Zahl zwischen 4000 und 8000
+	//	Zufällige Zahl zwischen 4000 und 8000
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(4000, 8000);
 
-	//	random Werte werden zugewiesen
+	//	Zufällige Werte werden zugewiesen
 	foxSpeed = (float)(dist(rng) % 20)/10 + 0.8;
 	x = dist(rng) - width;
 	foxFrame = 0.075*foxSpeed;
@@ -32,6 +32,7 @@ Fox::Fox(Graphics * gfx):
 
 Fox::~Fox()
 {
+	//	Aufräumen
 	delete fox;
 	delete fox2;
 	delete gfx;
@@ -40,20 +41,21 @@ Fox::~Fox()
 
 void Fox::changeDir()
 {
+	//	Falls er nicht gerade erst seine Richtung gewechselt hat
 	if (!directionlatency) {
-		changeDirection = !changeDirection;
-		directionlatency = 60;
+		changeDirection = !changeDirection;		//	Gibt an in welche Richtung der Fuchs rennt
+		directionlatency = 60;					//	Verzögerung zwischen Richtungswechsel
 	}
 }
 
 void Fox::show()
 {
-	//	für beide Richtungen das Zeichnen des Fuchses
+	//	Für beide Richtungen das Zeichnen des Fuchses
 	if (changeDirection) {
-		fox2->Draw((int)(frame) % 6, x, y, size);
+		fox2->Draw((int)(frame) % 6, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
 	}
 	else {
-		fox->Draw((int)(frame) % 6, x, y, size);
+		fox->Draw((int)(frame) % 6, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
 	}
 }
 
@@ -63,7 +65,7 @@ void Fox::update(double speed)
 	if (directionlatency)
 		directionlatency--;
 
-	//	Richtung
+	//	X Position Änderung in eine Richtung
 	if (changeDirection) {
 		x += -speed * 5 + 5 * foxSpeed;
 	}
@@ -76,21 +78,26 @@ void Fox::update(double speed)
 		changeDirection = false;
 	}
 
-	frame += speed * foxFrame;	//	aktualisieren des Bildes
+	//	Aktualisieren des Bildes
+	frame += speed * foxFrame;	
 
-	//	erneuern des Fuchses
+	//	Erneuern des Fuchses, falls dieser aus dem Bild rennt
 	if (x + width < 0) {
 		renew();
 	}
 
+	//	Anpassen der Hitbox
 	rect = { x+10, y+130, x + width+50, y + height+50 };
 }
 
 void Fox::renew()
 {
+	//	Zufall
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(4000, 8000);
+
+	//	Fuchs wird zufällig verändert
 	x = dist(rng) - width;	
 	foxSpeed = (float)(dist(rng) % 20) / 10 + 0.8;
 	foxFrame = 0.075*foxSpeed;

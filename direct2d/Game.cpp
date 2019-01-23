@@ -257,6 +257,7 @@ void Game::ComposeFrame()
 
 void Game::updateHighscore()
 {
+	//	Aufrunden des Punktestandes
 	distanceCount += 0.5;
 
 	//	Falls der aktuelle Highscore höher als der damalige ist, wird dieser aktualisiert
