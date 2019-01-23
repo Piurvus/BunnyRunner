@@ -9,7 +9,7 @@
 #include "Fox.h"
 //	Für strings
 #include <string>
-// Standartlibrary
+//  Standartlibrary
 #include <stdio.h>
 //	Ausgaben
 #include <fstream>
@@ -21,8 +21,12 @@ Game::Game(Graphics * gfx) :
 {
 
 	//-------Sprites-----------
-	water = new Water(gfx, 5);
+
+	//	gfx muss jeweils als Referenz mitgegeben werden, damit die Objekte dargestellt werden können	
+	//	Erzeugt das Wasserfeld mit 5 Stämmen (waves Objekte in der Water Klasse)
+	water = new Water(gfx, 5);	
 	fox = new Fox(gfx);
+	//	L"carrot.png" ist das Bild von der Karotte, welches benutzt wird
 	carrot = new Carrot(gfx, L"carrot.png");
 	bunny = new Bunny(gfx);
 	obj = new Obstacle(gfx);
@@ -31,7 +35,10 @@ Game::Game(Graphics * gfx) :
 	//-------------------------
 
 
+
 	//---------Read File----------------
+
+	//	Zuerst werden alte Punktzahlen eingelesen und die beste wird gewählt
 	infile.open("Highscore.txt");
 	int compare = 0;
 	while (std::getline(infile, highscoreString)) {
@@ -40,9 +47,10 @@ Game::Game(Graphics * gfx) :
 			highscoreInt = compare;
 		}
 	}
+	//	Danach wird eine "neue" Output Datei erstellt, welche die besten Punktzahlen speichert
 	outfile.open("Highscore.txt");
 	outfile << highscoreInt << std::endl;
-
+	//	Der Highscore darf kein int sein, damit er später dargestellt werden kann
 	swprintf_s(highscoreWchar, L"%d", highscoreInt);
 	//----------------------------------
 
@@ -50,6 +58,7 @@ Game::Game(Graphics * gfx) :
 
 Game::~Game()
 {
+	//	Aufräumen
 	delete shroom;
 	delete water;
 	delete carrot;
@@ -84,85 +93,87 @@ void Game::UpdateModel()
 		speed = 1.0;
 	}
 
+	//	Falls der Hase noch lebt
 	if (!bunny->isDead())
 	{
-		//	Erneuerung der Karotten
+		//	Erneuerung der Karotten, falls diese zu nah an einem Objekt sind
 		if (abs(obj->returnPos().left - carrot->returnPos().left) < 100) {
 			carrot->renew();
 		}
 
+		//	Falls der Hase nicht auf der Wolke ist, um schneller hinunter zu gelangen
 		if (GetAsyncKeyState(VK_DOWN) && !bunny->isClouded()) {
 			bunny->crouch();
 		}
 
-		//	Sprung aufladen
+		//	Sprung aufladen, falls der Hase auf dem Boden ist
 		if (GetAsyncKeyState(VK_UP) && bunny->onGround() && !bunny->isClouded())
 			charge += 1.5;
 
-		//	Mehrfach Sprung
+		//	Mehrfach Sprung, falls der Hase auf dem Boden ist, er Karotten hat und er genug lange seit dem letzten Sprung in der Luft gewartet hat(carrotsTimer)
 		if (GetAsyncKeyState(VK_UP) && !bunny->onGround() && carrots && (std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 0.5f && !bunny->isClouded()) {
-			carrotsTimer = clockR;
-			carrots--;
-			charge = 0;
-			bunny->jump(30);
+			carrotsTimer = clockR;	//	Der Timer wird erneuert
+			carrots--;				//	Karotte wird benutzt
+			charge = 0;				//	Die momentane Sprungstärke wird auf 0 gesetzt
+			bunny->jump(30);		//	Der Hase macht einen Sprung mit bereits festgelegter Höhe
 		}
 
-		//	normale Sprung
+		//	Normaler Sprung, falls der Sprung bereits aufgeladen wurde(charge) und sich der Hase auf dem Boden befindet
 		if (!GetAsyncKeyState(VK_UP) && charge != 0 && bunny->onGround() && !bunny->isClouded()) {
-			bunny->jump(charge);
-			charge = 0;
+			bunny->jump(charge);	//	Der Hase springt mit einer Höhe, welche von dem charge Wert abhängt
+			charge = 0;				//	Zurücksetzen der Sprungstärke
 		}
 
-		//	Kollision mit Objekt
+		//	Kollision zwischen Hase und Objekt
 		if (checkCollision(bunny->returnPos(), obj->returnPos())) {
-			bunny->die();
-			distanceCount -= speed;
-			updateHighscore();
+			bunny->die();			//	Der Hase stirbt
+			distanceCount -= speed;	//	Distanz wird um einen Tick angepasst, damit die richtige Punktzahl als Highscore angezeigt wird
+			updateHighscore();		//	Highscore wird aktualisiert
 		}
 
 		//	Kollision zwischen Objekt und Pilz
 		if (checkCollision(obj->returnPos(), shroom->returnPos())) {
-			obj->renew();
+			obj->renew();			//	Das Objekt wird an einem anderen Ort hingestellt, da es sich auf einem Pilz befand
 		}
 
-		//	Kollision mit Fuchs
+		//	Kollision zwischen Hase und Fuchs
 		if (checkCollision(bunny->returnPos(), fox->returnPos())) {
-			bunny->die();
-			distanceCount -= speed;
-			updateHighscore();
+			bunny->die();			//	Der Hase stirbt
+			distanceCount -= speed;	//	Distanz wird um einen Tick angepasst, damit die richtige Punktzahl als Highscore angezeigt wird
+			updateHighscore();		//	Highscore wird aktualisiert
 		}
 
-		//	Kollision mit Karotte
+		//	Kollision zwischen Hase und Karotte
 		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
-			if (speed <= 3.0)
-				speed += 0.1;
-			carrots++;
-			carrot->renew();
+			if (speed <= 3.0)		//	Falls der Hase nochnicht seine maximale Geschwindigkeit erreicht hat
+				speed += 0.1;		//	Die Geschwindigkeit wird erhöht
+			carrots++;				//	Der Karottenzähler wird um eins erhöht
+			carrot->renew();		//	Es wird eine "neue" Karotte platziert
 		}
 
-		//	Kollision mit Pilz
+		//	Kollision zwischen Hase und Pilz
 		if (checkCollision(bunny->returnPos(), shroom->returnPos())) {
-			if (shroom->isBroom()) {
-				bunny->jump(60, false);
+			if (shroom->isBroom()) {	//	Falls es ein violetter Pilz war
+				bunny->jump(60, false);	//	Der Hase springt einen fixen Wert ohne eine Jumpwolke zu hinterlassen
 			}
 			else {
-				bunny->jump(60, false);
-				bunny->getClouded();
+				bunny->jump(60, false);	//	Falls es ein blauer Pilz war
+				bunny->getClouded();	//	Der Hase springt einen fixen Wert ohne eine Jumpwolke zu hinterlassen
 			}
 		}
 
 		//	Kollision zwischen Fuchs und Objekt
 		if (checkCollision(fox->returnPos(), obj->returnPos())) {
-			fox->changeDir();
+			fox->changeDir();		//	Der Fuchs ändert seine Richtung
 		}
 
-		//	Aktualisierung der Anzeige
+		//	(Aktualisierung) Umwandlung der Anzeigevariablen (int kann nicht als Text dargestellt werden)
 		swprintf_s(distanceCountText, L"%d", (int)distanceCount);
 		swprintf_s(carrotCountText, L"%d", carrots);
 
-		distanceCount += speed;
+		distanceCount += speed;		//	Aktualisieren der gerannter Distanz
 
-		//	Aktualisierung der Objekte
+		//	Aktualisierung der Objekte (abhängig von der Geschwindigkeit des Hasens, damit alles sich gleich schnell bewegt)
 		carrot->update(speed);
 		fox->update(speed);
 		obj->update(speed);
@@ -173,12 +184,19 @@ void Game::UpdateModel()
 		//	Aktualisierung der Uhr
 		clockR = std::clock();
 	}
-	else if (bunny->isDead()) {
-		bunny->updateBunny(speed);
+	else if (bunny->isDead()) {		//	Falls der Hase tot ist
+		bunny->updateBunny(speed);	//	Der Hase fällt noch zu Boden
+		fox->update(speed);			//	Fuchs rennt weiter
+
+		//	Kollision zwischen Fuchs und Objekt
+		if (checkCollision(fox->returnPos(), obj->returnPos())) {
+			fox->changeDir();		//	Der Fuchs ändert seine Richtung
+		}
 	}
 
 	//	Neustart
-	if (GetAsyncKeyState(VK_F9)) {
+	if (GetAsyncKeyState(VK_F9) & 1) {
+		//	Alles wird auf die Defaultwerte zurückgesetzt
 		Sleep(10);
 		water = new Water(gfx, 5);
 		bunny = new Bunny(gfx);
@@ -218,10 +236,10 @@ void Game::ComposeFrame()
 		gfx->DrawTEXT(&D2D1::Rect(50, 500, 500, 500), 50, L"Crouched");
 	*/
 
-	//	Anzeigen von dem Hasen abhängig von Karotten
+	//	Anzeigen von dem Hasen, abhängig von Karotten
 	bunny->showBunny(carrots > 0);
 
-	// Anzeige von den Texten
+	//  Anzeige von den Texten
 	gfx->DrawTEXT(&D2D1::Rect(50, 10, 500, 500), 50, L"Score:");
 	gfx->DrawTEXT(&D2D1::Rect(250, 10, 500, 500), 50, distanceCountText);
 	//mbstowcs(outpuet, output, strlen(output + 1));
@@ -246,9 +264,7 @@ void Game::updateHighscore()
 		outfile << (int)distanceCount << std::endl;
 		highscoreInt = (int)distanceCount;
 	}
-
 	swprintf_s(highscoreWchar, L"%d", highscoreInt);
-
 	outfile.flush();
 }
 

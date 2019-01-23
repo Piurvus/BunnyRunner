@@ -42,21 +42,22 @@ public:
 	void ComposeFrame();
 
 private:
-
+	//	Das Wasserfeld im unterem Fensterbereich
 	D2D1_RECT_F bottom = D2D1::Rect(0, 471, 1600, 600);
 	D2D1_COLOR_F color = D2D1::ColorF(50, 50, 255);
 
-	float distanceCount = 0.0f;	//	gerannte Distanz
+	float distanceCount = 0.0f;			//	Gerannte Distanz
 	int highscoreInt = 0;
-	int carrots = 0;	//	Anzahl Karotten
-	double speed = 1.0;	//	Geschwindigkeit des Spiels/Hasens
+	int carrots = 0;					//	Anzahl Karotten
+	double speed = 1.0;					//	Geschwindigkeit des Spiels/Hasens
 	double refreshRate = 1.0 / 80.0;	//	GameFlow
 	double frameRate = 1.0 / 165.0;		//	FPS
-	double charge = 0;	//	momentane Sprungstärke des Hasens
+	double charge = 0;					//	Momentane Sprungstärke des Hasens
 
-
+	//	Uhren um die Geschwindigkeit des Spiels im Blick zu halten
 	std::clock_t clockR;
 	std::clock_t clockFPS;
+	//	Verhindert dass man zu schnell hintereinander Springen kann
 	std::clock_t carrotsTimer = 0;
 	
 	//	Der Text, welcher im Spiel angezeigt wird

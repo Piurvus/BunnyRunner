@@ -23,7 +23,9 @@ Es ist die Main Datei.
 
 
 //	Die beiden wichtigen Objekte
+//	Zuständig für Grafik
 Graphics* graphics;
+//	Das eigentliche "Game"
 Game* myGame;
 
 
@@ -44,6 +46,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd,
 		return 0;
 	}
 
+	//	Default Handling von den Nachrichten
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
 
@@ -56,8 +59,11 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 
 	//	Das Erstellen der Windowklasse für das Fenster
 	WNDCLASSEX windowclass;
+
+	//	Den benötigten Speicher frei machen
 	ZeroMemory(&windowclass, sizeof(WNDCLASSEX));
 
+	//	Die verschiedenen Klassenelemente werden gesetzt
 	windowclass.cbSize = sizeof(WNDCLASSEX);
 	windowclass.hbrBackground = (HBRUSH)COLOR_WINDOW;
 	windowclass.hInstance = hInstance;
@@ -65,9 +71,11 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 	windowclass.lpszClassName = L"MainWindow";
 	windowclass.style = CS_HREDRAW | CS_VREDRAW;
 
+	//	Registrieren der Window-Klasse damit diese anschliessend verwendet werden kann
 	RegisterClassEx(&windowclass);
 
-	RECT rect = { 0, 0, 1600, 600 };	//	Damit der INHALT des Fensters die gewünschte Auflösung besitzt
+	//	Damit der INHALT des Fensters die gewünschte Auflösung besitzt
+	RECT rect = { 0, 0, 1600, 600 };	
 	AdjustWindowRectEx(&rect, WS_OVERLAPPEDWINDOW, false, WS_EX_OVERLAPPEDWINDOW);
 
 	//	Handle des Fensters
@@ -84,38 +92,37 @@ int WINAPI wWinMain(HINSTANCE hInstance,
 		hInstance,
 		0);
 
+	//	Fehler im Programm abfangen
 	if (!windowHandle)
 		return -1;
 
 	graphics = new Graphics();
 
+	//	Abfangen von Fehlern bei der Initialisierung der Grafik
 	if (!graphics->Init(windowHandle)) {
 		delete graphics;
 		return -1;
 	}
 
-	ShowWindow(windowHandle, nCmdShow); // Fenster anzeigen.
+	// Fenster anzeigen
+	ShowWindow(windowHandle, nCmdShow); 
 
 	MSG message;
-
 	message.message = WM_NULL;
 
+	//	Der Konstruktor der Game Klasse wird mit einer Referenz zum Grafikobjekt aufgerufen, damit die verschiedenen Elemente des Spiels initialisiert werden können
 	myGame = new Game(graphics);
 
 	//	Die Schleife des Fensters	
 	while (message.message != WM_QUIT)
 	{
-		
+		//	Falls eine neue Message ankommt, wird diese bearbeitet
 		if (PeekMessage(&message, NULL, 0, 0, PM_REMOVE)) {
 			DispatchMessage(&message);
 		}
 
-		//graphics->BeginDraw();
-
 		//	Das eigentliche Spiel:
 		myGame->Run();
-		
-		//graphics->EndDraw();
 	}
 
 	delete myGame;

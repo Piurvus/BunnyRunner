@@ -37,7 +37,7 @@ Water::Water(Graphics * gfx, int count):
 	b = 1.0f;
 
 	//	Anzahl der Stämmen
-	for (int i = 0; i <= count; i++) {
+	for (int i = 0; i < count; i++) {
 		waves.push_back(Wave(gfx));
 	}
 
