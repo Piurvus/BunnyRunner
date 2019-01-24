@@ -8,6 +8,7 @@ Background, Shroom, Water, Fox von Florian
 obstacle, Carrot, Fox, Bunny von Yann
 
 Man braucht die DirectX SDK.
+Man muss das Projekt neuausrichten.
 
 Windows.h um ein Fenster zu erstellen.
 iostream um eine Konsolen Ausgabe zu machen.
