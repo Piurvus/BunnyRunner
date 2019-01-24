@@ -12,13 +12,14 @@ Shroom::Shroom(Graphics * gfx):
 
 Shroom::~Shroom()
 {
+	//	Aufräumen
 	delete shroom;
 	delete shroom2;
 }
 
 void Shroom::renew()
 {
-	//	siehe .h
+	//	setX() ist ein friend der Objekt Superklasse, welche erlaubt die protected Positionswerte zu ändern; bestimmt auch welcher Pilz angezeigt wird
 	if (setX(*this) == 0)
 		broom = true;
 	else
@@ -27,10 +28,10 @@ void Shroom::renew()
 
 void Shroom::update(double speed)
 {
-	//	bewegt sich passend zur Spielgeschwindigkeit gegen vorne
+	//	Bewegt sich passend zur Spielgeschwindigkeit gegen vorne
 	x -= speed * 5;
 
-	//	falls ausserhalb des Fensters
+	//	Falls ausserhalb des Fensters
 	if (x + width <= 0) {
 		renew();
 	}

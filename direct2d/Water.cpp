@@ -17,7 +17,7 @@ Water::Water(Graphics * gfx):
 		waves.push_back(Wave(gfx));
 	}
 
-	//	sortieren der Stämmen nach deren y-Werten
+	//	Sortieren der Stämmen nach deren y-Werten
 	std::sort(waves.begin(), waves.end());
 }
 
@@ -36,17 +36,18 @@ Water::Water(Graphics * gfx, int count):
 	g = 0.5f;
 	b = 1.0f;
 
-	//	Anzahl der Stämmen
+	//	Anzahl der Stämme
 	for (int i = 0; i < count; i++) {
 		waves.push_back(Wave(gfx));
 	}
 
-	//	sortieren der Stämmen nach deren y-Werten
+	//	Sortieren der Stämmen nach deren y-Werten
 	std::sort(waves.begin(), waves.end());
 }
 
 Water::~Water()
 {
+	//	Aufräumen
 	delete gfx;
 }
 
@@ -74,9 +75,10 @@ void Water::showWaterArea(const D2D1_RECT_F & rect, double speed)
 	//	Wasserbereich wird eingefärbt
 	gfx->fillRect(rect, r, g, b);
 	
-	//	jeder Stamm wird dargestellt
+	//	Jeder Stamm wird dargestellt
 	for (int i = 0; i < waves.size(); i++) {
 		//gfx->DrawWaterLine(waves[i].x, waves[i].y + waves[i].vec.y, waves[i].x + waves[i].vec.x, waves[i].y + waves[i].vec.y, waves[i].r, waves[i].g, waves[i].b, waves[i].thickness + 2.0f);
+		//	Zeichnet einer der beiden möglichen Stämme
 		if (waves[i].log1)
 			waves[i].log1->Draw(waves[i].x, waves[i].y, waves[i].vec.x);
 		else if (waves[i].log2)
@@ -89,7 +91,7 @@ void Water::showWaterArea(const D2D1_RECT_F & rect, double speed)
 Water::Wave::Wave(Graphics* gfx):
 	gfx(gfx)
 {
-	//	random Zahl
+	//	Zufällige Zahl
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(0, 1800);
@@ -104,11 +106,11 @@ Water::Wave::Wave(Graphics* gfx):
 	b = ((float)(dist(rng) % 5)) / 10 + 0.5f;
 	*/
 
-	//	zufällige Position
+	//	Zufällige Position
 	x = dist(rng);
 	y = (dist(rng) % 200) + 450;
 	
-	//	falls nicht im Bereich -> neue Position wählen
+	//	Falls nicht im Bereich -> neue Position wählen
 	while (y > 535 || y < 420) {
 		y = (dist(rng) % 200) + 400;
 	}

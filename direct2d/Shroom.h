@@ -6,24 +6,27 @@
 
 class Shroom : public Obstacle {
 
-	//	Die beiden Pilzarten
+	//	Die beiden Pilzarten (Bilder)
 	SpriteSheet* shroom;
 	SpriteSheet* shroom2;
 
-	//	zufällige Entscheidung welcher Pilz und wo sich dieser befindet
+	//	Zufällige Entscheidung welcher Pilz und wo sich dieser befindet
 	void renew();
 
-	//	je nach dem ob true oder false ist es der eine oder andere Pilz
+	//	Je nach dem ob true oder false, ist es der eine oder andere Pilz
 	bool broom = false;
 
 public:
 	
+	//	Gibt gfx an die Superklasse über, ladet die beiden Bilder der Pilze und ruft renew() auf
 	Shroom(Graphics* gfx);
 	~Shroom();
 
+	//	Aktualisieren der Position
 	void update(double speed);
+	//	Anzeigen des Pilzes
 	void show();
 
-	//	gibt zurück welcher Pilz es ist; wichtig für Kollision
+	//	Gibt zurück welcher Pilz es ist (violett oder blau); wichtig für Kollision 
 	bool isBroom();
 };

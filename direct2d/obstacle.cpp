@@ -9,6 +9,7 @@
 Obstacle::Obstacle(Graphics * gfx):
 	gfx(gfx)
 {
+	//	Die Höhen der Elemente werden gespeichert
 	spriteHeights.push_back(547);	//	Stone
 	spriteHeights.push_back(403);	//	Trunk
 	spriteHeights.push_back(320);	//	Stone2
@@ -20,14 +21,16 @@ Obstacle::Obstacle(Graphics * gfx, LPCWSTR name):
 	gfx(gfx)
 {
 	//	Konstruktor der Karotte
-	ownSprite = true;
-	sprite = new SpriteSheet(name, gfx, 1.0f);
+	ownSprite = true;								//	Zeigt an, dass es sich um Karotte handelt
+	sprite = new SpriteSheet(name, gfx, 1.0f);		//	Bild der Karotte
+	//	Andere, fixe Grössen
 	height = 80;
 	width = 80;
 }
 
 Obstacle::~Obstacle()
 {
+	//	Aufräumen
 	delete stone;
 	delete stone2;
 	delete trunk;
@@ -38,7 +41,7 @@ Obstacle::~Obstacle()
 
 void Obstacle::show()
 {
-	//	je nach dem welches Objekt existiert wird dieses dargestellt
+	//	Je nach dem welches Objekt existiert wird dieses dargestellt
 	if (stone != NULL)
 		stone->Draw(x, y - height + 50*size, size);
 	if (stone2 != NULL)
@@ -50,15 +53,15 @@ void Obstacle::show()
 
 void Obstacle::update(double speed)
 {
-	//	x Wert wird passend zur Spielgeschwindigkeit angepasst
+	//	X Wert wird passend zur Spielgeschwindigkeit angepasst
 	x -= speed*5;
 
-	//	falls ausserhalb
+	//	Falls ausserhalb
 	if (x + width <= 0) {
 		renew();
 	}
 
-	//	Die verschiedenen Rechtecke der jeweiligen Position der Objekte
+	//	Die verschiedenen Rechtecke der jeweiligen Positionen der Objekte
 	if (!ownSprite) {
 		if(stone)
 			rect = { x + 210 * size , y - height +  100 * size, x + width - 200 * size, y };
@@ -75,20 +78,21 @@ void Obstacle::update(double speed)
 
 void Obstacle::renew()
 {
-	//	random Zahl
+	//	Zufällige Zahl
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(1800, 2400);
 
 	float heighta = height;	//	Zwischenspeicher der alten Höhe damit diese nicht wiederverwendet wird
 	
+	//	Anpassen der Grösse nur falls es keine Karotte ist
 	if (!ownSprite) {
 
 		height = 900;
 
-		//	damit nicht zu gross
+		//	Damit nicht zu gross
 		while (height > 300) {
-			//	random wird eines der Objekte ausgewählt und erstellt
+			//	Zufällig wird eines der Objekte ausgewählt und erstellt
 			switch (dist(rng) % 3) {
 			case 0:
 				size = float(dist(rng) % 5) / 10 + 0.25f;
@@ -121,7 +125,7 @@ void Obstacle::renew()
 		}
 
 	}
-	//	random Position auf der x-Achse
+	//	Zufällige Position auf der x-Achse
 	x = dist(rng) - width;
 }
 
@@ -136,7 +140,7 @@ D2D_RECT_F Obstacle::returnPos()
 
 int setX(Obstacle &obj)
 {
-	//	das Objekt kriegt eine zufällige Position und 1 oder 0 wird zurückgegeben
+	//	Das Objekt kriegt eine zufällige Position und 1 oder 0 wird zurückgegeben (entscheidet darüber, welcher Pilz dargestellt wird)
 	std::mt19937 rng;
 	rng.seed(std::random_device()());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(1800*3, 2400*3);

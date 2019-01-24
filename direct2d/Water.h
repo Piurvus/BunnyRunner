@@ -23,17 +23,17 @@ class Water {
 		SpriteSheet* log2 = NULL;
 
 		float thickness;	//	thickness wird nicht gebraucht
-		float r, g, b;	//	Farben werden nicht gebraucht
+		float r, g, b;		//	Farben werden nicht gebraucht
 
-		float x, y;	//	Position des Stammes
+		float x, y;			//	Position des Stammes
 		float yWithSize;	//	Grösse
-		float speed;	//	jeweilige Geschwindigkeit
+		float speed;		//	Jeweilige Geschwindigkeit
 		
 		D2D_VECTOR_2F vec = {};
 
 		Wave(Graphics * gfx);
 
-		//	dient zur Ordnung der Stämme nach deren y-Werten
+		//	Dient zur Ordnung der Stämme nach deren y-Werten (damit die Stämme in der richtigen Reihenfolge gezeichnet werden und sich nicht falsch übermalen)
 		bool operator< (const Wave &other) const {
 			return yWithSize < other.yWithSize;
 		}
@@ -41,22 +41,25 @@ class Water {
 
 	};
 
-	float r, g, b;	//	Farben des Wassers
-	int count = 30;	//	Anzahl Stämme
+	float r, g, b;			//	Farben des Wassers
+	int count = 30;			//	Anzahl Stämme (default Wert)
 
-	//	sortierter und unsortierter Vektor der Stämmen
+	//	Sortierter und unsortierter Vektor der Stämmen
 	std::vector<Wave> waves;
 	std::vector<Wave> SortWaveBySize();
 
-	double gameSpeed;	//	Geschwindigkeit des Wassers
+	double gameSpeed;		//	Geschwindigkeit des Wassers
 
 public:
 
-	Water(Graphics* gfx);
+	//	Konstruktor mit und ohne Anzahl Stämme im Wasser
+	Water(Graphics* gfx);				
 	Water(Graphics* gfx, int count);
 	~Water();
 
+	//	Aktualisiert die Stämme
 	void updateWaves();
+	//	Anzeigen des Wassers und der Stämme
 	void showWaterArea(const D2D1_RECT_F &rect, double speed);
 
 };

@@ -9,7 +9,8 @@ SpriteSheet::SpriteSheet(LPCWSTR filename, Graphics * gfx, float a) :
 {
 	//LPCWSTR filename = L"test.png";
 
-	//	bmp wird initialisiert
+
+	//	-----------bmp wird initialisiert-----------
 
 	bmp = NULL;
 	HRESULT hr;
@@ -48,7 +49,10 @@ SpriteSheet::SpriteSheet(LPCWSTR filename, Graphics * gfx, float a) :
 		wicConverter,
 		NULL,
 		&bmp);
+	//	--------------------------------------------
 
+
+	//	Aufräumen
 	if (wicFactory) wicFactory->Release();
 	if (wicDecoder) wicDecoder->Release();
 	if (wicConverter) wicConverter->Release();
@@ -58,7 +62,6 @@ SpriteSheet::SpriteSheet(LPCWSTR filename, Graphics * gfx, float a) :
 	spriteWidth = bmp->GetSize().width;
 	spriteHeight = bmp->GetSize().height;
 	spritesAccross = 1;
-
 }
 
 SpriteSheet::SpriteSheet(LPCWSTR filename, Graphics * gfx, float a, int spriteWidth, int spriteHeight):
@@ -72,7 +75,7 @@ SpriteSheet::SpriteSheet(LPCWSTR filename, Graphics * gfx, float a, int spriteWi
 
 SpriteSheet::~SpriteSheet()
 {
-		//if (bmp) bmp->Release();	
+		//if (bmp) bmp->Release();	würde zu Error führen
 }
 
 
@@ -93,7 +96,6 @@ void SpriteSheet::Draw(float a)
 
 void SpriteSheet::Draw(float x, float y, double size)
 {
-
 	//	Position in dem Fenster
 	D2D_RECT_F dest = D2D1::RectF(
 		x, y,
@@ -115,7 +117,7 @@ void SpriteSheet::Draw(float x, float y, double size, double a, bool cuzitwontwo
 		x, y,
 		x + spriteWidth * size, y + spriteHeight * size);
 
-	//	je nach a stärker oder weniger stark sichtbar
+	//	Je nach a stärker oder weniger stark sichtbar
 	gfx->GetRenderTarget()->DrawBitmap(
 		bmp,
 		dest,
