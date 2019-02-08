@@ -67,6 +67,7 @@ Game::~Game()
 	delete background;
 	delete bunny;
 	delete obj;
+	delete bird;
 	outfile.close();
 }
 
@@ -144,6 +145,13 @@ void Game::UpdateModel()
 			updateHighscore();		//	Highscore wird aktualisiert
 		}
 
+		//	Kollision zwischen Hase und Vogel
+		if (checkCollision(bunny->returnPos(), bird->returnPos())) {
+			bunny->die();			//	Der Hase stirbt
+			distanceCount -= speed;	//	Distanz wird um einen Tick angepasst, damit die richtige Punktzahl als Highscore angezeigt wird
+			updateHighscore();		//	Highscore wird aktualisiert
+		}
+
 		//	Kollision zwischen Hase und Karotte
 		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
 			if (speed <= 3.0)		//	Falls der Hase nochnicht seine maximale Geschwindigkeit erreicht hat
@@ -177,6 +185,7 @@ void Game::UpdateModel()
 		//	Aktualisierung der Objekte (abhängig von der Geschwindigkeit des Hasens, damit alles sich gleich schnell bewegt)
 		carrot->update(speed);
 		fox->update(speed);
+		bird->update(speed);
 		obj->update(speed);
 		bunny->updateBunny(speed);
 		background->update(speed);
@@ -187,7 +196,8 @@ void Game::UpdateModel()
 	}
 	else if (bunny->isDead()) {		//	Falls der Hase tot ist
 		bunny->updateBunny(speed);	//	Der Hase fällt noch zu Boden
-		fox->update(speed);			//	Fuchs rennt weiter
+		fox->update(speed);	//	Fuchs rennt weiter
+		bird->update(speed);	//	Vogel fliegt weiter
 
 		//	Kollision zwischen Fuchs und Objekt
 		if (checkCollision(fox->returnPos(), obj->returnPos())) {
@@ -204,6 +214,7 @@ void Game::UpdateModel()
 		obj = new Obstacle(gfx);
 		carrot = new Carrot(gfx, L"carrot.png");
 		fox = new Fox(gfx);
+		bird = new Bird(gfx);
 		speed = 1.0f;
 		carrots = 0;
 		distanceCount = 0.0f;
@@ -222,6 +233,7 @@ void Game::ComposeFrame()
 	shroom->show();
 	water->showWaterArea(bottom, speed);
 	fox->show();
+	bird->show();
 	obj->show();
 	carrot->show();
 
