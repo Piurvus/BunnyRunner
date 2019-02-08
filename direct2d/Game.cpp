@@ -26,6 +26,7 @@ Game::Game(Graphics * gfx) :
 	//	Erzeugt das Wasserfeld mit 5 Stämmen (waves Objekte in der Water Klasse)
 	water = new Water(gfx, 5);	
 	fox = new Fox(gfx);
+	bird = new Bird(gfx);
 	//	L"carrot.png" ist das Bild von der Karotte, welches benutzt wird
 	carrot = new Carrot(gfx, L"carrot.png");
 	bunny = new Bunny(gfx);

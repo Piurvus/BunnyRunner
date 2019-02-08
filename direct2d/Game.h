@@ -12,11 +12,13 @@
 #include <fstream> //	In eine Datei schreiben und lesen.
 #include "Background.h"
 #include "Shroom.h"
+#include "Bird.h"
 
 class Game {
 
 	//	Alle Objekte im Spiel
 	Fox* fox;
+	Bird* bird;
 	Water* water;
 	Carrot* carrot;
 	Bunny* bunny;

@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Bird.cpp" />
     <ClCompile Include="Bunny.cpp" />
     <ClCompile Include="Carrot.cpp" />
     <ClCompile Include="Fox.cpp" />
@@ -151,12 +152,14 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="obstacle.cpp" />
+    <ClCompile Include="Quelle.cpp" />
     <ClCompile Include="Shroom.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="Water.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Background.h" />
+    <ClInclude Include="Bird.h" />
     <ClInclude Include="Bunny.h" />
     <ClInclude Include="Carrot.h" />
     <ClInclude Include="Fox.h" />
