@@ -41,10 +41,10 @@ void Bird::update(double speed)
 {
 
 	//	X Position Änderung in eine Richtung
-	x -= speed * 5 + 5 * BirdSpeed;
+	x -= speed * 5 + 5 * birdSpeed;
 
 	//	Aktualisieren des Bildes
-	frame += speed * BirdFrame;
+	frame += speed * birdFrame;
 
 	//	Erneuern des Fuchses, falls dieser aus dem Bild rennt
 	if (x + width < 0) {
