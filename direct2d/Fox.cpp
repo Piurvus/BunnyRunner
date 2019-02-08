@@ -52,10 +52,10 @@ void Fox::show()
 {
 	//	Für beide Richtungen das Zeichnen des Fuchses
 	if (changeDirection) {
-		fox2->Draw((int)(frame) % 12, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
+		fox2->Draw((int)(frame) % 6, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
 	}
 	else {
-		fox->Draw((int)(frame) % 12, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
+		fox->Draw((int)(frame) % 6, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
 	}
 }
 

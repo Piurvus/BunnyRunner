@@ -34,7 +34,8 @@ Bird::~Bird()
 void Bird::show()
 {
 	//	Zeichen des Vogels
-	bird->Draw((int)(frame) % 6, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
+	bird->Draw((int)(frame) % 8, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
+	gfx->DrawRectangle(rect);
 }
 
 void Bird::update(double speed)
@@ -52,7 +53,7 @@ void Bird::update(double speed)
 	}
 
 	//	Anpassen der Hitbox
-	rect = { x + 10, y + 130, x + width + 50, y + height + 50 };
+	rect = { x+30 , y, x + width-30, y+height};
 }
 
 void Bird::renew()

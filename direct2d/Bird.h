@@ -11,8 +11,8 @@ class Bird {
 	D2D1_RECT_F rect;
 
 	//	Grösse einer Frame im Bild
-	float height = 140;
-	float width = 153.33333f;
+	float height = 158;
+	float width = 235;
 
 	//	Position, Animationsbild, Geschwindigkeit sowie Geschwindigkeit der Bewegung
 	float x, y, frame, birdSpeed, birdFrame;
