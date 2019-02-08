@@ -152,7 +152,6 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="obstacle.cpp" />
-    <ClCompile Include="Quelle.cpp" />
     <ClCompile Include="Shroom.cpp" />
     <ClCompile Include="SpriteSheet.cpp" />
     <ClCompile Include="Water.cpp" />

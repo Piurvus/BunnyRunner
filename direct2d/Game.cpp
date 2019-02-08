@@ -146,12 +146,13 @@ void Game::UpdateModel()
 		}
 
 		//	Kollision zwischen Hase und Vogel
+		/*
 		if (checkCollision(bunny->returnPos(), bird->returnPos())) {
 			bunny->die();			//	Der Hase stirbt
 			distanceCount -= speed;	//	Distanz wird um einen Tick angepasst, damit die richtige Punktzahl als Highscore angezeigt wird
 			updateHighscore();		//	Highscore wird aktualisiert
 		}
-
+		*/
 		//	Kollision zwischen Hase und Karotte
 		if (checkCollision(bunny->returnPos(), carrot->returnPos())) {
 			if (speed <= 3.0)		//	Falls der Hase nochnicht seine maximale Geschwindigkeit erreicht hat

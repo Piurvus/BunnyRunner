@@ -1,12 +1,12 @@
-//	Diese Datei macht einen Feind, den Fuchs.
+//	Diese Datei macht einen Feind, den Vogel.
 #include "Bird.h"
 //	Um Zufallszahlen zu generieren
 #include <random>
 Bird::Bird(Graphics * gfx) :
 	gfx(gfx)
 {
-	//	Füchse werden erstellt (in beide Richtungen)
-	bird = new SpriteSheet(L"fox.png", gfx, 1.0f, width, height); // Bird
+	//	Vögel werden erstellt (in beide Richtungen)
+	bird = new SpriteSheet(L"Birdy.png", gfx, 1.0f, width, height); // Bird
 
 	y = 248;
 	frame = 0;
@@ -46,7 +46,7 @@ void Bird::update(double speed)
 	//	Aktualisieren des Bildes
 	frame += speed * birdFrame;
 
-	//	Erneuern des Fuchses, falls dieser aus dem Bild rennt
+	//	Erneuern des Vogels, falls dieser aus dem Bild rennt
 	if (x + width < 0) {
 		renew();
 	}
@@ -62,7 +62,7 @@ void Bird::renew()
 	rng.seed(std::random_device()());
 	std::uniform_int_distribution<std::mt19937::result_type> dist(4000, 8000);
 
-	//	Fuchs wird zufällig verändert
+	//	Vogels wird zufällig verändert
 	x = dist(rng) - width;
 	birdSpeed = (float)(dist(rng) % 20) / 10 + 0.8;
 	birdSpeed = 0.075*birdSpeed;

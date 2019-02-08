@@ -48,9 +48,6 @@
     <ClCompile Include="Shroom.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Quelle.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Bird.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
