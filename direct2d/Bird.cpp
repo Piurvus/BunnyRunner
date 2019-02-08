@@ -8,7 +8,7 @@ Bird::Bird(Graphics * gfx) :
 	//	Vögel werden erstellt (in beide Richtungen)
 	bird = new SpriteSheet(L"Birdy.png", gfx, 1.0f, width, height); // Bird
 
-	y = 248;
+	y = 150;
 	frame = 0;
 	birdFrame = 0.3;
 
@@ -18,7 +18,7 @@ Bird::Bird(Graphics * gfx) :
 	std::uniform_int_distribution<std::mt19937::result_type> dist(4000, 8000);
 
 	//	Zufällige Werte werden zugewiesen
-	birdSpeed = (float)(dist(rng) % 20) / 10 + 0.8;
+	birdSpeed = 2;
 	x = dist(rng) - width;
 	birdFrame = 0.075*birdSpeed;
 }
@@ -35,7 +35,7 @@ void Bird::show()
 {
 	//	Zeichen des Vogels
 	bird->Draw((int)(frame) % 8, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
-	gfx->DrawRectangle(rect);
+	//gfx->DrawRectangle(rect);
 }
 
 void Bird::update(double speed)
@@ -53,7 +53,7 @@ void Bird::update(double speed)
 	}
 
 	//	Anpassen der Hitbox
-	rect = { x+30 , y, x + width-30, y+height};
+	rect = { x+40 , y+25, x + width-40, y+height-25};
 }
 
 void Bird::renew()
@@ -65,8 +65,8 @@ void Bird::renew()
 
 	//	Vogels wird zufällig verändert
 	x = dist(rng) - width;
-	birdSpeed = (float)(dist(rng) % 20) / 10 + 0.8;
-	birdSpeed = 0.075*birdSpeed;
+	birdSpeed = 2;
+	birdFrame = 0.075 *birdSpeed;
 }
 
 D2D1_RECT_F Bird::returnPos()
