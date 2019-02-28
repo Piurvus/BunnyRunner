@@ -35,7 +35,7 @@ void Bird::show()
 {
 	//	Zeichen des Vogels
 	bird->Draw((int)(frame) % 8, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
-	//gfx->DrawRectangle(rect);
+	gfx->DrawRectangle(rect);
 }
 
 void Bird::update(double speed)
