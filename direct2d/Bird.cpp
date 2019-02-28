@@ -5,10 +5,10 @@
 Bird::Bird(Graphics * gfx) :
 	gfx(gfx)
 {
-	//	Vögel werden erstellt (in beide Richtungen)
+	//	Vögel werden erstellt
 	bird = new SpriteSheet(L"Birdy.png", gfx, 1.0f, width, height); // Bird
 
-	y = 150;
+	y = 100;
 	frame = 0;
 	birdFrame = 0.3;
 
@@ -35,7 +35,7 @@ void Bird::show()
 {
 	//	Zeichen des Vogels
 	bird->Draw((int)(frame) % 8, x, y, size);	//	Die "frame" gibt an, welches Animationsbild dargestellt wird
-	//gfx->DrawRectangle(rect);
+	gfx->DrawRectangle(rect);
 }
 
 void Bird::update(double speed)
@@ -53,7 +53,7 @@ void Bird::update(double speed)
 	}
 
 	//	Anpassen der Hitbox
-	rect = { x+40 , y+25, x + width-40, y+height-25};
+	rect = { x+28 , y+25, x + width-72, y+height-50};
 }
 
 void Bird::renew()

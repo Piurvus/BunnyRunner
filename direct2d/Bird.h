@@ -18,7 +18,7 @@ class Bird {
 	float x, y, frame, birdSpeed, birdFrame;
 
 	//	Grösse des Vogels
-	float size = 1;
+	float size = 0.8;
 
 public:
 
