@@ -1,4 +1,14 @@
 //	Header Datei für die Pilze
+/*
+	Wie auch die Klasse der Karotten erbt auch diese Klasse der Pilze von der Klasse Obstacle.
+	Um die x und y Werte, welche protected sind, zu ändern wird die setX() friend Methode in Obstacle verwendet.
+	Ansonsten funktioniert auch diese Klasse fast genau gleich wie die Obstacle Klasse.
+	Es wird zufällig zwischen zwei Pilzen gewählt und je nach dem welcher Pilz gewählt wurde, wird sein Bild dargestellt
+	und das SpriteSheet vom anderen Pilz ist auf null. Je nach dem welcher Pilz mit dem Hasen kollidiert passieren unterschiedliche 
+	Dinge. Um herauszufinden welcher Pilz der Momentane ist, wird isBroom() verwendet.
+*/
+
+
 #pragma once
 #include "obstacle.h"
 #include <random>

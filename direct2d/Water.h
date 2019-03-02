@@ -1,4 +1,16 @@
 //	Header Datei für das Wasser im Vordergrund
+
+/*
+	In der Wasser Klasse befindet sich noch die Klasse der Stämme.
+	Jeder Stamm ist ein Objekt der Wasser Klasse und die Menge der Stämme kann im Konstruktor von Water gewählt werden.
+	Jeder einzelne Stamm kriegt eigene zufällige Werte für Grösse, Geschwindigkeit sowie Position.
+	Welcher Stamm es ist wird auch zufällig gewählt.
+	Mit updateWaves() wird jeder einzelne Stamm aktualisiert und falls er sich ausserhalb des Fensters befindet wird er wieder zum Anfang des 
+	Fensters geschoben. Mit showWaterArea() wird das ganze Wasser mit all den Stämmen dargestellt. Die Stämme müssen hierfür sortiert werden,
+	damit sie sich, falls sie sich überlagern, richtig überlagern.
+*/
+
+
 #pragma once
 #include "Graphics.h"
 #include <vector>

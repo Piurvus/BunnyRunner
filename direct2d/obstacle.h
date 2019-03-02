@@ -1,4 +1,15 @@
 //	Header Datei für die Hindernisse
+/*
+	Diese Klasse ist für die ganzen Objekte, welche im Wege stehen.
+	Mit SpriteSheet.h wird ermöglicht verschiedene Bilder darzustellen.
+	Das Objekt, sowie seine Dimensionen werden zufällig ausgewählt. 
+	Jedes Objekt besitzt ihre eigene Hitbox und Koordinaten. Sobald ein Objekt aus dem Fenster gerät wird ein
+	neues Objekt zufällig gewählt und die restlichen werden auf null gesetzt. So weiss man immer welches Bild 
+	angezeigt werden muss.
+*/
+
+
+
 #pragma once
 
 #include "Graphics.h"

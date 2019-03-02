@@ -112,7 +112,7 @@ void Game::UpdateModel()
 		if (GetAsyncKeyState(VK_UP) && bunny->onGround() && !bunny->isClouded())
 			charge += 1.5;
 
-		//	Mehrfach Sprung, falls der Hase auf dem Boden ist, er Karotten hat und er genug lange seit dem letzten Sprung in der Luft gewartet hat(carrotsTimer)
+		//	Mehrfach Sprung, falls der Hase nicht auf dem Boden ist, er Karotten hat und er genug lange seit dem letzten Sprung in der Luft gewartet hat(carrotsTimer)
 		if (GetAsyncKeyState(VK_UP) && !bunny->onGround() && carrots && (std::clock() - carrotsTimer) / (double)CLOCKS_PER_SEC >= 0.5f && !bunny->isClouded()) {
 			carrotsTimer = clockR;	//	Der Timer wird erneuert
 			carrots--;				//	Karotte wird benutzt

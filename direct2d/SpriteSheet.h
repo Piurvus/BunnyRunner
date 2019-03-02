@@ -1,4 +1,12 @@
 //	Diese Klasse ist verantwortlich für die Bilder und Animationen des Spiels
+/*
+	Mithilfe der Graphics Klasse und einem Dateinamen kann diese Klasse Bilder einlesen und darstellen.
+	Das Bild wird in einer Bitmap gespeichert. Nun kann es an verschiedenen Orten und in verschiedenen Grössen
+	dargestellt werden. Falls es ein Animationsbild ist, können auch verschiedene Teile des Bildes (einzelne Animationsbilder) dargestellt werden.
+	Damit dies jedoch funktioniert müssen bei der Initialisierung des SpriteSheet Objektes auch noch die Dimensionen der einzelnen Sprites
+	angegeben werden, damit diese nachher mithilfe von frame(index) und einer Modulorechnung dargestellt werden können.
+*/
+
 #pragma once
 
 #include <wincodec.h>	//	wincodec ist die Windows Bilder Komponente, wir brauchen es um die Spritesheets anzuzeigen

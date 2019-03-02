@@ -1,4 +1,15 @@
 //	Header Datei für den Gameflow
+/*
+	In dieser Klasse geschieht das ganze Spielgeschehen.
+	Mit UpdateModel() wird die Logik aktualisiert und mit ComposeFrame() wird das momentane Spielgeschehen dargestellt.
+	Damit das Spiel auf jedem Rechner genau gleich schnell läuft, wurden Timer eingeführt, die darauf achten das Spiel nicht zu häufig
+	zu aktualisieren. 
+	Im UpdateModel() wird durchgehend auf Kollisionen mit dem Hasen überprüft um zu erkennen ob dieser noch lebt. Auf Tastendruck werden
+	verschiedene Funktionen des Hasen ausgeführt, wie zum Beispiel springen oder auch ducken.
+*/
+
+
+
 #pragma once
 
 #include "Graphics.h"

@@ -1,6 +1,12 @@
 //	Headerdatei für Grafiken
 //	Windows.h um ein Fenster zu erstellen
 //	<d2d1.h> direct2D Bibliothek für Grafische Darstellungen
+/*
+	In dieser Klasse befindet sich die ganze Logik des Darstellen.
+	Mithilfe von dem im Konstruktor initialisierten renderTarget und dem brush wurden verschiedene Funktionen für die Darstellung
+	im Fenster erstellt. So kann man Vierecke, Linien, Kreise und Flächen zeichnen.
+*/
+
 
 #pragma once
 #include <Windows.h>

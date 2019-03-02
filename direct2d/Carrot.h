@@ -1,4 +1,8 @@
 //	Header Datei für die Karotte
+/*
+	Die Karotten Klasse erbt von der Obstacle Klasse. Der einzige Unterschied zu einem üblichen Objekt ist der, dass die Karotte einen
+	fixen y Wert und eine fixe Grösse hat.
+*/
 #pragma once
 #include "obstacle.h"
 #include "Graphics.h"

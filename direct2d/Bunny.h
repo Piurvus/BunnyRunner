@@ -1,4 +1,18 @@
 //  Header Datei für den Hasen
+/*
+	Der Hase funktioniert ähnlich wie der Fuchs und der Vogel, besitzt jedoch um einiges mehr Funktionen.
+	Wie jedes bewegende Objekt im Spiel besitzt auch der Hase verschiedene Animationsbilder, welche mit frame nacheinander dargestellt werden.
+	Der Hase besitzt aber um einiges mehr Bilder. So gibt es extra eine verschiedene Animation dafür, falls der Hase mindestens
+	eine Karotte gegessen hat. Zusätzlich gibt es ein Bild von dem toten Hasen, sowie noch ein Bild für die Doppelsprung Wolke des Hasen
+	und ein Bild für die Wolke auf der der Hase reiten kann. 
+	Der Hase besitzt zusätzlich noch viele boolean Variablen die vorallem dafür da sind, um herauszufinden ob sich der Hase gerade in
+	der Luft oder in einem geduckten Zustand befindet. Oder auch einfach um herauszufinden ob der Hase überhaupt noch lebendig ist.
+	Gesteuert wird der Hase mit den verschiedenen Funktionen, wie zum Beispiel getClouded() oder jump(). Diese Funktionen werden in der
+	eigentlichen Gameschlaufe bei Tastendruck aufgerufen.
+	Show- und updateBunny() werden immer wieder aufgerufen. Show stellt den Hasen in dem Fenster dar und update aktualisiert die Position und
+	den Zustand des Hasen abhängig von der Spielgeschwindigkeit.
+*/
+
 #pragma once
 #include "Graphics.h"
 #include "SpriteSheet.h"
