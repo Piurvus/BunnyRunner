@@ -12,9 +12,19 @@ Man muss das Projekt neuausrichten.
 
 Windows.h um ein Fenster zu erstellen.
 iostream um eine Konsolen Ausgabe zu machen.
-
-Es ist die Main Datei.
 */
+
+/*
+	Dies ist die Einstiegsdatei. Hier findet vorallem die Erstellung des Fensters statt. Um dieses zu erstellen muss zuerst eine Windows Klassen Objekt
+	initialisiert werden und mit ZeroMemory() der Speicher von diesem Objekt geleert werden. Danach wird das Objekt deklariert, registriert und mit ShowWindow()
+	dargestellt. Es erscheint ein Fenster. Dieses befindet sich in einer while Schleife mit der MessageHandling und dem myGame->run(), in welchem die gesamte
+	Spiellogik, sowie die gesamte Spieldarstellung stattfindet.
+	In dieser Datei werden zusätzlich noch zwei weitere Objekte erstellt. Das myGame Objekt, welches für das gesamte Spiel zuständig ist und das Graphics
+	Objekt, welches für die Darstellung des Spiels zuständig ist.
+*/
+
+
+
 #include <Windows.h>
 #include "Graphics.h"
 #include "SpriteSheet.h"

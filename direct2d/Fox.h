@@ -2,7 +2,7 @@
 /*
 	Der Fuchs funktioniert ähnlich wie der Hase und der Vogel.
 	Wie auch die anderen beiden Lebewesen besitzt der Fucks Animationsbilder, welche mit einer Variable frame jeweils dargestellt werden
-	können. Anderst als bei den anderen beiden Lebewesen ist, dass der Fuchs auch noch gespiegelte Animationsbilder besitzt, damit
+	können. Anders als bei den anderen beiden Lebewesen ist, dass der Fuchs auch noch gespiegelte Animationsbilder besitzt, damit
 	er auch in die andere Richtung rennen kann. Dies ist notwendig da, sobald der Fuchs in ein Objekt hineinrennt seine Richtung wechselt.
 	Damit der Fuchs aber nicht in einem Objekt stecken bleiben kann, wurde eine directionlatency eingeführt, welche den Fuchs so lange daran
 	hindert seine Richtung zu ändern, bis genug Zeit verstrichen ist.

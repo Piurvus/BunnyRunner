@@ -1,11 +1,11 @@
 //	Header Datei für den Vogel
 /*
 	Der Vogel funktioniert ähnlich wie auch der Fuchs und auch der Hase.
-	Mithilfe von SpriteSheet lassen sich die verschiedenen Animations Bilder des Vogels laden, welche dann nach einander
+	Mithilfe von SpriteSheet lassen sich die verschiedenen Animationsbilder des Vogels laden, welche dann nacheinander
 	dargestellt werden. Die Variable frame bestimmt welches Bild aktuell angezeigt werden soll. Die Variablen birdSpeed und birdFrame
 	bestimmen die Geschwindigkeit der x Achsen Aktualisierung, sprich die eigentliche Geschwindigkeit des Vogels, sowie die Aktualisierungsrate
 	der frame Variable, also wie schnell der Vogel schlussendlich flattert.
-	Der Vogel besitzt noch Variablen wie x und y, welche einfach seine Position im Fenster angeben, sowie eines Vierecks D2D1_RECT_F rect,
+	Der Vogel besitzt noch Variablen wie x und y, welche einfach seine Position im Fenster angeben, sowie ein Viereck D2D1_RECT_F rect,
 	welches die Hitbox des Vogels bestimmt.
 	Diese Hitbox wird in der Gameschlaufe immer wieder auf Kollision mit dem Hasen überprüft.
 */
